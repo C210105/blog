@@ -20,6 +20,8 @@ public interface ArticlesRepository extends JpaRepository <Articles, Long> {
 
     List<Articles> findAllArticlesByOrderByUpdateDayDesc();
 
+    Optional <Articles> findFirstByOrderByHotArticlesDescUpdateDayDesc();
+
     Optional <Articles> findFirstByCategoryOrderByUpdateDayDesc(Categorys categorys);
 
     List <Articles> findTop7ByCategoryOrderByUpdateDayDesc(Categorys categorys);

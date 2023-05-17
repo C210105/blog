@@ -34,9 +34,11 @@ public class PostsController {
         Articles articles = articlesService.findById(articlesId).orElse(null);
         List <Categorys> categorys = categorysService.findByAllCategorys();
         List <Products> products = productsService.finByAllProducts();
+        Articles hotArticles = articlesService.getHotArticles();
         model.addAttribute("articles", articles);
         model.addAttribute("categorys", categorys);
         model.addAttribute("products", products);
+        model.addAttribute("hotArticles", hotArticles);
         return "html/posts.html";
     }
 

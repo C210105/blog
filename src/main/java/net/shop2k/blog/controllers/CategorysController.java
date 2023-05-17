@@ -17,7 +17,7 @@ import net.shop2k.blog.services.CategorysService;
 import net.shop2k.blog.services.ProductsService;
 
 @Controller
-@RequestMapping(path =  "/blog/index")
+@RequestMapping(path = "/blog/index")
 public class CategorysController {
     
     @Autowired
@@ -35,10 +35,12 @@ public class CategorysController {
         Optional <Articles> articles = articlesService.getLatestArticles();
         List <Articles> allArticles = articlesService.getAllArticlesExceptLatest();
         List <Products> products = productsService.finByAllProducts();
+        Articles hotArticles = articlesService.getHotArticles();
         model.addAttribute("categorys", categorys);
         model.addAttribute("articles", articles.orElse(null));
         model.addAttribute("allArticles", allArticles);
         model.addAttribute("products", products);    
+        model.addAttribute("hotArticles", hotArticles);
         return "html/index.html";
     }
 
