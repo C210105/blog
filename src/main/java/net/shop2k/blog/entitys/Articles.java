@@ -37,8 +37,10 @@ public class Articles {
     @Column(name = "urlImage")
     private String urlImage;
 
+    @Column (name = "hotArticles")
+    private Long hotArticles;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", nullable = false)
     private Categorys category;
-
 }

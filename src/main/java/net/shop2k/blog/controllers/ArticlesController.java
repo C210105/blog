@@ -39,6 +39,7 @@ public class ArticlesController {
             List <Articles> latestSixArticles = articlesService.getArticles2To7ByCategorys(categoryss);
             List <Articles> latestEightArticles = articlesService.getArticles8To15ByCategorys(categoryss);
             List <Articles> latestSixXArticles = articlesService.getArticles16To22ByCategorys(categoryss);
+            Articles hotArticles = articlesService.getHotArticles();
             List <Articles> articles = articlesService.getArticlesByCategorys(categoryss);
             List <Categorys> categorys = categorysService.findByAllCategorys();
             List <Products> products = productsService.finByAllProducts();
@@ -49,6 +50,7 @@ public class ArticlesController {
             model.addAttribute("latestEightArticles", latestEightArticles);
             model.addAttribute("latestSixXArticles", latestSixXArticles);
             model.addAttribute("products", products);
+            model.addAttribute("hotArticles", hotArticles);
             return "html/categorys.html";
         }
         return "html/erro.html";

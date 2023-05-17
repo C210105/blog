@@ -87,19 +87,20 @@
                     <div class="row">
                         <div class="col-md-12 py-0">
                             <a class="text-black text-muted text-decoration-underline" href="#">Blog</a> >
-                            <a class="text-black text-muted text-decoration-underline" href="#">Categorys</a> >
-                            <a class="text-black text-muted text-decoration-underline" href="#">Articles</a> >
-                            <a class="text-black text-muted text-decoration-underline" href="#"
-                                th:text="${articles.name}"></a>
+                            <a class="text-black text-muted text-decoration-underline" href="#"th:text="${articles.name}"></a> >
+                            <a class="text-black text-muted text-decoration-underline" href="#"th:text="${articles.shortTitle}"></a>
+
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-auto pt-1">
-                            <p class="text-bg-danger">Tin nóng</p>
+                        <div class="col-auto py-2 pt-1">
+                            <span class="text-bg-danger fs-5">Tin nóng</span>
+                            <a href="#" class="fw-semibold link-dark" th:text="${hotArticles.shortTitle}"></a>
                         </div>
                         <div class="col text-end">
                             <a th:text="${#temporals.format(articles.updateDay, 'dd-MM-yyyy HH:mm')}"></a>
                         </div>
+                        <hr>
                     </div>
                     <div class="row">
                         <div class="col-md-12">

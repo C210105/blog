@@ -29,6 +29,11 @@ public class ArticlesService {
         return articlesRepository.findFirstArticlesByOrderByUpdateDayDesc();
     }
 
+    public Articles getHotArticles(){
+        return articlesRepository.findFirstByOrderByHotArticlesDescUpdateDayDesc().orElse(null);
+    }
+
+
     public List <Articles> getAllArticlesExceptLatest(){
         List<Articles> allArticles = articlesRepository.findAllArticlesByOrderByUpdateDayDesc();
         if (!allArticles.isEmpty()) {
@@ -68,6 +73,8 @@ public class ArticlesService {
         }
         return new ArrayList<>();
     }
+
+
 
     // public List<Articles> getLatestSixArticlesByCategory(Categorys categorys) {
     //     List<Articles> latestArticles = articlesRepository.findTop7ByCategoryOrderByUpdateDayDesc(categorys);
