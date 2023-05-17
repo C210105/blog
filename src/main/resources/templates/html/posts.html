@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title th:text="${articles.title}"></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+    <style>
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="">
+        <header class="container blog-header py-4">
+            <div class="row flex-nowrap justify-content-between align-items-center">
+                <div class="col-4 pt-1">
+                    <a class="link-secondary" href="#">Sub</a>
+                </div>
+                <div class="col-4 text-center">
+                    <a class="blog-header-logo text-dark p-1 fw-bolder fs-2" th:href="@{/blog/index/}">SHOP
+                        2K</a>
+                </div>
+                <div class="col-4 d-flex justify-content-end align-items-center">
+                    <a class="link-secondary" href="#" aria-label="Search">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
+                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img"
+                            viewBox="0 0 24 24">
+                            <title>Tìm kiếm</title>
+                            <circle cx="10.5" cy="10.5" r="7.5"></circle>
+                            <path d="M21 21l-5.2-5.2"></path>
+                        </svg>
+                    </a>
+                    <a class="btn btn-sm btn-outline-secondary" href="#">Đăng Kí</a>
+                </div>
+            </div>
+        </header>
+        <!-- <hr> -->
+        <div class="nav-scroller py-1 bg-primary">
+            <nav class="container nav d-flex justify-content-between" th:object="${categorys}">
+                <a type="buttom" class="btn btn-primary p-2 link-light" method="GET"
+                    th:href="@{/blog/v1/categorys/articles/{id}(id=${category.id})}" th:each="category : ${categorys}"
+                    th:text="${category.name}" th:value="${category.id}"></a>
+                <!-- <a class="btn btn-primary p-2 dropdown-toggle text-light" data-bs-toggle="dropdown"
+                    aria-expanded="false" th:if="${categorys[12].id == 13}" th:href="@{/api/v1/categorys/{id}(id=${categorys[12].id})}" th:text="${categorys[12].name}"
+                    th:value="${categorys[12].id}">
+                </a>
+                <ul class="dropdown-menu" th:if="${categorys[12].id == 13}">
+                    <li><a class="btn btn-primary dropdown-item" href="#">Hokkaido</a></li>
+                    <li><a class="btn btn-primary dropdown-item" href="#">Tokyo</a></li>
+                    <li><a class="btn btn-primary dropdown-item" href="#">Saitama</a></li>
+                    <li><a class="btn btn-primary dropdown-item" href="#">Chiba</a></li>
+                    <li><a class="btn btn-primary dropdown-item" href="#">Oosaka</a></li>
+                    <li><a class="btn btn-primary dropdown-item" href="#">Kyoto</a></li>
+                    <li><a class="btn btn-primary dropdown-item" href="#">Nagoya</a></li>
+                    <li><a class="btn btn-primary dropdown-item" href="#">Kyushyu</a></li>
+                </ul> -->
+            </nav>
+        </div>
+        <div class="bg-light">
+            <nav class="container d-flex">
+                <div class="p-2 link-dark fw-bolder" href="#">Nổi bật</div>
+                <div class="p-2">
+                    <a href="#" class="" style="color: rgb(126, 121, 121);">tìm kiếm 1　</a>
+                    <a href="#" class="" style="color: rgb(126, 121, 121);">tìm kiếm 2　</a>
+                    <a href="#" class="" style="color: rgb(126, 121, 121);">tìm kiếm 3　</a>
+                    <a href="#" class="" style="color: rgb(126, 121, 121);">tìm kiếm 4　</a>
+                </div>
+                <div class="p-2 link-dark">
+                    <a href="#" class="link-dark">Xem thêm</a>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div class="container">
+        <div class="py-2">
+            <div class="row ">
+                <div class="col-md-8 pt-2">
+                    <div class="row">
+                        <div class="col-md-12 py-0">
+                            <a class="text-black text-muted text-decoration-underline" href="#">Blog</a> >
+                            <a class="text-black text-muted text-decoration-underline" href="#">Categorys</a> >
+                            <a class="text-black text-muted text-decoration-underline" href="#">Articles</a> >
+                            <a class="text-black text-muted text-decoration-underline" href="#"
+                                th:text="${articles.name}"></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-auto pt-1">
+                            <p class="text-bg-danger">Tin nóng</p>
+                        </div>
+                        <div class="col text-end">
+                            <a th:text="${#temporals.format(articles.updateDay, 'dd-MM-yyyy HH:mm')}"></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3 th:text="${articles.title}"></h3>
+                            <img th:src="@{'/images/' + ${articles.urlImage} + '.png'}" class="card-img-top" alt="...">
+                            <div class="text-center">Hình ảnh minh họa</div>
+                            <div class="lh-lg">
+                                <p>19h30 tối nay (15/5), trên sân vận động quốc gia Olympic (Phnom Penh, Campuchia), đội tuyển nữ Việt Nam đã ra quân trong trận chung kết môn bóng đá nữ SEA Games 32. Đối thủ của các cô gái Việt Nam là đội tuyển (ĐT) bóng đá nữ Myanmar.</p>
+                                <p>Kết quả chung cuộc, thầy trò HLV Mai Đức Chung đã giành chiến thắng với tỉ số 2-0. Hai cầu thủ ghi bàn thắng cho ĐT nữ Việt Nam là tiền đạo Huỳnh Như (phút 12) và tiền vệ Thanh Nhã (phút 76).</p>
+                                <p>Giành tấm huy chương vàng SEA Games 32, bóng đá nữ Việt Nam lập kỳ tích khi có lần thứ 4 liên tiếp giành huy chương vàng SEA Games. Đây cũng là lần thứ 8 trong lịch sử bóng đá nữ Việt Nam giành ngôi hậu ở sân chơi khu vực (hơn Thái Lan 3 lần).</p>
+                                <p>Theo thông tin từ Liên đoàn Bóng đá Việt Nam (VFF), ngay sau trận đấu chung kết, Thường trực Ban chấp hành VFF đã quyết định “thưởng nóng” các cô gái vàng số tiền 2 tỷ đồng.</p>
+                                <p>Như vậy, VFF đã thưởng ĐT bóng đá nữ Việt Nam tổng cộng 3,6 tỷ đồng bao gồm: 2 tỷ sau trận chung kết và 1,6 tỷ đồng sau các trận đấu từ vòng bảng đến bán kết SEA Games 32.</p>
+                              </div>
+                              </div>
+                    </div>
+                </div>
+                <div class="col-md-4 pt-2">
+                    <div class="row">
+                        <div class="col pt-2">
+                            <input type="search" class="form-control form-control-dark" placeholder="検索"
+                                aria-label="Search">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6" th:each="product: ${products}">
+                            <div class="">
+                                <img th:src="@{'/images/' + ${product.urlImage} + '.png'}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <div class="fw-bolder text-truncate">
+                                        <a href="#" class="link-dark"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="py-3 my-4">
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <li class="nav-item"><a href="#" class="nav-link px-3 text-muted">Home</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-3 text-muted">Features</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-3 text-muted">Pricing</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-3 text-muted">FAQs</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-3 text-muted">About</a></li>
+        </ul>
+        <p class="text-center text-muted">© 2021 Company, Inc</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+        </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+        integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+        </script>
+</body>
+
+</html>
