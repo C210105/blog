@@ -16,19 +16,35 @@ import net.shop2k.blog.services.ArticlesService;
 import net.shop2k.blog.services.CategorysService;
 import net.shop2k.blog.services.ProductsService;
 
+/*
+ * Categorys Controller 
+ */
 @Controller
 @RequestMapping(path = "/blog/index")
 public class CategorysController {
     
+    /*
+     * Categorys Service 
+     */
     @Autowired
     CategorysService categorysService;
 
+    /*
+     * Articles Service 
+     */
     @Autowired
     ArticlesService articlesService;
     
+    /*
+     * Products Service
+     */
     @Autowired
     ProductsService productsService;
 
+    /*
+     * /index 
+     * Model
+     */
     @GetMapping("/")
     public String getAllCategorys(Model model){
         List <Categorys> categorys = categorysService.findByAllCategorys();
@@ -36,11 +52,11 @@ public class CategorysController {
         List <Articles> allArticles = articlesService.getAllArticlesExceptLatest();
         List <Products> products = productsService.finByAllProducts();
         Articles hotArticles = articlesService.getHotArticles();
-        model.addAttribute("categorys", categorys);
-        model.addAttribute("articles", articles.orElse(null));
-        model.addAttribute("allArticles", allArticles);
-        model.addAttribute("products", products);    
-        model.addAttribute("hotArticles", hotArticles);
+        model.addAttribute("categorys", categorys); //全てCategorysを表する
+        model.addAttribute("articles", articles.orElse(null)); //最新Articles
+        model.addAttribute("allArticles", allArticles); //全てArticlesを表示する
+        model.addAttribute("products", products); //全てProductsを表示する
+        model.addAttribute("hotArticles", hotArticles); //ホットArticlesを表示する
         return "html/index.html";
     }
 

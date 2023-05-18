@@ -16,6 +16,9 @@ import net.shop2k.blog.services.ArticlesService;
 import net.shop2k.blog.services.CategorysService;
 import net.shop2k.blog.services.ProductsService;
 
+/*
+ * Posts Controller
+ */
 @Controller
 @RequestMapping(path = "/blog/v1/categorys/articles/posts/")
 public class PostsController {
@@ -29,16 +32,20 @@ public class PostsController {
     @Autowired
     ProductsService productsService;
 
+    /*
+     * @PathVariable
+     * Model
+     */
     @GetMapping("/{articlesId}")
     public String showArticleDetails(@PathVariable Long articlesId, Model model) {
         Articles articles = articlesService.findById(articlesId).orElse(null);
         List <Categorys> categorys = categorysService.findByAllCategorys();
         List <Products> products = productsService.finByAllProducts();
         Articles hotArticles = articlesService.getHotArticles();
-        model.addAttribute("articles", articles);
-        model.addAttribute("categorys", categorys);
-        model.addAttribute("products", products);
-        model.addAttribute("hotArticles", hotArticles);
+        model.addAttribute("articles", articles); //全てArticlesを表示する
+        model.addAttribute("categorys", categorys); //全てCategorysを表示する
+        model.addAttribute("products", products); //全てProductsを表示する
+        model.addAttribute("hotArticles", hotArticles); //ホットArticlesを表示する
         return "html/posts.html";
     }
 

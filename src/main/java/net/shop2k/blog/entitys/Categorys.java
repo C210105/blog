@@ -10,31 +10,36 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@Entity
-@NoArgsConstructor
-@AllArgsConstructor
-@Table(name = "categorys")
+/*
+ *カテゴリー情報 
+ */
+
+@Data //メソッドを自動的に生成定義
+@Entity //DB内にマップに指定
+@NoArgsConstructor //デフォルトのコンストラクタを自動的に生成、パラメータを取らず
+// @AllArgsConstructor　//全てのフィルードを受け入れ
+@Table(name = "categorys") //categorysテーブルをマップの指定
 public class Categorys {
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id //主キー
+    @GeneratedValue(strategy = GenerationType.AUTO) //主キー値を自動的に生成定義
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name") //カテゴリーの名
     private String name;
     
+    /*
+     * コンストラクタ定義
+     * nameパラメータ使用
+     * 
+     */
     public Categorys(String name) {
         this.name = name;
     }
-    
-    public Categorys(Long categoryId) {
-    }
 
-    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY) //フィーチャクラス間の1対多関係を定義する
     private Set<Articles> articles;
 }

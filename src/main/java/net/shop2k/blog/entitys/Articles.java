@@ -13,34 +13,38 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
-@Data
-@Entity
-@Table(name= "articles")
+/*
+ * 記事情報
+ */
+
+@Data //メソッドを自動的に生成定義 set,get,toString,equals,hashCode
+@Entity //データベース内のテーブルにマップ指定
+@Table(name= "articles") //DBのarticlesテーブルにマップに指定
 public class Articles {
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id //主キー
+    @GeneratedValue(strategy = GenerationType.AUTO) //主キーの値が自動的に生成される定義する
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name") //記事の名
     private String name;
 
-    @Column(name = "title")
+    @Column(name = "title") //記事のタイトル 
     private String title;
 
-    @Column(name = "shortTitle")
+    @Column(name = "shortTitle") //記事のショートタイトル
     private String shortTitle;
 
-    @Column(name = "updateDay")
+    @Column(name = "updateDay") //記事のアップデート時間
     private LocalDateTime updateDay;
 
-    @Column(name = "urlImage")
+    @Column(name = "urlImage") //写真のリンク
     private String urlImage;
 
-    @Column (name = "hotArticles")
+    @Column (name = "hotArticles") //記事のホットのレベル
     private Long hotArticles;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY) //フィーチャクラス間の多対１関係を定義するアノテーション
+    @JoinColumn(name = "category_id", nullable = false) //結合列フィールドを定義する、使用されるデータベース内列名を指定、フィルード空白はダメ
     private Categorys category;
 }
