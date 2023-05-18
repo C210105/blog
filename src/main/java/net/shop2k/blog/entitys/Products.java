@@ -8,18 +8,23 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
 
-@Data
-@Entity
-@Table (name = "products")
+
+/*
+ * 商品情報
+ */
+
+@Data //メソッドを自動的に生成定義
+@Entity //DB内にマップに定義
+@Table (name = "products") //productsテーブルをマップ指定
 public class Products {
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id //主キー
+    @GeneratedValue(strategy = GenerationType.AUTO) //主キー値を自動的に生成定義
     private Long id;
     
-    @Column(name = "name")
+    @Column(name = "name") //商品名
     private String name;
 
-    @Column(name = "urlImage")
+    @Column(name = "urlImage") //写真リンク
     private String urlImage;
 }

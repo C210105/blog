@@ -5,6 +5,9 @@ import org.springframework.stereotype.Repository;
 
 import net.shop2k.blog.entitys.Categorys;
 
+/*
+ * Categorys Repository
+ */
 
 @Repository
 public interface CategorysRepository extends JpaRepository<Categorys, Long>{
