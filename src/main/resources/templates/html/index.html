@@ -20,13 +20,13 @@
 
 <body>
     <div class="">
-        <header class="container blog-header py-4">
+        <header class="container blog-header">
             <div class="row flex-nowrap justify-content-between align-items-center">
                 <div class="col-4 pt-1">
                     <a class="link-secondary" href="#">Sub</a>
                 </div>
                 <div class="col-4 text-center">
-                    <a class="blog-header-logo text-dark p-1 fw-bolder fs-2" th:href="@{/blog/index/}">SHOP 2K</a>
+                    <a class="blog-header-logo text-dark p-1 fw-bolder fs-2" th:href="@{/blog/index/}">Blog</a>
                 </div>
                 <div class="col-4 d-flex justify-content-end align-items-center">
                     <a class="link-secondary" href="#" aria-label="Search">
@@ -88,15 +88,18 @@
                         <div>Đây là những thông tin nổi bật nhất đến từ đất nước Nhật Bản</div>
                         <hr>
                     </div>
-                    <div class="row" th:each="article: ${articles}">
+                    <div class="row" >
                         <div class="col-md-6">
                             <div class="card">
-                                <img src="../image/1.jpg" class="card-img-top" alt="...">
+                                <div class="position-absolute top-0 end-0">
+                                    <span class="badge bg-danger text-light">Mới</span>
+                                </div>
+                                <img th:src="@{'/images/' + ${articles.urlImage} + '.png'}" alt="">
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="fw-bolder fs-4"><a href="#" class="link-dark" th:text="${article.shortTitle}"></a></div>
-                            <div class="text-end" style="font-size: small;" th:text="${#temporals.format(article.updateDay, 'dd-MM-yyyy HH:mm')}"></div>
+                            <div class="fw-bolder fs-4"><a href="#" class="link-dark" th:text="${articles.shortTitle}"></a></div>
+                            <div class="text-end" style="font-size: small;" th:text="${#temporals.format(articles.updateDay, 'dd-MM-yyyy HH:mm')}"></div>
                         </div>
                     </div>
                     <hr>
@@ -223,9 +226,15 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col text-center">
+                            <p>Top Doanh Số</p>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6" th:each="product: ${products}">
+                            <a href="">
                                 <img th:src="@{'/images/' + ${product.urlImage} + '.png'}" class="card-img-top" alt="...">
-                                <!-- <img th:src="@{'/images/' + '1' + '.png'}" class="card-img-top" alt="..."> -->
+                            </a>
                                 <div class="card-body">
                                     <div class="fw-bolder text-truncate">
                                         <a href="#" class="link-dark"></a>
@@ -256,5 +265,4 @@
         integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
         </script>
 </body>
-
 </html>
