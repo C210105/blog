@@ -70,5 +70,4 @@ public interface ArticlesRepository extends JpaRepository <Articles, Long> {
      * 23オブジェクトをupdateDayフィルードを並べ替える
      */
     List <Articles> findTop23ByCategoryOrderByUpdateDayDesc(Categorys categorys);
-
 }
