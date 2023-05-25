@@ -18,8 +18,8 @@ public class SecurityConfig {
         http
         .authorizeHttpRequests(authz -> authz
             .requestMatchers(org.springframework.boot.autoconfigure.security.servlet.PathRequest.toStaticResources().atCommonLocations()).permitAll()
-            .requestMatchers("/").permitAll()
-            .requestMatchers("/admin").hasRole("ADMIN")
+            .requestMatchers("/blog").hasAnyRole("USER", "ADMIN")
+            .requestMatchers("/admin/blog/").hasRole("ADMIN")
             .anyRequest().permitAll() 
         )
         .formLogin(login -> login
@@ -36,5 +36,5 @@ public class SecurityConfig {
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 }
+
