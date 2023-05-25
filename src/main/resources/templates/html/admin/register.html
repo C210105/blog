@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>ADMIN</title>
+    <title>Login</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -27,25 +27,24 @@
             <div class="row justify-content-center">
                 <div class="col-md-7 col-lg-5">
                     <div class="bg-light p-4 p-md-5">
-                        <h3 class="text-center mb-3">Đăng Nhập</h3>
-                        <div th:if="${param.error}">
-                            <p class="error-message text-danger text-center">Tên đăng nhập hoặc mật khẩu không đúng. Vui lòng thử lại.</p>
-                        </div>
-                        <form th:action="@{/admin/blog/login}" method="POST" class="">
+                        <h3 class="text-center mb-3">Đăng Kí</h3>
+                        <p class="text-danger text-center" th:text="${error}" th:if="${error}"></p>
+                        <p class="text-success text-center" th:text="${susccessMessage}" th:if="${susccessMessage}"></p>
+                        <form th:action="@{/admin/blog/registeradmin}" method="POST" class="">
                             <div class="form-group mb-3">
-                                <input type="text" id="username" name="username" class="form-control rounded-left" placeholder="Tài khoản" required>
+                                <input type="text" id="username" name="username" class="form-control rounded-left" placeholder="Tài khoản"
+                                    required>
                             </div>
                             <div class="form-group d-flex mb-4">
                                 <input type="password" id="password" name="password" class="form-control rounded-left" placeholder="Mật khẩu"
                                     required>
                             </div>
                             <div class="form-group mb-3">
-                                <button type="submit"
-                                    class="form-control btn btn-primary rounded submit">Đăng nhập</button>
+                                <button type="submit" class="form-control btn btn-primary rounded submit px-3">Đăng Kí</button>
                             </div>
                             <div class="form-group d-flex text-center">
                                 <div class="w-50 text-md-right">
-                                    <a th:href="@{/admin/blog/registeradmin}" class="text-decoration-none">Đăng kí</a>
+                                    <a th:href="@{/admin/blog/login}" class="text-decoration-none">Đăng nhập</a>
                                 </div>
                                 <div class="w-50 text-md-right">
                                     <a href="#" class="text-decoration-none">Quên mật khẩu</a>
