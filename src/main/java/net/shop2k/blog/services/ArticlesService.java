@@ -144,8 +144,8 @@ public class ArticlesService {
     /*
      * 記事を削除する
      */
-    public void deleteArticles (Long id){
-        articlesRepository.deleteById(id);
+    public void deleteArticles (Long articlesId){
+        articlesRepository.deleteById(articlesId);
     }
 
 }
