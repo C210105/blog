@@ -11,6 +11,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 
+    <!-- <script>
+        window.location.reload();
+    </script> -->
+
 </head>
 
 <body>
@@ -40,12 +44,12 @@
                         <h3 class="text-center mb-3 mt-3"> Đăng Bài Báo Mới</h3>
                     </div>
                     <p class="text-danger text-center" th:text="${error}" th:if="${error}"></p>
-                    <p class="text-success text-center" th:text="${susccessMessage}" th:if="${susccessMessage}"></p>
+                    <p class="text-success text-center" th:text="${susccessMessageCreate}" th:if="${susccessMessageCreate}"></p>
                     <form th:action="@{/admin/blog/create}" method="POST" enctype="multipart/form-data">
                         <div class="input-group has-validation mb-3">
-                                <select class="form-select is-invalid" aria-label="Thể loại" name="category" placeholder="asdasd">
+                                <select class="form-select is-invalid" aria-label="Thể loại" name="category" placeholder="">
                                     <option selected>Thể loại</option>
-                                    <option th:each="category: ${categorys}" th:text="${category.name}" th:value="${category.id}"></option>
+                                    <option th:each="category: ${allCategorys}" th:text="${category.name}" th:value="${category.id}"></option>
                                     <!-- <option value="2">Thê loại 2</option> -->
                                 </select>
                         </div>
@@ -97,7 +101,8 @@
                         <div class="col-md-12 text-center mb-3">
                             <h5>Các Bài Đăng Mới Nhất</h5>
                         </div>
-                        <div class="col-md-12" th:each="allArticle: ${allArticles}">
+                        <p class="text-success text-center" th:text="${susccessMessageDelete}" th:if="${susccessMessageDelete}"></p>
+                        <div class="col-md-6" th:each="allArticle: ${allArticles}">
                             <div class="row">
                                 <div class="col-4 d-none d-lg-block">
                                     <div class="card">
@@ -113,11 +118,13 @@
                                         th:text="${#temporals.format(allArticle.updateDay, 'dd-MM-yyyy HH:mm')}">
                                     </div>
                                 </div>
-                                <div class="text-end">
-                                    <button type="button" class="btn lh-1 btn-success" style="font-size: x-small">Cập
-                                        nhật</button>
-                                    <button type="button" class="btn lh-1 btn-danger"
-                                        style="font-size: x-small">Xóa</button>
+                                <div class="d-flex justify-content-end">
+                                    <!-- <form th:action="@{/admin/blog/delete/{articlesId}(articlesId=${allArticle.id})}" method="POST" onsubmit="return confirm('Bạn có chắc chắn muốn sửa bài viết này?')">
+                                        <button type="submit" class="btn btn-success ms-2" style="font-size: small;">Sửa</button> -->
+                                    </form>
+                                        <form th:action="@{/admin/blog/delete/{articlesId}(articlesId=${allArticle.id})}" method="POST" onsubmit="return confirm('Bạn có chắc chắn muốn xóa bài viết này?')">
+                                            <button type="submit" class="btn btn-danger ms-2" style="font-size: small;">Xóa</button>
+                                        </form>
                                 </div>
                             </div>
                             <hr>
