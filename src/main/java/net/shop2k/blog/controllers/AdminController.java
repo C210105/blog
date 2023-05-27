@@ -115,7 +115,7 @@ public class AdminController {
     @PostMapping("/create")
     public String createArticles(@RequestParam("category") Long categoryId, @RequestParam("title") String title,
             @RequestParam("shortTitle") String shortTile, @RequestParam("conTent") String conTent,
-            @RequestParam("urlImage") MultipartFile urlImage, Model model) {
+            @RequestParam("urlImage") MultipartFile urlImage, @RequestParam("hotArticles") Long hotArticles, Model model) {
 
         Articles articles = new Articles();
         Optional<Categorys> optionalCategory = categorysService.findByOptional(categoryId);
@@ -129,6 +129,7 @@ public class AdminController {
             articles.setConTent(conTent);
             articles.setUpdateDay(LocalDateTime.now());
             articles.setCategory(category);
+            articles.setHotArticles(hotArticles);
             try {
                 if (!urlImage.isEmpty()) {
                     String fileName = UUID.randomUUID().toString() + "-" + urlImage.getOriginalFilename();

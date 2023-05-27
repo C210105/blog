@@ -54,36 +54,39 @@
                                 </select>
                         </div>
                         <div class="input-group has-validation mb-3">
-                            <select class="form-select is-invalid" aria-label="Độ nóng">
-                                <option selected>Độ nóng</option>
-                                <option value="1">Độ nóng 1</option>
-                                <option value="2">Độ nóng 2</option>
-                                <option value="3">Độ nóng 3</option>
-                                <option value="4">Độ nóng 4</option>
-                                <option value="5">Độ nóng 5</option>
-                            </select>
-                        </div>
-                        <div class="input-group has-validation mb-3">
                             <div class="form-floating is-invalid">
-                                <input type="text" class="form-control is-invalid" id="title" name="title" placeholder="1" required>
-                                <label for="floatingInputGroup2">Tiêu đề chính</label>
+                                <input type="number" class="form-control is-invalid" max="5" min="1" id="hotArticles" name="hotArticles" placeholder="1" required>
+                                <label for="floatingInputGroup2">Độ nóng (1 - 5)</label>
                             </div>
                         </div>
                         <div class="input-group has-validation mb-3">
+                            <div class="form-floating is-invalid">
+                                <textarea class="form-control is-invalid" id="title" name="title" aria-label="With textarea"
+                                    placeholder="1"></textarea>
+                                <label for="floatingInputGroup2">Tiều đề chính</label>
+                            </div>
+                        </div>
+                        <div class="input-group has-validation mb-3">
+                            <div class="form-floating is-invalid">
+                                <textarea class="form-control is-invalid" id="shortTitle" name="shortTitle" aria-label="With textarea"
+                                    placeholder="1"></textarea>
+                                <label for="floatingInputGroup2">Tiêu đề ngắn</label>
+                            </div>
+                        </div>
+                        <!-- <div class="input-group has-validation mb-3">
                             <div class="form-floating is-invalid">
                                 <input type="text" class="form-control is-invalid" id="shortTile" name="shortTitle" placeholder="1" required>
                                 <label for="floatingInputGroup2">Tiêu đề ngắn</label>
                             </div>
-                            <!-- <div class="invalid-feedback">
+                            <div class="invalid-feedback">
                               Please choose a username.
-                            </div> -->
-                        </div>
+                            </div>
+                        </div> -->
                         <div class="input-group mb-3">
                             <label for="" class="input-group-text">Ảnh</label>
                             <input type="file" class="form-control" id="urlImage" name="urlImage">
                         </div>
                         <div class="input-group has-validation mb-3">
-                            <span class="input-group-text">Nội dung</span>
                             <div class="form-floating is-invalid">
                                 <textarea class="form-control is-invalid" id="conTent" name="conTent" aria-label="With textarea"
                                     placeholder="1"></textarea>
