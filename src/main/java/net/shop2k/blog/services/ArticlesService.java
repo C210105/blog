@@ -63,6 +63,14 @@ public class ArticlesService {
         return allArticles;
     }
 
+    public List <Articles> ggetAllArticlesExceptLatest(){
+        List<Articles> allArticles = articlesRepository.findAllArticlesByOrderByUpdateDayDesc();
+        // if (!allArticles.isEmpty()) {
+        //     allArticles.remove(0);
+        // }
+        return allArticles;
+    }
+
     /*
      * 特定のCategorysに関連の最新Articlesを取得する
      */
@@ -113,4 +121,31 @@ public class ArticlesService {
         }
         return new ArrayList<>();
     }
+
+
+    /*
+     * CRUDのAPI
+     */
+
+     /*
+      * 新しい記事を登録する
+      */
+    public void createArticles (Articles articles){
+        articlesRepository.save(articles);
+    }
+
+    /*
+     * 記事を更新する
+     */
+    public Articles updateArticles (Articles articles){
+        return articlesRepository.save(articles);
+    }
+
+    /*
+     * 記事を削除する
+     */
+    public void deleteArticles (Long id){
+        articlesRepository.deleteById(id);
+    }
+
 }

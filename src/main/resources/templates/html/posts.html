@@ -100,14 +100,10 @@
                     <div class="row">
                         <div class="col-md-12">
                             <h3 th:text="${articles.title}"></h3>
-                            <img th:src="@{'/images/' + ${articles.urlImage} + '.png'}" class="card-img-top" alt="...">
+                            <img th:src="@{'/images/' + ${articles.urlImage}+''}" class="card-img-top" alt="...">
                             <div class="text-center">Hình ảnh minh họa</div>
                             <div class="lh-lg">
-                                <p>19h30 tối nay (15/5), trên sân vận động quốc gia Olympic (Phnom Penh, Campuchia), đội tuyển nữ Việt Nam đã ra quân trong trận chung kết môn bóng đá nữ SEA Games 32. Đối thủ của các cô gái Việt Nam là đội tuyển (ĐT) bóng đá nữ Myanmar.</p>
-                                <p>Kết quả chung cuộc, thầy trò HLV Mai Đức Chung đã giành chiến thắng với tỉ số 2-0. Hai cầu thủ ghi bàn thắng cho ĐT nữ Việt Nam là tiền đạo Huỳnh Như (phút 12) và tiền vệ Thanh Nhã (phút 76).</p>
-                                <p>Giành tấm huy chương vàng SEA Games 32, bóng đá nữ Việt Nam lập kỳ tích khi có lần thứ 4 liên tiếp giành huy chương vàng SEA Games. Đây cũng là lần thứ 8 trong lịch sử bóng đá nữ Việt Nam giành ngôi hậu ở sân chơi khu vực (hơn Thái Lan 3 lần).</p>
-                                <p>Theo thông tin từ Liên đoàn Bóng đá Việt Nam (VFF), ngay sau trận đấu chung kết, Thường trực Ban chấp hành VFF đã quyết định “thưởng nóng” các cô gái vàng số tiền 2 tỷ đồng.</p>
-                                <p>Như vậy, VFF đã thưởng ĐT bóng đá nữ Việt Nam tổng cộng 3,6 tỷ đồng bao gồm: 2 tỷ sau trận chung kết và 1,6 tỷ đồng sau các trận đấu từ vòng bảng đến bán kết SEA Games 32.</p>
+                               <p th:text="${articles.conTent}"></p>
                               </div>
                               </div>
     
