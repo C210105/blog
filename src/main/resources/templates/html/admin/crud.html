@@ -35,18 +35,18 @@
     <main>
         <div class="container">
             <div class="row">
-                <div class="col-md-8">
-                    <form class="mt-5 mb-5 card">
-                        <div>
-                            <h3 class="text-center mb-3 mt-3"> Đăng Bài Báo Mới</h3>
-                        </div>
+                <div class="col-md-8 mt-5 mb-5 card">
+                    <div>
+                        <h3 class="text-center mb-3 mt-3"> Đăng Bài Báo Mới</h3>
+                    </div>
+                    <p class="text-danger text-center" th:text="${error}" th:if="${error}"></p>
+                    <p class="text-success text-center" th:text="${susccessMessage}" th:if="${susccessMessage}"></p>
+                    <form th:action="@{/admin/blog/create}" method="POST" enctype="multipart/form-data">
                         <div class="input-group has-validation mb-3">
-                                <select class="form-select is-invalid" aria-label="Thể loại" placeholder="asdasd">
+                                <select class="form-select is-invalid" aria-label="Thể loại" name="category" placeholder="asdasd">
                                     <option selected>Thể loại</option>
-                                    <option value="1">Thể loại 1</option>
-                                    <option value="2">Thê loại 2</option>
-                                    <option value="3">Thể loại 3</option>
-
+                                    <option th:each="category: ${categorys}" th:text="${category.name}" th:value="${category.id}"></option>
+                                    <!-- <option value="2">Thê loại 2</option> -->
                                 </select>
                         </div>
                         <div class="input-group has-validation mb-3">
@@ -61,13 +61,13 @@
                         </div>
                         <div class="input-group has-validation mb-3">
                             <div class="form-floating is-invalid">
-                                <input type="text" class="form-control is-invalid" id="" placeholder="1" required>
+                                <input type="text" class="form-control is-invalid" id="title" name="title" placeholder="1" required>
                                 <label for="floatingInputGroup2">Tiêu đề chính</label>
                             </div>
                         </div>
                         <div class="input-group has-validation mb-3">
                             <div class="form-floating is-invalid">
-                                <input type="text" class="form-control is-invalid" id="" placeholder="1" required>
+                                <input type="text" class="form-control is-invalid" id="shortTile" name="shortTitle" placeholder="1" required>
                                 <label for="floatingInputGroup2">Tiêu đề ngắn</label>
                             </div>
                             <!-- <div class="invalid-feedback">
@@ -76,18 +76,18 @@
                         </div>
                         <div class="input-group mb-3">
                             <label for="" class="input-group-text">Ảnh</label>
-                            <input type="file" class="form-control" id="">
+                            <input type="file" class="form-control" id="urlImage" name="urlImage">
                         </div>
                         <div class="input-group has-validation mb-3">
                             <span class="input-group-text">Nội dung</span>
                             <div class="form-floating is-invalid">
-                                <textarea class="form-control is-invalid" aria-label="With textarea"
+                                <textarea class="form-control is-invalid" id="conTent" name="conTent" aria-label="With textarea"
                                     placeholder="1"></textarea>
                                 <label for="floatingInputGroup2">Nhập nội dung</label>
                             </div>
                         </div>
                         <div class="text-center mb-3">
-                            <button type="button" class="btn btn-primary">Đăng Bài Viết</button>
+                            <button type="submit" class="btn btn-primary">Đăng Bài Viết</button>
                         </div>
                     </form>
                 </div>
@@ -101,20 +101,16 @@
                             <div class="row">
                                 <div class="col-4 d-none d-lg-block">
                                     <div class="card">
-                                        <img src="../image/1.jpg" class="card-img-top" alt="...">
+                                        <img th:src="@{'/images/' + ${allArticle.urlImage}+''}" class="card-img-top" alt="...">
                                     </div>
                                 </div>
                                 <div class="col-md-8">
                                     <div class="">
-                                        <a href="#" class="link-dark fw-bolder">Đây là tin hót nhất</a>
-                                        <p class="text-truncate">Hiểu đơn giản thì READ là lúc người dùng xem một bài
-                                            viết, xem một thông tin từ Database. Phần hiển thị giao diện sẽ do bạn đảm
-                                            nhiệm.
-                                            Người dùng gửi yêu cầu đến máy chủ và xem bài viết đã lưu trữ trong
-                                            Database.</p>
+                                        <a href="#" class="link-dark fw-bolder text-decoration-none" th:text="${allArticle.shortTitle}"></a>
+                                        <p class="text-truncate" th:text="${allArticle.conTent}"></p>
                                     </div>
                                     <div class="text-end" style="font-size: x-small"
-                                        th:text="${#temporals.format(allArticle.updateDay, 'dd-MM-yyyy HH:mm')}">dfdsf
+                                        th:text="${#temporals.format(allArticle.updateDay, 'dd-MM-yyyy HH:mm')}">
                                     </div>
                                 </div>
                                 <div class="text-end">
@@ -122,29 +118,6 @@
                                         nhật</button>
                                     <button type="button" class="btn lh-1 btn-danger"
                                         style="font-size: x-small">Xóa</button>
-                                </div>
-                            </div>
-                            <hr>
-                        </div>
-                        <div class="col-md-12" th:each="allArticle: ${allArticles}">
-                            <div class="row">
-                                <div class="col-4 d-none d-lg-block">
-                                    <div class="card">
-                                        <img src="../image/1.jpg" class="card-img-top" alt="...">
-                                    </div>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="">
-                                        <a href="#" class="link-dark fw-bolder">Đây là tin hót nhất</a>
-                                        <p class="text-truncate">Hiểu đơn giản thì READ là lúc người dùng xem một bài
-                                            viết, xem một thông tin từ Database. Phần hiển thị giao diện sẽ do bạn đảm
-                                            nhiệm.
-                                            Người dùng gửi yêu cầu đến máy chủ và xem bài viết đã lưu trữ trong
-                                            Database.</p>
-                                    </div>
-                                    <div class="text-end" style="font-size: x-small"
-                                        th:text="${#temporals.format(allArticle.updateDay, 'dd-MM-yyyy HH:mm')}">dfdsf
-                                    </div>
                                 </div>
                             </div>
                             <hr>

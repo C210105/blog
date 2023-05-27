@@ -25,7 +25,7 @@ public class SecurityConfig {
         .formLogin(login -> login
             .loginProcessingUrl("/admin/blog/login")
             .loginPage("/admin/blog/login")
-            .defaultSuccessUrl("/admin/blog/index")
+            .defaultSuccessUrl("/admin/blog/create")
             .failureUrl("/admin/blog/login?error=true")
             .permitAll()
         );

@@ -94,11 +94,15 @@
                                 <div class="position-absolute top-0 end-0">
                                     <span class="badge bg-danger text-light">Mới</span>
                                 </div>
-                                <img th:src="@{'/images/' + ${articles.urlImage} + '.png'}" alt="">
+                                <img th:src="@{'/images/' + ${articles.urlImage} + ''}" alt="">
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="fw-bolder fs-4"><a href="#" class="link-dark" th:text="${articles.shortTitle}"></a></div>
+                            <div class="fw-bolder fs-4">
+                                <a th:href="@{/blog/v1/categorys/articles/posts/{articlesId}(articlesId=${articles.id})}"
+                                            method="GET" class="link-dark" th:text="${articles.shortTitle}"></a>
+                            </div>
+                            <p th:text="${articles.conTent}"></p>
                             <div class="text-end" style="font-size: small;" th:text="${#temporals.format(articles.updateDay, 'dd-MM-yyyy HH:mm')}"></div>
                         </div>
                     </div>
@@ -108,13 +112,15 @@
                             <div class="row">
                                 <div class="col-4 d-none d-lg-block">
                                     <div class="card">
-                                        <img src="../image/1.jpg" class="card-img-top" alt="...">
+                                        <img th:src="@{'/images/' + ${allArticle.urlImage} + ''}" alt="">
                                     </div>
                                 </div>
-                                <div class="col">
+                                <div class="col-8">
                                     <div class="fw-bolder">
-                                        <a href="#" class="link-dark" th:text="${allArticle.shortTitle}"></a>
+                                        <a th:href="@{/blog/v1/categorys/articles/posts/{articlesId}(articlesId=${allArticle.id})}"
+                                            method="GET" class="link-dark" th:text="${allArticle.shortTitle}"></a>
                                     </div>
+                                    <p th:text="${allArticle.conTent}" class="text-truncate" style="font-size: small;"></p>
                                     <div class="text-end" style="font-size: x-small" th:text="${#temporals.format(allArticle.updateDay, 'dd-MM-yyyy HH:mm')}"></div>
                                 </div>
                             </div>

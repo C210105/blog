@@ -45,7 +45,8 @@
         <!-- <hr> -->
         <div class="nav-scroller py-1 bg-primary">
             <nav class="container nav d-flex justify-content-between" th:object="${categorys}">
-                <a type="buttom" class="btn btn-primary p-2 link-light" method="GET" th:href="@{/blog/v1/categorys/articles/{id}(id=${category.id})}" th:each="category : ${categorys}"
+                <a type="buttom" class="btn btn-primary p-2 link-light" method="GET"
+                    th:href="@{/blog/v1/categorys/articles/{id}(id=${category.id})}" th:each="category : ${categorys}"
                     th:text="${category.name}" th:value="${category.id}"></a>
                 <!-- <a class="btn btn-primary p-2 dropdown-toggle text-light" data-bs-toggle="dropdown"
                     aria-expanded="false" th:if="${categorys[12].id == 13}" th:href="@{/api/v1/categorys/{id}(id=${categorys[12].id})}" th:text="${categorys[12].name}"
@@ -65,12 +66,12 @@
         </div>
         <div class="bg-light">
             <nav class="container text-truncate">
-                    <a class="link-dark fw-bolder">Ngay bây giờ　</a>
-                    <a href="#" class="" style="color: rgb(126, 121, 121);">tìm kiếm 1　</a>
-                    <a href="#" class="" style="color: rgb(126, 121, 121);">tìm kiếm 2　</a>
-                    <a href="#" class="" style="color: rgb(126, 121, 121);">tìm kiếm 3　</a>
-                    <a href="#" class="" style="color: rgb(126, 121, 121);">tìm kiếm 4　</a>
-                    <a href="#" class="" style="color: rgb(126, 121, 121);">Xem thêm</a>
+                <a class="link-dark fw-bolder">Ngay bây giờ　</a>
+                <a href="#" class="" style="color: rgb(126, 121, 121);">tìm kiếm 1　</a>
+                <a href="#" class="" style="color: rgb(126, 121, 121);">tìm kiếm 2　</a>
+                <a href="#" class="" style="color: rgb(126, 121, 121);">tìm kiếm 3　</a>
+                <a href="#" class="" style="color: rgb(126, 121, 121);">tìm kiếm 4　</a>
+                <a href="#" class="" style="color: rgb(126, 121, 121);">Xem thêm</a>
             </nav>
         </div>
     </div>
@@ -88,7 +89,8 @@
                     <div class="row">
                         <div class="py-2">
                             <span class="text-bg-danger fs-5">Tin nóng</span>
-                            <a href="#" class="fw-semibold link-dark" th:each="hotArticle: ${hotArticles}" th:text="${hotArticle.shortTitle}"></a>
+                            <a href="#" class="fw-semibold link-dark" th:each="hotArticle: ${hotArticles}"
+                                th:text="${hotArticle.shortTitle}"></a>
                         </div>
                         <hr>
                         <div class="fw-bolder fs-4">Nổi Bật</div>
@@ -101,13 +103,19 @@
                                 <div class="position-absolute top-0 end-0">
                                     <span class="badge bg-danger text-light">Mới</span>
                                 </div>
-                                <img th:src="@{'/images/' + ${latestOneArticles.urlImage} + '.png'}" class="card-img-top" alt="...">
+                                <img th:src="@{'/images/' + ${latestOneArticles.urlImage} + ''}" class="card-img-top"
+                                    alt="...">
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="fw-bolder fs-3"><a th:href="@{/blog/v1/categorys/articles/posts/{articlesId}(articlesId=${latestOneArticle.id})}" method="GET" class="link-dark" th:text="${latestOneArticles.shortTitle}"></a></div>
-                            <div class="text-end" style="font-size: x-small;"><span th:text="${#temporals.format(latestOneArticles.updateDay, 'dd-MM-yyyy HH:mm')}"></span>
-                                </div>
+                            <div class="fw-bolder">
+                                <a th:href="@{/blog/v1/categorys/articles/posts/{articlesId}(articlesId=${latestOneArticle.id})}"
+                                    method="GET" class="link-dark fs-3" th:text="${latestOneArticles.shortTitle}"></a>
+                            </div>
+                            <p th:text="${latestOneArticle.conTent}"></p>
+                            <div class="text-end" style="font-size: x-small;"><span
+                                    th:text="${#temporals.format(latestOneArticles.updateDay, 'dd-MM-yyyy HH:mm')}"></span>
+                            </div>
 
                         </div>
                     </div>
@@ -118,14 +126,19 @@
                             <div class="row">
                                 <div class="col-4 d-none d-lg-block">
                                     <div class="card">
-                                        <img src="../image/1.jpg" class="card-img-top" alt="...">
+                                        <img th:src="@{'/images/' + ${latestSixArticle.urlImage} + ''}"
+                                            class="card-img-top" alt="...">
                                     </div>
                                 </div>
-                                <div class="col">
+                                <div class="col-8">
                                     <div class="fw-bolder">
-                                        <a href="#" class="link-dark" th:text="${latestSixArticle.shortTitle}"></a>
+                                        <a th:href="@{/blog/v1/categorys/articles/posts/{articlesId}(articlesId=${latestSixArticle.id})}"
+                                            method="GET" class="link-dark" th:text="${latestSixArticle.shortTitle}"></a>
                                     </div>
-                                    <div class="text-end" style="font-size: x-small" th:text="${#temporals.format(latestSixArticle.updateDay, 'dd-MM-yyyy HH:mm')}"></div>
+                                    <p th:text="${latestSixArticle.conTent}" class="text-truncate fs-6"></p>
+                                    <div class="text-end" style="font-size: x-small"
+                                        th:text="${#temporals.format(latestSixArticle.updateDay, 'dd-MM-yyyy HH:mm')}">
+                                    </div>
                                 </div>
                             </div>
                             <hr>
@@ -134,28 +147,36 @@
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                         <div class="col-md-3" th:each="latestEightArticle: ${latestEightArticles}">
                             <div class="">
-                                <img src="../image/1.jpg" class="card-img-top" alt="...">
+                                <img th:src="@{'/images/' + ${latestEightArticle.urlImage} + ''}" class="card-img-top"
+                                    alt="...">
                                 <div class="card-body">
                                     <div class="fw-bolder text-truncate">
                                         <a href="#" class="link-dark" th:text="${latestEightArticle.shortTitle}"></a>
                                     </div>
+                                    <p th:text="${latestEightArticle.conTent}" class="text-truncate"></p>
                                 </div>
                             </div>
                         </div>
-                        </div>
+                    </div>
                     <hr>
-                    
+
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                         <div class="col-md-6" th:each="latestSixXArticle: ${latestSixXArticles}">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="card">
-                                        <img src="../image/1.jpg" class="card-img-top" alt="...">
+                                        <img th:src="@{'/images/' + ${latestSixXArticle.urlImage} + ''}"
+                                            class="card-img-top" alt="...">
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <div class="fw-bolder"><a href="#" class="link-dark" th:text="${latestSixXArticle.shortTitle}"></a></div>
+                                    <div class="fw-bolder">
+                                        <a href="#" class="link-dark"
+                                            th:text="${latestSixXArticle.shortTitle}">
+                                        </a>
+                                    </div>
+                                    <p th:text="${latestSixXArticle.conTent}"></p>
                                 </div>
                             </div>
                             <hr>
@@ -178,7 +199,8 @@
                         <div class="col-md-6" th:each="product: ${products}">
                             <div class="">
                                 <a href="#">
-                                <img th:src="@{'/images/' + ${product.urlImage} + '.png'}" class="card-img-top" alt="#">
+                                    <img th:src="@{'/images/' + ${product.urlImage} + '.png'}" class="card-img-top"
+                                        alt="#">
                                 </a>
                                 <div class="card-body">
                                     <div class="fw-bolder text-truncate">
