@@ -12,14 +12,15 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.JpaSort.Path;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -115,7 +116,7 @@ public class AdminController {
     @PostMapping("/create")
     public String createArticles(@RequestParam("category") Long categoryId, @RequestParam("title") String title,
             @RequestParam("shortTitle") String shortTile, @RequestParam("conTent") String conTent,
-            @RequestParam("urlImage") MultipartFile urlImage, Model model) {
+            @RequestParam("urlImage") MultipartFile urlImage, @RequestParam("hotArticles") Long hotArticles, Model model) {
 
         Articles articles = new Articles();
         Optional<Categorys> optionalCategory = categorysService.findByOptional(categoryId);
@@ -129,6 +130,7 @@ public class AdminController {
             articles.setConTent(conTent);
             articles.setUpdateDay(LocalDateTime.now());
             articles.setCategory(category);
+            articles.setHotArticles(hotArticles);
             try {
                 if (!urlImage.isEmpty()) {
                     String fileName = UUID.randomUUID().toString() + "-" + urlImage.getOriginalFilename();
@@ -138,17 +140,18 @@ public class AdminController {
                     articlesService.createArticles(articles);
                 }
             } catch (IOException e) {
-                return "/";
+                return "redirect:/error";
             }
             log.info("記事を登録できました");
             model.addAttribute("allCategorys", allCategorys);
             model.addAttribute("allArticles", allArticles);
             model.addAttribute("susccessMessageCreate", "Đăng bài viết thành công");
-            return "html/admin/crud.html";
+            model.addAttribute("susccessMessageUpdate", "Đã Sửa bài viết thành công");
+            return "redirect:/admin/blog/create";
         } else {
             log.info("No");
             model.addAttribute("error", "Looix");
-            return "html/admin/crud.html";
+            return "redirect:/error";
         }
     }
 
@@ -167,6 +170,77 @@ public class AdminController {
         model.addAttribute("susccessMessageDelete", "Xóa bài viết thành công");
         log.info(articlesId +" を削除できました"); // Console 表示する
         return "html/admin/crud.html";
+    }
+
+    /*
+     *記事を更新する
+     */
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/update/{articlesId}")
+    public String updateArticles(@PathVariable("articlesId") Long articlesId, Model model){
+        
+        Optional <Articles> articlesOptional = articlesService.findById(articlesId);
+
+        if(articlesOptional.isPresent()){
+            Articles articles = articlesOptional.get();
+            List <Categorys> allCategorys = categorysService.findByAllCategorys();
+            List <Articles> allArticles = articlesService.getAllArticles();
+            model.addAttribute("articles", articles);
+            model.addAttribute("allCategorys", allCategorys);
+            model.addAttribute("allArticles", allArticles);
+            model.addAttribute("update", "update");
+            return "html/admin/update.html";
+        }
+        return "redirect:/error";
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PostMapping("/update/{articlesId}")
+    public String updateaArticles(@PathVariable("articlesId") Long articlesId, @ModelAttribute("articles") Articles updateArticles,
+        BindingResult bindingResult, @RequestParam("urlImage") MultipartFile urlImage, Model model){
+        
+            // if (bindingResult.hasErrors()) {
+            //     // Xử lý lỗi validation nếu có
+            //     return "html/admin/update.html";
+            // }
+            List <Categorys> allCategorys = categorysService.findByAllCategorys();
+            Optional<Articles> articlesOptional = articlesService.findById(articlesId);
+        
+            if (articlesOptional.isPresent()) {
+                Articles articles = articlesOptional.get();
+                articles.setTitle(updateArticles.getTitle());
+                articles.setShortTitle(updateArticles.getShortTitle());
+                articles.setConTent(updateArticles.getConTent());
+                articles.setCategory(updateArticles.getCategory());
+                // articles.setUpdateDay(LocalDateTime.now());
+                // アップした写真を確認する
+                if (!urlImage.isEmpty()) {
+                    try {
+                        // 写真を保存する場所
+                        String fileName = UUID.randomUUID().toString() + "-" + urlImage.getOriginalFilename();
+                        java.nio.file.Path filePath = Paths.get("src/main/resources/static/images/", fileName);
+                        Files.copy(urlImage.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+                        articles.setUrlImage(fileName);
+                    } catch (IOException e) {
+                        // エラーになる時
+                        log.info("Lỗi");
+                        return "redirect:/error";
+                    }
+                }
+                log.info("Sửa thành công");
+                articlesService.updateArticles(articles);
+                model.addAttribute("susccessMessageUpdate", "Đã Sửa thành công bài viết số " + articlesId);
+                model.addAttribute("return", "return");
+                model.addAttribute("allCategorys", allCategorys);
+                // return "redirect:/admin/blog/update/" + articlesId;
+                return "html/admin/update.html";
+            }
+        // List <Categorys> allCategorys = categorysService.findByAllCategorys();
+        // List <Articles> allArticles = articlesService.ggetAllArticlesExceptLatest();
+        // model.addAttribute("allCategorys", allCategorys);
+        // model.addAttribute("allArticles", allArticles);
+        // log.info("更新できました");
+        return "redirect:/error";
     }
 
 }

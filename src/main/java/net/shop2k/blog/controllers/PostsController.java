@@ -42,7 +42,7 @@ public class PostsController {
         List <Categorys> categorys = categorysService.findByAllCategorys();
         List <Products> products = productsService.finByAllProducts();
         Articles hotArticles = articlesService.getHotArticles();
-        model.addAttribute("articles", articles); //全てArticlesを表示する
+        model.addAttribute("articles", articles); //Articlesを表示する
         model.addAttribute("categorys", categorys); //全てCategorysを表示する
         model.addAttribute("products", products); //全てProductsを表示する
         model.addAttribute("hotArticles", hotArticles); //ホットArticlesを表示する
