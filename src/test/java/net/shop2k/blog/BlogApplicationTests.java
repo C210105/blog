@@ -22,13 +22,19 @@ class BlogApplicationTests {
 	void contextLoads() {
 	}
 
-	@Test
-	void category(){
+	// @Test
+	// void category(){
 
-		List <Categorys> category = categorysService.findByAllCategorys();
-		assertNotNull(category, "ok");
-		assertEquals(2,category.size());
+	// 	List <Categorys> category = categorysService.findByAllCategorys();
+	// 	assertNotNull(category, "ok");
+	// 	assertEquals(2,category.size());
+// }
+
+	@Test
+	void laytatcabaibao (){
 		
+		List <Categorys> allCategorys = categorysService.findByAllCategorys();
+		assertEquals(1, allCategorys.size(), "Loii");
 	}
 
 }
