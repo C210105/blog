@@ -18,24 +18,20 @@
 </head>
 
 <body>
-    <header>
-        <div class="">
-            <header class="container blog-header mt-2 mb-2">
-                <div class="row flex-nowrap justify-content-center align-items-center">
-                    <div class="text-center">
-                        <a class="blog-header-logo text-dark p-1 fw-bolder fs-2 text-decoration-none"
-                            th:href="@{/blog/index/}">Blog - ADMIN</a>
-                    </div>
-                </div>
-            </header>
-            <!-- <hr> -->
-            <div class="nav-scroller py-1 bg-primary">
-                <nav class="container nav d-flex justify-content-between">
-                    <a type="buttom" class="btn btn-primary p-2 link-light" method="GET">CRUD</a>
-                </nav>
+    <header class="container blog-header mt-2 mb-2">
+        <div class="row flex-nowrap justify-content-center align-items-center">
+            <div class="text-center">
+                <a class="blog-header-logo text-dark p-1 fw-bolder fs-2 text-decoration-none"
+                    th:href="@{/blog/index/}">Blog - ADMIN</a>
             </div>
         </div>
     </header>
+    <!-- <hr> -->
+    <div class="nav-scroller py-1 bg-primary">
+        <nav class="container nav d-flex justify-content-between">
+            <a type="buttom" class="btn btn-primary p-2 link-light" method="GET">CRUD</a>
+        </nav>
+    </div>
     <main>
         <div class="container">
             <div class="row">
@@ -44,32 +40,35 @@
                         <h3 class="text-center mb-3 mt-3"> Đăng Bài Báo Mới</h3>
                     </div>
                     <p class="text-danger text-center" th:text="${error}" th:if="${error}"></p>
-                    <p class="text-success text-center" th:text="${susccessMessageCreate}" th:if="${susccessMessageCreate}"></p>
+                    <p class="text-success text-center" th:text="${susccessMessageCreate}"
+                        th:if="${susccessMessageCreate}"></p>
                     <form th:action="@{/admin/blog/create}" method="POST" enctype="multipart/form-data">
                         <div class="input-group has-validation mb-3">
-                                <select class="form-select is-invalid" aria-label="Thể loại" name="category" placeholder="" >
-                                    <option selected>Thể loại</option>
-                                    <option th:each="category: ${allCategorys}" th:text="${category.name}" th:value="${category.id}"></option>
-                                    <!-- <option value="2">Thê loại 2</option> -->
-                                </select>
+                            <select class="form-select is-invalid" aria-label="Thể loại" name="category" placeholder="">
+                                <option selected>Thể loại</option>
+                                <option th:each="category: ${allCategorys}" th:text="${category.name}"
+                                    th:value="${category.id}"></option>
+                                <!-- <option value="2">Thê loại 2</option> -->
+                            </select>
                         </div>
                         <div class="input-group has-validation mb-3">
                             <div class="form-floating is-invalid">
-                                <input type="number" class="form-control is-invalid" max="5" min="1" id="hotArticles" name="hotArticles" placeholder="1" required>
+                                <input type="number" class="form-control is-invalid" max="5" min="1" id="hotArticles"
+                                    name="hotArticles" placeholder="1" required>        
                                 <label for="floatingInputGroup2">Độ nóng (1 - 5)</label>
                             </div>
                         </div>
                         <div class="input-group has-validation mb-3">
                             <div class="form-floating is-invalid">
-                                <textarea class="form-control is-invalid" id="title" name="title" aria-label="With textarea"
-                                    placeholder="1"></textarea>
+                                <textarea class="form-control is-invalid" id="title" name="title"
+                                    aria-label="With textarea" placeholder="1"></textarea>
                                 <label for="floatingInputGroup2">Tiều đề chính</label>
                             </div>
                         </div>
                         <div class="input-group has-validation mb-3">
                             <div class="form-floating is-invalid">
-                                <textarea class="form-control is-invalid" id="shortTitle" name="shortTitle" aria-label="With textarea"
-                                    placeholder="1"></textarea>
+                                <textarea class="form-control is-invalid" id="shortTitle" name="shortTitle"
+                                    aria-label="With textarea" placeholder="1"></textarea>
                                 <label for="floatingInputGroup2">Tiêu đề ngắn</label>
                             </div>
                         </div>
@@ -88,8 +87,8 @@
                         </div>
                         <div class="input-group has-validation mb-3">
                             <div class="form-floating is-invalid">
-                                <textarea class="form-control is-invalid" id="conTent" name="conTent" aria-label="With textarea"
-                                    placeholder="1"></textarea>
+                                <textarea class="form-control is-invalid" id="conTent" name="conTent"
+                                    aria-label="With textarea" placeholder="1"></textarea>
                                 <label for="floatingInputGroup2">Nhập nội dung</label>
                             </div>
                         </div>
@@ -104,17 +103,20 @@
                         <div class="col-md-12 text-center mb-3">
                             <h5>Các Bài Đăng Mới Nhất</h5>
                         </div>
-                        <p class="text-success text-center" th:text="${susccessMessageDelete}" th:if="${susccessMessageDelete}"></p>
+                        <p class="text-success text-center" th:text="${susccessMessageDelete}"
+                            th:if="${susccessMessageDelete}"></p>
                         <div class="col-md-6" th:each="allArticle: ${allArticles}">
                             <div class="row">
                                 <div class="col-4 d-none d-lg-block">
                                     <div class="card">
-                                        <img th:src="@{'/images/' + ${allArticle.urlImage}+''}" class="card-img-top" alt="...">
+                                        <img th:src="@{'/images/' + ${allArticle.urlImage}+''}" class="card-img-top"
+                                            alt="...">
                                     </div>
                                 </div>
                                 <div class="col-md-8">
                                     <div class="">
-                                        <a href="#" class="link-dark fw-bolder text-decoration-none" th:text="${allArticle.shortTitle}"></a>
+                                        <a href="#" class="link-dark fw-bolder text-decoration-none"
+                                            th:text="${allArticle.shortTitle}"></a>
                                         <p class="text-truncate" th:text="${allArticle.conTent}"></p>
                                     </div>
                                     <div class="text-end" style="font-size: x-small"
@@ -122,12 +124,18 @@
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-end">
-                                    <form th:action="@{/admin/blog/update/{articlesId}(articlesId=${allArticle.id})}" method="GET" onsubmit="return confirm('Bạn có chắc chắn muốn sửa bài viết này?')">
-                                        <button type="submit" class="btn btn-success ms-2" style="font-size: small;">Sửa</button>
+                                    <form th:action="@{/admin/blog/update/{articlesId}(articlesId=${allArticle.id})}"
+                                        method="GET"
+                                        onsubmit="return confirm('Bạn có chắc chắn muốn sửa bài viết này?')">
+                                        <button type="submit" class="btn btn-success ms-2"
+                                            style="font-size: x-small;">Sửa</button>
                                     </form>
-                                        <form th:action="@{/admin/blog/delete/{articlesId}(articlesId=${allArticle.id})}" method="POST" onsubmit="return confirm('Bạn có chắc chắn muốn xóa bài viết này?')">
-                                            <button type="submit" class="btn btn-danger ms-2" style="font-size: small;">Xóa</button>
-                                        </form>
+                                    <form th:action="@{/admin/blog/delete/{articlesId}(articlesId=${allArticle.id})}"
+                                        method="POST"
+                                        onsubmit="return confirm('Bạn có chắc chắn muốn xóa bài viết này?')">
+                                        <button type="submit" class="btn btn-danger ms-2"
+                                            style="font-size: x-small;">Xóa</button>
+                                    </form>
                                 </div>
                             </div>
                             <hr>

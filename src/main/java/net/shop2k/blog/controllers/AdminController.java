@@ -196,7 +196,7 @@ public class AdminController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/update/{articlesId}")
-    public String updateaArticles(@PathVariable("articlesId") Long articlesId, @ModelAttribute("articles") Articles updateArticles,
+    public String updateArticles(@PathVariable("articlesId") Long articlesId, @ModelAttribute("articles") Articles updateArticles,
         BindingResult bindingResult, @RequestParam("urlImage") MultipartFile urlImage, Model model){
         
             // if (bindingResult.hasErrors()) {
