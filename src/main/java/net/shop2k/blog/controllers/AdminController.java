@@ -100,20 +100,20 @@ public class AdminController {
      * Articles: CRUDのAPI 機能
      */
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping("/create")
+    @GetMapping("/articles/create")
     public String createArticles(Model model) {
         List<Articles> allArticles = articlesService.ggetAllArticlesExceptLatest();
         List<Categorys> allCategorys = categorysService.findByAllCategorys();
         model.addAttribute("allCategorys", allCategorys);
         model.addAttribute("allArticles", allArticles);
-        return "html/admin/crud.html";
+        return "html/admin/createarticles.html";
     }
 
     /*
      * 記事を登録する
      */
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @PostMapping("/create")
+    @PostMapping("/articles/create")
     public String createArticles(@RequestParam("category") Long categoryId, @RequestParam("title") String title,
             @RequestParam("shortTitle") String shortTile, @RequestParam("conTent") String conTent,
             @RequestParam("urlImage") MultipartFile urlImage, @RequestParam("hotArticles") Long hotArticles,
@@ -150,7 +150,7 @@ public class AdminController {
             model.addAttribute("susccessMessageCreate", "Đăng bài viết thành công");
             model.addAttribute("susccessMessageUpdate", "Đã Sửa bài viết thành công");
             // return "redirect:/admin/blog/create";
-            return "html/admin/crud.html";
+            return "html/admin/createarticles.html";
         } else {
             log.info("No");
             model.addAttribute("error", "Looix");
@@ -172,14 +172,14 @@ public class AdminController {
         model.addAttribute("allCategorys", allCategorys); // 全てカテゴリーを表示する
         model.addAttribute("susccessMessageDelete", "Xóa bài viết thành công");
         log.info(articlesId + " を削除できました"); // Console 表示する
-        return "html/admin/crud.html";
+        return "html/admin/createarticles.html";
     }
 
     /*
      * 記事を更新する
      */
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping("/update/{articlesId}")
+    @GetMapping("/articles/update/{articlesId}")
     public String updateArticles(@PathVariable("articlesId") Long articlesId, Model model) {
 
         Optional<Articles> articlesOptional = articlesService.findById(articlesId);
@@ -192,7 +192,7 @@ public class AdminController {
             model.addAttribute("allCategorys", allCategorys);
             model.addAttribute("allArticles", allArticles);
             model.addAttribute("update", "update");
-            return "html/admin/update.html";
+            return "html/admin/updatearticles.html";
         }
         return "redirect:/error";
     }
@@ -237,7 +237,7 @@ public class AdminController {
             model.addAttribute("return", "return");
             model.addAttribute("allCategorys", allCategorys);
             // return "redirect:/admin/blog/update/" + articlesId;
-            return "html/admin/update.html";
+            return "html/admin/updatearticles.html";
         }
         // List <Categorys> allCategorys = categorysService.findByAllCategorys();
         // List <Articles> allArticles = articlesService.ggetAllArticlesExceptLatest();

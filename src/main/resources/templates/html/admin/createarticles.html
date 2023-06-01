@@ -42,7 +42,7 @@
                     <p class="text-danger text-center" th:text="${error}" th:if="${error}"></p>
                     <p class="text-success text-center" th:text="${susccessMessageCreate}"
                         th:if="${susccessMessageCreate}"></p>
-                    <form th:action="@{/admin/blog/create}" method="POST" enctype="multipart/form-data">
+                    <form th:action="@{/admin/blog/articles/create}" method="POST" enctype="multipart/form-data">
                         <div class="input-group has-validation mb-3">
                             <select class="form-select is-invalid" aria-label="Thể loại" name="category" placeholder="">
                                 <option selected>Thể loại</option>
@@ -123,7 +123,7 @@
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-end">
-                                    <form th:action="@{/admin/blog/update/{articlesId}(articlesId=${allArticle.id})}"
+                                    <form th:action="@{/admin/blog/articles/update/{articlesId}(articlesId=${allArticle.id})}"
                                         method="GET"
                                         onsubmit="return confirm('Bạn có chắc chắn muốn sửa bài viết này?')">
                                         <button type="submit" class="btn btn-success ms-2"
