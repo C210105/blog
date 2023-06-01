@@ -288,11 +288,16 @@ public class AdminController {
     @PostMapping("/categorys/delete/{categorysId}")
     public String deleteCategorys(@PathVariable("categorysId") Long categorysId, Model model){
 
-        categorysService.deleteCategorys(categorysId);
-        List <Categorys> allCategorys = categorysService.getAllCategorysUpdateDay();
-        model.addAttribute("allCategorys", allCategorys);
-        log.info("カテゴリーを削除できた");
-        model.addAttribute("susccessMessageDeleteCategorys", "Xóa chủ đề thành công");
-        return "/html/admin/categorys.html";
+        try{
+            categorysService.deleteCategorys(categorysId);
+            List <Categorys> allCategorys = categorysService.getAllCategorysUpdateDay();
+            model.addAttribute("allCategorys", allCategorys);
+            log.info("カテゴリーを削除できた");
+            model.addAttribute("susccessMessageDeleteCategorys", "Xóa chủ đề thành công");
+            return "/html/admin/categorys.html";
+        }catch(Exception e){
+            log.info("カテゴリーを削除できなかった");
+            return "html/error.html";
+        }
     }
 }

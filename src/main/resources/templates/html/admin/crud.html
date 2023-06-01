@@ -103,8 +103,7 @@
                         <div class="col-md-12 text-center mb-3">
                             <h5>Các Bài Đăng Mới Nhất</h5>
                         </div>
-                        <p class="text-success text-center" th:text="${susccessMessageDelete}"
-                            th:if="${susccessMessageDelete}"></p>
+                        <p class="text-success text-center" th:text="${susccessMessageDelete}" th:if="${susccessMessageDelete}"></p>
                         <div class="col-md-6" th:each="allArticle: ${allArticles}">
                             <div class="row">
                                 <div class="col-4 d-none d-lg-block">
