@@ -302,4 +302,60 @@ public class AdminController {
             return "html/admin/categorys.html";
         }
     }
+
+    /*
+     * カテゴリーを更新機能
+     */
+    /*
+     * GET
+     */
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/categorys/update/{categorysId}")
+    public String getUpdateCategorys(@PathVariable("categorysId") Long categorysId, Model model){
+
+        List <Categorys> allCategorys = categorysService.getAllCategorysUpdateDay();
+        Optional <Categorys> categorysOptional = categorysService.findByOptional(categorysId);
+        if(categorysOptional.isPresent()){
+            Categorys categorys = categorysOptional.get();
+            model.addAttribute("categorys", categorys);
+            model.addAttribute("allCategorys", allCategorys);
+            log.info("カテゴリーを更新ページ");
+            model.addAttribute("update", "update");
+            return "html/admin/updatecategorys.html";
+        }
+        return "html/admin/error.html";
+    }
+
+    /*
+     * POST
+     */
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PostMapping("/categorys/update/{categorysId}")
+    public String updateCategorys(@PathVariable("categorysId") Long categorysId, @ModelAttribute("categorys") Categorys updateCategorys, Model model){
+        
+        List <Categorys> allCategorys = categorysService.getAllCategorysUpdateDay();
+        Optional <Categorys> categorysOptional = categorysService.findByOptional(categorysId);
+        if(categorysOptional.isPresent()){
+            Categorys categorys = categorysOptional.get();
+            categorys.setName(updateCategorys.getName());
+            categorys.setUpdateDay(LocalDateTime.now());
+
+            try{
+                categorysService.updateCategorys(categorys);
+                log.info("カテゴリーを更新できた");
+                model.addAttribute("return", "return");
+                model.addAttribute("allCategorys", allCategorys);
+                model.addAttribute("updateMessageCategorys", "Cập nhật chủ đề thành công");
+                return "html/admin/updatecategorys.html";
+            }catch(IllegalArgumentException e){
+                model.addAttribute("updateCategorysError", e.getMessage());
+                model.addAttribute("return", "return");
+                return "html/admin/updatecategorys.html";
+            }
+        }
+        // model.addAttribute("return");
+        // model.addAttribute("")
+        return "html/admin/error.html";
+
+    }
 }

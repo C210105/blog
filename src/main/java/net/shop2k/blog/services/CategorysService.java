@@ -65,6 +65,18 @@ public class CategorysService {
     }
 
     /*
+     * カテゴリーを更新機能
+     */
+    public void updateCategorys(Categorys categorys){
+
+        if(categorys.getName() == null || categorys.getName().isEmpty()){
+            throw new IllegalArgumentException("Nhập chủ đề");
+        }
+
+        categorysRepository.save(categorys);
+    }
+
+    /*
      * カテゴリーを削除機能
      */
     public void deleteCategorys (Long categorysId){

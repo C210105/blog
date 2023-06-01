@@ -45,7 +45,7 @@
                             </div>
                         </div>
                         <div class="text-center">
-                            <button class="btn btn-primary mb-3">Lưu chủ đề</button>
+                            <button class="btn btn-primary mb-3">Tạo chủ đề</button>
                             <button class="btn btn-danger mb-3">Quay lại</button>
                         </div>
                     </form>
@@ -62,8 +62,8 @@
                             <p th:text="${allCategory.name}"></p>
                             <div class="d-flex justify-content-end mb-1">
                                 <div class="" style="font-size: small;"
-                                    th:text="${#temporals.format(allCategory.createDay, 'dd-MM-yyyy HH:mm')}"></div>
-                                <div class="ms-3" style="font-size: small;">Ngày sửa: 2/2/2</div>
+                                    th:text="'cre: ' + ${#temporals.format(allCategory.createDay, 'dd/MM/yy HH:mm')}"></div>
+                                <div class="ms-3" style="font-size: small;" th:text="'up: ' + ${#temporals.format(allCategory.updateDay, 'dd/MM/yy HH:mm')}"></div>
                                 <div class="ms-3" style="font-size: small;">Người tạo: Admin1</div>
                             </div>
                             <!-- <form class="text-end">
@@ -76,9 +76,9 @@
                             </form> -->
                             <div class="d-flex justify-content-end mt-2">
                                 <form class=""
-                                    th:action="@{/admin/blog/categorys/delete/{categorysId}(categorysId=${allCategory.id})}"
-                                    method="POST"
-                                    onsubmit="return confirm('Bạn có chắc chắn muốn xóa chủ đề này này?')">
+                                    th:action="@{/admin/blog/categorys/update/{categorysId}(categorysId=${allCategory.id})}"
+                                    method="GET"
+                                    onsubmit="return confirm('Bạn có chắc chắn muốn sửa chủ đề này này?')">
                                     <button type="submit" class="btn btn-success ms-2"
                                         style="font-size: x-small;">Sửa</button>
                                 </form>
