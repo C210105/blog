@@ -55,6 +55,7 @@
                     <div class="text-center mb-5">
                         <h4 class="fs-5">Các chủ đề đã tạo gần đây</h4>
                     </div>
+                    <p class="text-danger text-center" th:text="${deleteCategorysError}" th:if="${deleteCategorysError}"></p>
                     <p class="text-success text-center" th:text="${susccessMessageDeleteCategorys}" th:if="${susccessMessageDeleteCategorys}"></p>
                     <div class="row">
                         <div class="col-md-6" th:each="allCategory : ${allCategorys}">

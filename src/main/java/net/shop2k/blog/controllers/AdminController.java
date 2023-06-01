@@ -255,7 +255,7 @@ public class AdminController {
      * Categorysを登録機能
      */
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping("/create/categorys")
+    @GetMapping("/categorys/create")
     public String getCategorys(Model model) {
         List <Categorys> allCategorys = categorysService.getAllCategorysUpdateDay();
         model.addAttribute("allCategorys", allCategorys);
@@ -287,17 +287,19 @@ public class AdminController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/categorys/delete/{categorysId}")
     public String deleteCategorys(@PathVariable("categorysId") Long categorysId, Model model){
-
+        
+        List <Categorys> allCategorys = categorysService.getAllCategorysUpdateDay();
         try{
             categorysService.deleteCategorys(categorysId);
-            List <Categorys> allCategorys = categorysService.getAllCategorysUpdateDay();
             model.addAttribute("allCategorys", allCategorys);
             log.info("カテゴリーを削除できた");
             model.addAttribute("susccessMessageDeleteCategorys", "Xóa chủ đề thành công");
             return "/html/admin/categorys.html";
         }catch(Exception e){
+            model.addAttribute("allCategorys", allCategorys);
+            model.addAttribute("deleteCategorysError", "Lỗi không thể xóa chủ đề này");
             log.info("カテゴリーを削除できなかった");
-            return "html/error.html";
+            return "html/admin/categorys.html";
         }
     }
 }
