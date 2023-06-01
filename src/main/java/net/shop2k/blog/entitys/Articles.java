@@ -23,7 +23,7 @@ import lombok.Data;
 public class Articles {
     
     @Id //主キー
-    @GeneratedValue(strategy = GenerationType.AUTO) //主キーの値が自動的に生成される定義する
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //主キーの値が自動的に生成される定義する
     private Long id;
 
     @Column(name = "name") //記事の名

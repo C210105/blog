@@ -33,10 +33,12 @@
                     <div>
                         <h3 class="text-center mb-3 mt-3 fs-5">Tạo Chủ Đề Cho Các Bài Báo</h3>
                     </div>
-                    <form action="" method="">
+                    <p class="text-danger text-center" th:text="${error}" th:if="${error}"></p>
+                    <p class="text-success text-center" th:text="${susccessMessageCategorys}" th:if="${susccessMessageCategorys}"></p>
+                    <form th:action="@{/admin/blog/create/categorys}" method="POST">
                         <div class="input-group has-validation mb-3">
                             <div class="form-floating is-invalid">
-                                <input type="text" class="form-control is-invalid" placeholder="1">
+                                <input type="text" name="name" id="name" class="form-control is-invalid" placeholder="1">
                                 <label for="floatingInputGroup2">Nhập chủ đề bài viết</label>
                             </div>
                         </div>
