@@ -1,17 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="vi">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>ADMIN - CURD</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+    <!-- <script>
+        window.location.reload();
+    </script> -->
+
 </head>
+
 <body>
-    <h1>ahaha</h1>
-    <ul>
-        <li th:each="role : ${roles}">
-            <span th:text="${role}"></span>
-        </li>
-    </ul>
+    <header class="container blog-header mt-2 mb-2">
+        <div class="row flex-nowrap justify-content-center align-items-center">
+            <div class="text-center">
+                <a class="blog-header-logo text-dark p-1 fw-bolder fs-2 text-decoration-none"
+                th:href="@{/admin/blog/index}" method="GET">Blog - ADMIN</a>
+            </div>
+        </div>
+    </header>
+    <!-- <hr> -->
+    <div class="nav-scroller py-1 bg-primary">
+        <nav class="container nav d-flex justify-content-center">
+            <a th:href="@{/admin/blog/categorys/create}" type="buttom" class="btn btn-primary p-2 link-light" method="GET">Chủ Đề</a>
+            <a th:href="@{/admin/blog/articles/create}" type="buttom" class="btn btn-primary p-2 link-light" method="GET">Bài Viêt</a>
+        </nav>
+    </div>
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+
+                <div class="col-md-4"></div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <!-- place footer here -->
+    </footer>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+        </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+        integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+        </script>
 </body>
+
 </html>

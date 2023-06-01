@@ -2,7 +2,7 @@
 <html lang="vi">
 
 <head>
-    <title>ADMIN - CURD</title>
+    <title>Tất cả bài báo</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -22,14 +22,15 @@
         <div class="row flex-nowrap justify-content-center align-items-center">
             <div class="text-center">
                 <a class="blog-header-logo text-dark p-1 fw-bolder fs-2 text-decoration-none"
-                    th:href="@{/blog/index/}">Blog - ADMIN</a>
+                th:href="@{/admin/blog/index}" method="GET">Blog - ADMIN</a>
             </div>
         </div>
     </header>
     <!-- <hr> -->
     <div class="nav-scroller py-1 bg-primary">
-        <nav class="container nav d-flex justify-content-between">
-            <a type="buttom" class="btn btn-primary p-2 link-light" method="GET">CRUD</a>
+        <nav class="container nav d-flex justify-content-center">
+            <a th:href="@{/admin/blog/categorys/create}" type="buttom" class="btn btn-primary p-2 link-light " method="GET">Chủ Đề</a>
+            <a th:href="@{/admin/blog/articles/create}" type="buttom" class="btn btn-primary p-2 link-light active" method="GET">Bài Viêt</a>
         </nav>
     </div>
     <main>
@@ -37,13 +38,14 @@
             <div class="row">
                 <div class="col-md-8 mt-5 mb-5 card">
                     <div>
-                        <h3 class="text-center mb-3 mt-3"> Đăng Bài Báo Mới</h3>
+                        <h3 class="text-center mb-3 mt-3 fs-5"> Đăng Bài Báo Mới</h3>
                     </div>
                     <p class="text-danger text-center" th:text="${error}" th:if="${error}"></p>
                     <p class="text-success text-center" th:text="${susccessMessageCreate}"
                         th:if="${susccessMessageCreate}"></p>
                     <form th:action="@{/admin/blog/articles/create}" method="POST" enctype="multipart/form-data">
                         <div class="input-group has-validation mb-3">
+                            <label for="" class="input-group-text">Thể loại</label>
                             <select class="form-select is-invalid" aria-label="Thể loại" name="category" placeholder="">
                                 <option selected>Thể loại</option>
                                 <option th:each="category: ${allCategorys}" th:text="${category.name}"
@@ -52,13 +54,15 @@
                             </select>
                         </div>
                         <div class="input-group has-validation mb-3">
+                            <label for="" class="input-group-text">Độ nóng</label>
                             <div class="form-floating is-invalid">
                                 <input type="number" class="form-control is-invalid" max="5" min="1" id="hotArticles"
                                     name="hotArticles" placeholder="1" required>        
-                                <label for="floatingInputGroup2">Độ nóng (1 - 5)</label>
+                                <label for="floatingInputGroup2">Từ 1 - 5</label>
                             </div>
                         </div>
                         <div class="input-group has-validation mb-3">
+                            <label for="" class="input-group-text">Tiêu đề chính</label>
                             <div class="form-floating is-invalid">
                                 <textarea class="form-control is-invalid" id="title" name="title"
                                     aria-label="With textarea" placeholder="1"></textarea>
@@ -66,6 +70,7 @@
                             </div>
                         </div>
                         <div class="input-group has-validation mb-3">
+                            <label for="" class="input-group-text">Tiêu đề ngắn</label>
                             <div class="form-floating is-invalid">
                                 <textarea class="form-control is-invalid" id="shortTitle" name="shortTitle"
                                     aria-label="With textarea" placeholder="1"></textarea>
@@ -86,6 +91,7 @@
                             <input type="file" class="form-control" id="urlImage" name="urlImage">
                         </div>
                         <div class="input-group has-validation mb-3">
+                            <label for="" class="input-group-text">Nội dung</label>
                             <div class="form-floating is-invalid">
                                 <textarea class="form-control is-invalid" id="conTent" name="conTent"
                                     aria-label="With textarea" placeholder="1"></textarea>
@@ -93,7 +99,7 @@
                             </div>
                         </div>
                         <div class="text-center mb-3">
-                            <button type="submit" class="btn btn-primary">Đăng Bài Viết</button>
+                            <button type="submit" class="btn btn-primary" style="font-size: small;">Đăng Bài Viết</button>
                         </div>
                     </form>
                 </div>

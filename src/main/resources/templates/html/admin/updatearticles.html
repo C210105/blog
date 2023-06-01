@@ -24,14 +24,15 @@
                 <div class="row flex-nowrap justify-content-center align-items-center">
                     <div class="text-center">
                         <a class="blog-header-logo text-dark p-1 fw-bolder fs-2 text-decoration-none"
-                            th:href="@{/blog/index/}">Blog - ADMIN</a>
+                        th:href="@{/admin/blog/index}" method="GET">Blog - ADMIN</a>
                     </div>
                 </div>
             </header>
             <!-- <hr> -->
             <div class="nav-scroller py-1 bg-primary">
-                <nav class="container nav d-flex justify-content-between">
-                    <a type="buttom" class="btn btn-primary p-2 link-light" method="GET">CRUD</a>
+                <nav class="container nav d-flex justify-content-center">
+                    <a th:href="@{/admin/blog/categorys/create}" type="buttom" class="btn btn-primary p-2 link-light" method="GET">Chủ Đề</a>
+                    <a th:href="@{/admin/blog/articles/create}" type="buttom" class="btn btn-primary p-2 link-light" method="GET">Bài Viêt</a>
                 </nav>
             </div>
         </div>
@@ -41,7 +42,7 @@
             <div class="row">
                 <div class="col-md-8 mt-5 mb-5 card">
                     <div>
-                        <h3 class="text-center mb-3 mt-3"> Sừa Bài Viết</h3>
+                        <h3 class="text-center mb-3 mt-3 fs-5"> Sừa Bài Viết</h3>
                         <p class="text-success text-center" th:text="${susccessMessageUpdate}"
                             th:if="${susccessMessageUpdate}"></p>
                         <form th:action="@{/admin/blog/update/{articlesId}(articlesId=${articles.Id})}" method="POST"
@@ -104,7 +105,7 @@
                                 </div>
                             </div>
                             <div class="text-center mb-3">
-                                <button type="submit" class="btn btn-primary" th:if="${update}" method="GET">Lưu bài viết</button>
+                                <button type="submit" class="btn btn-primary" th:if="${update}" method="GET" style="font-size: small;">Lưu bài viết</button>
                                 <a th:href="@{/admin/blog/create}" method="GET" th:if="${return}"
                                     class="btn btn-primary">Quay lại
                                 </a>

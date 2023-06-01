@@ -17,13 +17,14 @@
     <header class="container mt-2 mb-2">
         <div class="row flex-nowrap justify-content-center align-items-center">
             <div class="text-center">
-                <a th:href="@{/blog/index/}" class="text-dark p-1 fw-bolder fs-2 text-decoration-none">Blog - ADMIN</a>
+                <a th:href="@{/admin/blog/index}" method="GET" class="text-dark p-1 fw-bolder fs-2 text-decoration-none">Blog - ADMIN</a>
             </div>
         </div>
     </header>
     <div class="navbar-nav-scroll py-1 bg-primary">
-        <nav class="container nav d-flex justify-content-between">
-            <a href="" class="btn btn-primary p-2 link-light" method="GET">Categorys</a>
+        <nav class="container nav d-flex justify-content-center">
+            <a th:href="@{/admin/blog/categorys/create}" type="buttom" class="btn btn-primary p-2 link-light" method="GET">Chủ Đề</a>
+            <a th:href="@{/admin/blog/articles/create}" type="buttom" class="btn btn-primary p-2 link-light" method="GET">Bài Viêt</a>
         </nav>
     </div>
     <main>
@@ -38,6 +39,7 @@
                     <p class="text-success text-center" th:text="${updateMessageCategorys}" th:if="${updateMessageCategorys}"></p>
                     <form th:action="@{/admin/blog/categorys/update/{categorysId}(categorysId=${categorys.id})}" method="POST">
                         <div class="input-group has-validation mb-3">
+                            <label for="" class="input-group-text">Chủ đề</label>
                             <div class="form-floating is-invalid">
                                 <input type="text" name="name" id="name" class="form-control is-invalid"
                                     placeholder="1" th:value="${categorys.name}">
@@ -45,7 +47,7 @@
                             </div>
                         </div>
                         <div class="text-center">
-                            <button class="btn btn-primary mb-3" th:if="${update}" method="GET">Lưu chủ đề</button>
+                            <button class="btn btn-primary mb-3" th:if="${update}" method="GET" style="font-size: small;">Lưu chủ đề</button>
                             <!-- <button class="btn btn-danger mb-3" th:if="${return}" method="GET">Quay lại</button> -->
                             <a th:href="@{/admin/blog/categorys/create}" th:if="${return}" class="btn btn-danger mb-3"> Quay lại</a>
                         </div>
