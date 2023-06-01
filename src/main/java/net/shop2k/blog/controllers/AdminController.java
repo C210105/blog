@@ -162,7 +162,7 @@ public class AdminController {
      * 記事を削除する
      */
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @PostMapping("/delete/{articlesId}")
+    @PostMapping("/articles/delete/{articlesId}")
     public String deleteArticles(@PathVariable("articlesId") Long articlesId, Model model) {
 
         articlesService.deleteArticles(articlesId);
@@ -256,27 +256,43 @@ public class AdminController {
      */
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/create/categorys")
-    public String getCategorys() {
+    public String getCategorys(Model model) {
+        List <Categorys> allCategorys = categorysService.getAllCategorysUpdateDay();
+        model.addAttribute("allCategorys", allCategorys);
         return "html/admin/categorys.html";
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @PostMapping("/create/categorys")
+    @PostMapping("/categorys/create")
     public String createCategorys(@RequestParam("name") String name, Model model){
-
+        List <Categorys> allCategorys = categorysService.getAllCategorysUpdateDay();
         Categorys categorys = new Categorys();
         categorys.setName(name);
         categorys.setCreateDay(LocalDateTime.now());
         try{
             categorysService.createCategorys(categorys);
+            model.addAttribute("allCategorys", allCategorys);
             model.addAttribute("susccessMessageCategorys", "Đã tạo chủ đề thành công");
             log.info("カテゴリーを追加できました");
             return "html/admin/categorys.html";
         }catch(IllegalArgumentException e){
             log.info("エラー：カテゴリーを追加できなかった");
+            model.addAttribute("allCategorys", allCategorys);
             model.addAttribute("error", e.getMessage());
             model.addAttribute("error", e.getMessage());
             return "html/admin/categorys.html";
         }
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PostMapping("/categorys/delete/{categorysId}")
+    public String deleteCategorys(@PathVariable("categorysId") Long categorysId, Model model){
+
+        categorysService.deleteCategorys(categorysId);
+        List <Categorys> allCategorys = categorysService.getAllCategorysUpdateDay();
+        model.addAttribute("allCategorys", allCategorys);
+        log.info("カテゴリーを削除できた");
+        model.addAttribute("susccessMessageDeleteCategorys", "Xóa chủ đề thành công");
+        return "/html/admin/categorys.html";
     }
 }

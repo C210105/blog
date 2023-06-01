@@ -27,6 +27,10 @@ public class CategorysService {
         return categorysRepository.findAll();
     }
 
+    public List <Categorys> getAllCategorysUpdateDay(){
+        return categorysRepository.findAllCategorysByOrderByCreateDayDesc();
+    }
+
     /*
      * 指定したcategorysIdに基づいてCategorysをクエリして取得する
      */
@@ -60,5 +64,11 @@ public class CategorysService {
         categorysRepository.save(categorys);
     }
 
+    /*
+     * カテゴリーを削除機能
+     */
+    public void deleteCategorys (Long categorysId){
+        categorysRepository.deleteById(categorysId);
+    }
 
 }

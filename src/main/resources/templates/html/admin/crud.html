@@ -130,7 +130,7 @@
                                         <button type="submit" class="btn btn-success ms-2"
                                             style="font-size: x-small;">Sửa</button>
                                     </form>
-                                    <form th:action="@{/admin/blog/delete/{articlesId}(articlesId=${allArticle.id})}"
+                                    <form th:action="@{/admin/blog/articles/delete/{articlesId}(articlesId=${allArticle.id})}"
                                         method="POST"
                                         onsubmit="return confirm('Bạn có chắc chắn muốn xóa bài viết này?')">
                                         <button type="submit" class="btn btn-danger ms-2"
