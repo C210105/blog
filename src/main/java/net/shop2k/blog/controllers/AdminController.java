@@ -259,7 +259,7 @@ public class AdminController {
     public String getCategorys(Model model) {
         List <Categorys> allCategorys = categorysService.getAllCategorysUpdateDay();
         model.addAttribute("allCategorys", allCategorys);
-        return "html/admin/categorys.html";
+        return "html/admin/createcategorys.html";
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -274,13 +274,13 @@ public class AdminController {
             model.addAttribute("allCategorys", allCategorys);
             model.addAttribute("susccessMessageCategorys", "Đã tạo chủ đề thành công");
             log.info("カテゴリーを追加できました");
-            return "html/admin/categorys.html";
+            return "html/admin/createcategorys.html";
         }catch(IllegalArgumentException e){
             log.info("エラー：カテゴリーを追加できなかった");
             model.addAttribute("allCategorys", allCategorys);
             model.addAttribute("error", e.getMessage());
             model.addAttribute("error", e.getMessage());
-            return "html/admin/categorys.html";
+            return "html/admin/createcategorys.html";
         }
     }
 
@@ -294,12 +294,12 @@ public class AdminController {
             model.addAttribute("allCategorys", allCategorys);
             log.info("カテゴリーを削除できた");
             model.addAttribute("susccessMessageDeleteCategorys", "Xóa chủ đề thành công");
-            return "/html/admin/categorys.html";
+            return "/html/admin/createcategorys.html";
         }catch(Exception e){
             model.addAttribute("allCategorys", allCategorys);
             model.addAttribute("deleteCategorysError", "Lỗi không thể xóa chủ đề này");
             log.info("カテゴリーを削除できなかった");
-            return "html/admin/categorys.html";
+            return "html/admin/createcategorys.html";
         }
     }
 
