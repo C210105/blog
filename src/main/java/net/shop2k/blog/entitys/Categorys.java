@@ -1,5 +1,6 @@
 package net.shop2k.blog.entitys;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 import jakarta.persistence.Column;
@@ -25,12 +26,18 @@ import lombok.NoArgsConstructor;
 public class Categorys {
     
     @Id //主キー
-    @GeneratedValue(strategy = GenerationType.AUTO) //主キー値を自動的に生成定義
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //主キー値を自動的に生成定義
     private Long id;
 
     @Column(name = "name") //カテゴリーの名
     private String name;
+
+    @Column(name = "createDay")
+    private LocalDateTime createDay; // 登録日
     
+    @Column(name = "updateDay") // 更新日
+    private LocalDateTime updateDay;
+
     /*
      * コンストラクタ定義
      * nameパラメータ使用

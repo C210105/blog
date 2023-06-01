@@ -124,25 +124,25 @@ public class ArticlesService {
 
 
     /*
-     * CRUDのAPI
+     * Articles: CRUDのAPI 機能
      */
 
      /*
-      * 新しい記事を登録する
+      * 新しい記事を登録機能
       */
     public void createArticles (Articles articles){
         articlesRepository.save(articles);
     }
 
     /*
-     * 記事を更新する
+     * 記事を更新機能
      */
     public Articles updateArticles (Articles articles){
         return articlesRepository.save(articles);
     }
 
     /*
-     * 記事を削除する
+     * 記事を削除機能
      */
     public void deleteArticles (Long articlesId){
         articlesRepository.deleteById(articlesId);

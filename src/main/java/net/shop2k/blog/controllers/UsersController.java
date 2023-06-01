@@ -35,7 +35,7 @@ public class UsersController {
         user.setUsername(username);
         user.setPassword(password);
         user.setSetEnabled(true);
-        user.setRole("ROLE_USER");
+        user.setRole("ROLE_ADMIN");
         
         // Lưu thông tin người dùng vào cơ sở dữ liệu
         try {
