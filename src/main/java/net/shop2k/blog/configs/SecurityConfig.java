@@ -30,10 +30,10 @@ public class SecurityConfig {
             .permitAll()
         )
         .logout(logout -> logout
-            .logoutUrl("/admin/blog/logout")
-            .logoutSuccessUrl("/admin/blog/login")
-            .invalidateHttpSession(true)
-            .deleteCookies("JSESSIONID"));
+            .logoutUrl("/admin/blog/logout") //logout　ページ
+            .logoutSuccessUrl("/admin/blog/login") //logout。後
+            .invalidateHttpSession(true) //sessionを削除する
+            .deleteCookies("JSESSIONID")); //cookiesを削除する
         return http.build();
     }
 

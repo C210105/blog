@@ -63,6 +63,8 @@ public class AdminController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/logout")
     public String logoutAdmin(HttpServletRequest request, HttpServletResponse response, Model model){
+
+        // session を削除する
         HttpSession session = request.getSession(false);
         if(session != null){
             session.invalidate();
@@ -70,10 +72,10 @@ public class AdminController {
         Cookie[] cookies = request.getCookies();
         if(cookies != null){
             for(Cookie cookie : cookies){
-                cookie.setMaxAge(0);
-                cookie.setValue(null);
+                cookie.setMaxAge(0); //cokkies:期限切れになり、削除する
+                cookie.setValue(null); //cokkies の値: nullに設定する
                 cookie.setPath("/");
-                response.addCookie(cookie);
+                response.addCookie(cookie); //クライアント側からcookiesを削除される
             }
         }
         log.info("ログアウトできた");
