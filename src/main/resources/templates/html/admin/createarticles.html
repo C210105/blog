@@ -80,7 +80,8 @@
                         <div class="input-group has-validation mb-3">
                             <label for="" class="input-group-text">Nội dung ngắn</label>
                             <div class="form-floating is-invalid">
-                                <textarea class="form-control is-invalid" name="shortConTent" id="shortConTent" placeholder="1"></textarea>
+                                <textarea class="form-control is-invalid" name="shortConTent" id="shortConTent"
+                                    placeholder="1"></textarea>
                                 <label for="floatingInputGroup2">Nhập nội dung ngắn</label>
                             </div>
                         </div>
@@ -131,25 +132,34 @@
                                             th:text="${allArticle.shortTitle}"></a>
                                         <!-- <p class="text-truncate" th:text="${allArticle.conTent}"></p> -->
                                     </div>
-                                    <div class="text-end" style="font-size: x-small"
-                                        th:text="${#temporals.format(allArticle.updateDay, 'dd-MM-yyyy HH:mm')}">
+                                    <!-- <div class="text-end mb-1" style="font-size: x-small"
+                                        th:text="'cre: ' + ${#temporals.format(allArticle.createDay, 'dd/MM/yy HH:mm')}">
+                                    </div> -->
+                                    <div class="d-flex justify-content-end mb-1">
+                                        <div class="" style="font-size: x-small;" th:text="'cre: ' + ${#temporals.format(allArticle.createDay, 'dd/MM/yy HH:mm')}"></div>
+                                        <!-- <div th:if="${allArticle.updateDay == null}"> -->
+                                        
+                                        <!-- <div class="ms-3" style="font-size: x-small;" th:text="'up: ' + ${#temporals.format(allArticle.updateDay, 'dd/MM/yy HH:mm')}"></div> -->
+                                    <!-- </div> -->
+                                        <div class="ms-3" style="font-size: x-small;">Người tạo: Admin1</div>
                                     </div>
-                                </div>
-                                <div class="d-flex justify-content-end mt-2">
-                                    <form
-                                        th:action="@{/admin/blog/articles/update/{articlesId}(articlesId=${allArticle.id})}"
-                                        method="GET"
-                                        onsubmit="return confirm('Bạn có chắc chắn muốn sửa bài viết này?')">
-                                        <button type="submit" class="btn btn-success ms-2"
-                                            style="font-size: x-small;">Sửa</button>
-                                    </form>
-                                    <form
-                                        th:action="@{/admin/blog/articles/delete/{articlesId}(articlesId=${allArticle.id})}"
-                                        method="POST"
-                                        onsubmit="return confirm('Bạn có chắc chắn muốn xóa bài viết này?')">
-                                        <button type="submit" class="btn btn-danger ms-2"
-                                            style="font-size: x-small;">Xóa</button>
-                                    </form>
+
+                                    <div class="d-flex justify-content-end mt-2">
+                                        <form
+                                            th:action="@{/admin/blog/articles/update/{articlesId}(articlesId=${allArticle.id})}"
+                                            method="GET"
+                                            onsubmit="return confirm('Bạn có chắc chắn muốn sửa bài viết này?')">
+                                            <button type="submit" class="btn btn-success ms-2"
+                                                style="font-size: x-small;">Sửa</button>
+                                        </form>
+                                        <form
+                                            th:action="@{/admin/blog/articles/delete/{articlesId}(articlesId=${allArticle.id})}"
+                                            method="POST"
+                                            onsubmit="return confirm('Bạn có chắc chắn muốn xóa bài viết này?')">
+                                            <button type="submit" class="btn btn-danger ms-2"
+                                                style="font-size: x-small;">Xóa</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                             <hr>
@@ -166,7 +176,7 @@
     <script>
         CKEDITOR.replace('conTent');
     </script>
-     <!-- Bootstrap JavaScript Libraries -->
+    <!-- Bootstrap JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
         integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
         </script>

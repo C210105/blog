@@ -41,14 +41,14 @@ public class ArticlesService {
      * 最新のArticlesを取得する
      */
     public Optional <Articles> getLatestArticles(){
-        return articlesRepository.findFirstArticlesByOrderByUpdateDayDesc();
+        return articlesRepository.findFirstArticlesByOrderByCreateDayDesc();
     }
 
     /*
      * １番hotArticlesを取得する
      */
     public Articles getHotArticles(){
-        return articlesRepository.findFirstByOrderByHotArticlesDescUpdateDayDesc().orElse(null);
+        return articlesRepository.findFirstByOrderByHotArticlesDescCreateDayDesc().orElse(null);
     }
 
 
@@ -56,7 +56,7 @@ public class ArticlesService {
      * 最新Articles以外全てArticlesを取得する
      */
     public List <Articles> getAllArticlesExceptLatest(){
-        List<Articles> allArticles = articlesRepository.findAllArticlesByOrderByUpdateDayDesc();
+        List<Articles> allArticles = articlesRepository.findAllArticlesByOrderByCreateDayDesc();
         if (!allArticles.isEmpty()) {
             allArticles.remove(0);
         }
@@ -64,7 +64,7 @@ public class ArticlesService {
     }
 
     public List <Articles> ggetAllArticlesExceptLatest(){
-        List<Articles> allArticles = articlesRepository.findAllArticlesByOrderByUpdateDayDesc();
+        List<Articles> allArticles = articlesRepository.findAllArticlesByOrderByCreateDayDesc();
         // if (!allArticles.isEmpty()) {
         //     allArticles.remove(0);
         // }
@@ -75,7 +75,7 @@ public class ArticlesService {
      * 特定のCategorysに関連の最新Articlesを取得する
      */
     public Articles getLatestArticleByCategorys(Categorys categorys) {
-        return articlesRepository.findFirstByCategoryOrderByUpdateDayDesc(categorys).orElse(null);
+        return articlesRepository.findFirstByCategoryOrderByCreateDayDesc(categorys).orElse(null);
     }
 
     /*
@@ -91,7 +91,7 @@ public class ArticlesService {
      * 2番から7番目のArticlesを取得する
      */
     public List<Articles> getArticles2To7ByCategorys(Categorys categorys){
-        List<Articles> latestArticles = articlesRepository.findTop7ByCategoryOrderByUpdateDayDesc(categorys);
+        List<Articles> latestArticles = articlesRepository.findTop7ByCategoryOrderByCreateDayDesc(categorys);
         if(latestArticles.size() > 1){
             return latestArticles.subList(1,latestArticles.size());
         }
@@ -103,7 +103,7 @@ public class ArticlesService {
      * 8番から15番目のArticlesを取得する
      */
     public List<Articles> getArticles8To15ByCategorys(Categorys categorys){
-        List<Articles> latestArticless = articlesRepository.findTop16ByCategoryOrderByUpdateDayDesc(categorys);
+        List<Articles> latestArticless = articlesRepository.findTop16ByCategoryOrderByCreateDayDesc(categorys);
         if(latestArticless.size() > 8){
             return latestArticless.subList(8, latestArticless.size());
         }
@@ -115,7 +115,7 @@ public class ArticlesService {
      * 16番から22番目のArticlesを取得する
      */
     public List<Articles> getArticles16To22ByCategorys(Categorys categorys){
-        List<Articles> latestArticlesss = articlesRepository.findTop23ByCategoryOrderByUpdateDayDesc(categorys);
+        List<Articles> latestArticlesss = articlesRepository.findTop23ByCategoryOrderByCreateDayDesc(categorys);
         if(latestArticlesss.size() > 16){
             return latestArticlesss.subList(16, latestArticlesss.size());
         }

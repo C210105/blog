@@ -103,7 +103,7 @@
                                             method="GET" class="link-dark" th:text="${articles.shortTitle}"></a>
                             </div>
                             <p th:text="${articles.shortConTent}"></p>
-                            <div class="text-end" style="font-size: small;" th:text="${#temporals.format(articles.updateDay, 'dd-MM-yyyy HH:mm')}"></div>
+                            <div class="text-end" style="font-size: small;" th:text="'cre: ' + ${#temporals.format(articles.createDay, 'dd-MM-yy HH:mm')}"></div>
                         </div>
                     </div>
                     <hr>
@@ -121,7 +121,7 @@
                                             method="GET" class="link-dark" th:text="${allArticle.shortTitle}"></a>
                                     </div>
                                     <p th:text="${allArticle.shortConTent}" class="text-truncate" style="font-size: small;"></p>
-                                    <div class="text-end" style="font-size: x-small" th:text="${#temporals.format(allArticle.updateDay, 'dd-MM-yyyy HH:mm')}"></div>
+                                    <div class="text-end" style="font-size: x-small" th:text="'cre: ' + ${#temporals.format(allArticle.createDay, 'dd-MM-yy HH:mm')}"></div>
                                 </div>
                             </div>
                             <hr>

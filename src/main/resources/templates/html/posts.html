@@ -92,7 +92,7 @@
                             <a href="#" class="fw-semibold link-dark" th:text="${hotArticles.shortTitle}"></a>
                         </div>
                         <div class="col text-end">
-                            <a th:text="${#temporals.format(articles.updateDay, 'dd-MM-yyyy HH:mm')}"></a>
+                            <a th:text="'cre: ' + ${#temporals.format(articles.createDay  , 'dd-MM-yy HH:mm')}"></a>
                         </div>
                         <hr>
                     </div>

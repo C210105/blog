@@ -130,7 +130,7 @@ public class AdminController {
             articles.setShortTitle(shortTile);
             articles.setShortConTent(shortConTent);
             articles.setConTent(conTent);
-            articles.setUpdateDay(LocalDateTime.now());
+            articles.setCreateDay(LocalDateTime.now());
             articles.setCategory(category);
             articles.setHotArticles(hotArticles);
             try {
