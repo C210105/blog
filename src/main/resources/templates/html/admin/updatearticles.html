@@ -11,10 +11,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <script src="//cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
-    <!-- <script>
-        window.location.reload();
-    </script> -->
-
 </head>
 
 <body>
@@ -96,24 +92,20 @@
                                 <input type="file" class="form-control" id="urlImage" name="urlImage">
                             </div>
                             <div class="input-group has-validation mb-3">
-                                <label for="" class="input-group-text">Nội dung</label>
                                 <div class="form-floating is-invalid">
                                     <textarea class="form-control is-invalid" id="conTent" name="conTent"
-                                        aria-label="With textarea" placeholder="1"
                                         th:text="${articles.conTent}"></textarea>
-                                    <label for="floatingInputGroup2">Nhập nội dung bài viết</label>
                                 </div>
                             </div>
                             <div class="text-center mb-3">
                                 <button type="submit" class="btn btn-primary" th:if="${update}" method="GET" style="font-size: small;">Lưu bài viết</button>
                                 <a th:href="@{/admin/blog/articles/create}" method="GET" th:if="${return}"
-                                    class="btn btn-primary">Quay lại
+                                    class="btn btn-primary" style="font-size: small;">Quay lại
                                 </a>
                             </div>
                         </form>
                     </div>
                     <div class="col-md-8">
-                        <hr>
                     </div>
                     <div class="col-md-4"></div>
                 </div>
