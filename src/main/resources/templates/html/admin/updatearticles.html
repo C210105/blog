@@ -10,7 +10,7 @@
     <!-- Bootstrap CSS v5.2.1 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-
+    <script src="//cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
     <!-- <script>
         window.location.reload();
     </script> -->
@@ -106,7 +106,7 @@
                             </div>
                             <div class="text-center mb-3">
                                 <button type="submit" class="btn btn-primary" th:if="${update}" method="GET" style="font-size: small;">Lưu bài viết</button>
-                                <a th:href="@{/admin/blog/create}" method="GET" th:if="${return}"
+                                <a th:href="@{/admin/blog/articles/create}" method="GET" th:if="${return}"
                                     class="btn btn-primary">Quay lại
                                 </a>
                             </div>
@@ -122,6 +122,9 @@
     <footer>
         <!-- place footer here -->
     </footer>
+    <script>
+        CKEDITOR.replace('conTent');
+    </script>
     <!-- Bootstrap JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
         integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
