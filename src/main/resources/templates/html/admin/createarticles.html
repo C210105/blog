@@ -136,11 +136,14 @@
                                         th:text="'cre: ' + ${#temporals.format(allArticle.createDay, 'dd/MM/yy HH:mm')}">
                                     </div> -->
                                     <div class="d-flex justify-content-end mb-1">
-                                        <div class="" style="font-size: x-small;" th:text="'cre: ' + ${#temporals.format(allArticle.createDay, 'dd/MM/yy HH:mm')}"></div>
-                                        <!-- <div th:if="${allArticle.updateDay == null}"> -->
-                                        
-                                        <!-- <div class="ms-3" style="font-size: x-small;" th:text="'up: ' + ${#temporals.format(allArticle.updateDay, 'dd/MM/yy HH:mm')}"></div> -->
-                                    <!-- </div> -->
+                                        <div class="" style="font-size: x-small;"
+                                            th:text="'cre: ' + ${#temporals.format(allArticle.createDay, 'dd/MM/yy HH:mm')}">
+                                        </div>
+                                        <div th:if="${allArticle.updateDay != null}">
+                                            <div class="ms-3" style="font-size: x-small;"
+                                                th:text="'up: ' + ${#temporals.format(allArticle.updateDay, 'dd/MM/yy HH:mm')}">
+                                            </div>
+                                        </div>
                                         <div class="ms-3" style="font-size: x-small;">Người tạo: Admin1</div>
                                     </div>
 

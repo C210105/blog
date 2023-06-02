@@ -218,7 +218,7 @@ public class AdminController {
             articles.setShortConTent(updateArticles.getShortConTent());
             articles.setConTent(updateArticles.getConTent());
             articles.setCategory(updateArticles.getCategory());
-            // articles.setUpdateDay(LocalDateTime.now());
+            articles.setUpdateDay(LocalDateTime.now());
             // アップした写真を確認する
             if (!urlImage.isEmpty()) {
                 try {

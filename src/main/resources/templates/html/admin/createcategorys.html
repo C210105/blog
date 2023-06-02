@@ -64,8 +64,10 @@
                             <p th:text="${allCategory.name}"></p>
                             <div class="d-flex justify-content-end mb-1">
                                 <div class="" style="font-size: x-small;"th:text="'cre: ' + ${#temporals.format(allCategory.createDay, 'dd/MM/yy HH:mm')}"></div>
-                                <div class="ms-3" style="font-size: x-small;" th:text="'up: ' + ${#temporals.format(allCategory.updateDay, 'dd/MM/yy HH:mm')}"></div>
-                                <div class="ms-3" style="font-size: x-small;">Người tạo: Admin1</div>
+                                <div th:if="${allCategory.updateDay != null}">
+                                    <div class="ms-3" style="font-size: x-small;" th:text="'up: ' + ${#temporals.format(allCategory.updateDay, 'dd/MM/yy HH:mm')}"></div>
+                                </div>
+                                    <div class="ms-3" style="font-size: x-small;">Người tạo: Admin1</div>
                             </div>
                             <!-- <form class="text-end">
                                 <button class="btn btn-success" style="font-size: x-small;">Sửa</button>

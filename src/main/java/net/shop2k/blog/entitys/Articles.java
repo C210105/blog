@@ -41,8 +41,11 @@ public class Articles {
     @Column (name = "conTent") //記事の内容
     private String conTent;
 
-    @Column(name = "createDay") //記事のアップデート時間
+    @Column(name = "createDay") //記事の登録時間
     private LocalDateTime createDay;
+
+    @Column(name = "updateDay") //記事のアップデート時間
+    private LocalDateTime updateDay;
 
     @Column(name = "urlImage") //写真のリンク
     private String urlImage;
