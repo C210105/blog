@@ -16,37 +16,38 @@
 <body>
     <header class="p-3 mb-3 border-bottom">
         <div class="container">
-          <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-            <a href="#" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
-                <img th:src="@{/images/1.png}" alt="" width="32" height="32">
-            </a>
-            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-              <li><a href="#" class="nav-link px-2 link-secondary">Blog-Admin</a></li>
-              <li><a href="#" class="nav-link px-2 link-dark">Chủ Đề</a></li>
-              <li><a href="#" class="nav-link px-2 link-dark">Bài Viết</a></li>
-              <li><a href="#" class="nav-link px-2 link-dark">Khác</a></li>
-            </ul>   
-            <div class="dropdown text-end">
-              <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                <img th:src="@{/images/1.png}" alt="mdo" width="32" height="32" class="rounded-circle">
-              </a>
-              <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="">
-                <li><a class="dropdown-item" href="#">Thông tin</a></li>
-                <li><a class="dropdown-item" href="#">Bảo mật</a></li>
-                <li><a class="dropdown-item" href="#">Cài đặt</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
-              </ul>
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a th:href="@{/admin/blog/index}" method="GET"
+                    class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+                    <img th:src="@{/images/1.png}" alt="" width="32" height="32">
+                </a>
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a th:href="@{/admin/blog/index}" method="GET"
+                            class="nav-link px-2 link-secondary">Blog-Admin</a></li>
+                    <li><a th:href="@{/admin/blog/categorys/create}" method="GET" class="nav-link px-2 link-dark">Chủ
+                            Đề</a></li>
+                    <li><a th:href="@{/admin/blog/articles/create}" method="GET" class="nav-link px-2 link-dark">Bài
+                            Viết</a></li>
+                    <li><a href="#" class="nav-link px-2 link-dark">Khác</a></li>
+                </ul>
+                <div class="dropdown text-end">
+                    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <img th:src="@{/images/1.png}" alt="mdo" width="32" height="32" class="rounded-circle">
+                    </a>
+                    <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="">
+                        <li><a class="dropdown-item" href="#">Thông tin</a></li>
+                        <li><a class="dropdown-item" href="#">Bảo mật</a></li>
+                        <li><a class="dropdown-item" href="#">Cài đặt</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
+                    </ul>
+                </div>
             </div>
-          </div>
         </div>
-      </header>
-    <div class="navbar-nav-scroll py-1 bg-primary">
-        <nav class="container nav d-flex justify-content-center">
-            <a th:href="@{/admin/blog/categorys/create}" type="buttom" class="btn btn-primary p-2 link-light" method="GET">Chủ Đề</a>
-            <a th:href="@{/admin/blog/articles/create}" type="buttom" class="btn btn-primary p-2 link-light" method="GET">Bài Viêt</a>
-        </nav>
-    </div>
+    </header>
     <main>
         <div class="container">
             <div class="row">
@@ -55,21 +56,26 @@
                         <h3 class="text-center mb-3 mt-3 fs-5">Cập Nhật Chủ Đề</h3>
                     </div>
                     <p class="text-danger text-center" th:text="${error}" th:if="${error}"></p>
-                    <p class="text-danger text-center" th:text="${updateCategorysError}" th:if="${updateCategorysError}"></p>
-                    <p class="text-success text-center" th:text="${updateMessageCategorys}" th:if="${updateMessageCategorys}"></p>
-                    <form th:action="@{/admin/blog/categorys/update/{categorysId}(categorysId=${categorys.id})}" method="POST">
+                    <p class="text-danger text-center" th:text="${updateCategorysError}"
+                        th:if="${updateCategorysError}"></p>
+                    <p class="text-success text-center" th:text="${updateMessageCategorys}"
+                        th:if="${updateMessageCategorys}"></p>
+                    <form th:action="@{/admin/blog/categorys/update/{categorysId}(categorysId=${categorys.id})}"
+                        method="POST">
                         <div class="input-group has-validation mb-3">
                             <label for="" class="input-group-text">Chủ đề</label>
                             <div class="form-floating is-invalid">
-                                <input type="text" name="name" id="name" class="form-control is-invalid"
-                                    placeholder="1" th:value="${categorys.name}">
+                                <input type="text" name="name" id="name" class="form-control is-invalid" placeholder="1"
+                                    th:value="${categorys.name}">
                                 <label for="floatingInputGroup2">Nhập chủ đề bài viết</label>
                             </div>
                         </div>
                         <div class="text-center">
-                            <button class="btn btn-primary mb-3" th:if="${update}" method="GET" style="font-size: small;">Lưu chủ đề</button>
+                            <button class="btn btn-primary mb-3" th:if="${update}" method="GET"
+                                style="font-size: small;">Lưu chủ đề</button>
                             <!-- <button class="btn btn-danger mb-3" th:if="${return}" method="GET">Quay lại</button> -->
-                            <a th:href="@{/admin/blog/categorys/create}" th:if="${return}" class="btn btn-danger mb-3"> Quay lại</a>
+                            <a th:href="@{/admin/blog/categorys/create}" th:if="${return}" class="btn btn-danger mb-3">
+                                Quay lại</a>
                         </div>
                     </form>
                 </div>
