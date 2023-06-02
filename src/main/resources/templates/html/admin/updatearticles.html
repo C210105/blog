@@ -80,13 +80,21 @@
                                     <label for="floatingInputGroup2">Nhập tiêu đề ngắn</label>
                                 </div>
                             </div>
-                            <div class="d-flex align-items-center mb-3">
+                            <div class="input-group has-validation mb-3">
+                                <label for="" class="input-group-text">Nội dung ngắn</label>
+                                <div class="form-floating is-invalid">
+                                    <textarea class="form-control is-invalid" id="shortConTent" name="shortConTent"
+                                        aria-label="With textarea" placeholder="1"
+                                        th:text="${articles.shortConTent}"></textarea>
+                                    <label for="floatingInputGroup2">Nhập nội dung ngắn</label>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center mb-3" th:if="${articles.urlImage != null}">
                                 <img th:src="@{'/images/' + ${articles.urlImage}}" alt="" style="height: 50px;"
                                     class="">
                                 <input class="form-check-input ms-2" type="checkbox" value="" id="flexCheckDefault">
                                 <label class="form-check-label ms-1" for="flexCheckDefault">Xóa ảnh</label>
                             </div>
-
                             <div class="input-group has-validation mb-3">
                                 <label for="" class="input-group-text">Ảnh</label>
                                 <input type="file" class="form-control" id="urlImage" name="urlImage">
