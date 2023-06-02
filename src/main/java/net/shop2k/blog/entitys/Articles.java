@@ -35,6 +35,9 @@ public class Articles {
     @Column(name = "shortTitle") //記事のショートタイトル
     private String shortTitle;
 
+    @Column(name = "shortConTent") //記事のショート情報
+    private String shortConTent;
+
     @Column (name = "conTent") //記事の内容
     private String conTent;
 
