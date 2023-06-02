@@ -112,9 +112,9 @@
                                 <a th:href="@{/blog/v1/categorys/articles/posts/{articlesId}(articlesId=${latestOneArticle.id})}"
                                     method="GET" class="link-dark fs-3" th:text="${latestOneArticles.shortTitle}"></a>
                             </div>
-                            <p th:text="${latestOneArticle.conTent}"></p>
+                            <p th:text="${latestOneArticle.shortConTent}"></p>
                             <div class="text-end" style="font-size: x-small;"><span
-                                    th:text="${#temporals.format(latestOneArticles.updateDay, 'dd-MM-yyyy HH:mm')}"></span>
+                                    th:text="'cre: ' + ${#temporals.format(latestOneArticles.createDay, 'dd-MM-yyyy HH:mm')}"></span>
                             </div>
 
                         </div>
@@ -135,9 +135,9 @@
                                         <a th:href="@{/blog/v1/categorys/articles/posts/{articlesId}(articlesId=${latestSixArticle.id})}"
                                             method="GET" class="link-dark" th:text="${latestSixArticle.shortTitle}"></a>
                                     </div>
-                                    <p th:text="${latestSixArticle.conTent}" class="text-truncate fs-6"></p>
+                                    <p th:text="${latestSixArticle.shortConTent}" class="text-truncate fs-6"></p>
                                     <div class="text-end" style="font-size: x-small"
-                                        th:text="${#temporals.format(latestSixArticle.updateDay, 'dd-MM-yyyy HH:mm')}">
+                                        th:text="'cre: ' + ${#temporals.format(latestSixArticle.createDay, 'dd-MM-yyyy HH:mm')}">
                                     </div>
                                 </div>
                             </div>
@@ -176,7 +176,7 @@
                                             th:text="${latestSixXArticle.shortTitle}">
                                         </a>
                                     </div>
-                                    <p th:text="${latestSixXArticle.conTent}"></p>
+                                    <p th:text="${latestSixXArticle.shortConTent}"></p>
                                 </div>
                             </div>
                             <hr>

@@ -92,15 +92,15 @@
                             <a href="#" class="fw-semibold link-dark" th:text="${hotArticles.shortTitle}"></a>
                         </div>
                         <div class="col text-end">
-                            <a th:text="${#temporals.format(articles.updateDay, 'dd-MM-yyyy HH:mm')}"></a>
+                            <a th:text="'cre: ' + ${#temporals.format(articles.createDay  , 'dd-MM-yy HH:mm')}"></a>
                         </div>
                         <hr>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <h3 th:text="${articles.title}"></h3>
-                            <img th:src="@{'/images/' + ${articles.urlImage}+''}" class="card-img-top" alt="...">
-                            <div class="text-center">Hình ảnh minh họa</div>
+                            <!-- <img th:src="@{'/images/' + ${articles.urlImage}+''}" class="card-img-top" alt="...">
+                            <div class="text-center">Hình ảnh minh họa</div> -->
                             <div class="lh-lg " id="conTent" th:utext="${articles.conTent}"></div>
                         </div>
     

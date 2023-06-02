@@ -35,8 +35,14 @@ public class Articles {
     @Column(name = "shortTitle") //記事のショートタイトル
     private String shortTitle;
 
+    @Column(name = "shortConTent") //記事のショート情報
+    private String shortConTent;
+
     @Column (name = "conTent") //記事の内容
     private String conTent;
+
+    @Column(name = "createDay") //記事の登録時間
+    private LocalDateTime createDay;
 
     @Column(name = "updateDay") //記事のアップデート時間
     private LocalDateTime updateDay;
