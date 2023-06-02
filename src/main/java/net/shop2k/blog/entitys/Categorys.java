@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 public class Categorys {
     
     @Id //主キー
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //主キー値を自動的に生成定義
+    @GeneratedValue(strategy = GenerationType.AUTO) //主キー値を自動的に生成定義
     private Long id;
 
     @Column(name = "name") //カテゴリーの名

@@ -69,7 +69,7 @@ public class ArticlesController {
             model.addAttribute("hotArticles", hotArticles); //ホットArticlesを表示する
             return "html/categorys.html";
         }   
-        return "html/erro.html";
+        return "html/error.html";
     }
 
 }
