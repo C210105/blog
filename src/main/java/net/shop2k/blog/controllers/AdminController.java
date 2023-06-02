@@ -115,7 +115,7 @@ public class AdminController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/articles/create")
     public String createArticles(@RequestParam("category") Long categoryId, @RequestParam("title") String title,
-            @RequestParam("shortTitle") String shortTile, @RequestParam("conTent") String conTent,
+            @RequestParam("shortTitle") String shortTile, @RequestParam("shortConTent") String shortConTent, @RequestParam("conTent") String conTent,
             @RequestParam("urlImage") MultipartFile urlImage, @RequestParam("hotArticles") Long hotArticles,
             Model model) {
 
@@ -128,6 +128,7 @@ public class AdminController {
             List<Categorys> allCategorys = categorysService.findByAllCategorys();
             articles.setTitle(title);
             articles.setShortTitle(shortTile);
+            articles.setShortConTent(shortConTent);
             articles.setConTent(conTent);
             articles.setUpdateDay(LocalDateTime.now());
             articles.setCategory(category);
@@ -214,6 +215,7 @@ public class AdminController {
             Articles articles = articlesOptional.get();
             articles.setTitle(updateArticles.getTitle());
             articles.setShortTitle(updateArticles.getShortTitle());
+            articles.setShortConTent(updateArticles.getShortConTent());
             articles.setConTent(updateArticles.getConTent());
             articles.setCategory(updateArticles.getCategory());
             // articles.setUpdateDay(LocalDateTime.now());
