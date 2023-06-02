@@ -28,7 +28,12 @@ public class SecurityConfig {
             .defaultSuccessUrl("/admin/blog/index")
             .failureUrl("/admin/blog/login?error=true")
             .permitAll()
-        );
+        )
+        .logout(logout -> logout
+            .logoutUrl("/admin/blog/logout")
+            .logoutSuccessUrl("/admin/blog/login")
+            .invalidateHttpSession(true)
+            .deleteCookies("JSESSIONID"));
         return http.build();
     }
 
