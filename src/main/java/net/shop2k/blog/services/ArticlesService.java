@@ -30,6 +30,15 @@ public class ArticlesService {
     // }
 
     /*
+     * Search title
+     */
+    public List <Articles> searchArticles(String keyword){
+        // List <Articles> searchResults = articlesRepository.findByTitleContaining(keyword);
+        // return searchResults;
+        return articlesRepository.findByTitleContaining(keyword);
+    }
+
+    /*
      * DB内の全てArticlesを取得する
      * 戻り値：
      */
