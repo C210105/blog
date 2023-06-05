@@ -18,6 +18,11 @@ import net.shop2k.blog.entitys.Categorys;
 public interface ArticlesRepository extends JpaRepository <Articles, Long> {
 
     /*
+     * title
+     */
+    List <Articles> findByTitleContaining(String keyword);
+
+    /*
      * Categoryフィルードが指定したcategorysIdを持つCategorysオブジェクトに対応するArticlesオブジェクトをDBで検索
      * 返される結果はクエリ条件を満たすArticlesオブジェクトのList
      */
