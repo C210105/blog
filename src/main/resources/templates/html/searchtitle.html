@@ -27,7 +27,7 @@
                 </a>
 
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="#" class="nav-link px-2 link-secondary">Blog</a></li>
+                    <li><a th:href="@{/blog/index/}" class="nav-link px-2 link-secondary">Blog</a></li>
                     <li><a href="#" class="nav-link px-2 link-dark">Thông Tin</a></li>
                     <li><a href="#" class="nav-link px-2 link-dark">Hỏi Đáp</a></li>
                     <li><a href="#" class="nav-link px-2 link-dark">Trợ Giúp</a></li>
@@ -63,149 +63,40 @@
                 th:text="${category.name}" th:value="${category.id}"></a>
         </nav>
     </div>
-    <div class="bg-light">
-        <nav class="container text-truncate">
-            <a class="link-dark fw-bolder">Ngay bây giờ　</a>
-            <a href="#" class="" style="color: rgb(126, 121, 121);">tìm kiếm 1　</a>
-            <a href="#" class="" style="color: rgb(126, 121, 121);">tìm kiếm 2　</a>
-            <a href="#" class="" style="color: rgb(126, 121, 121);">tìm kiếm 3　</a>
-            <a href="#" class="" style="color: rgb(126, 121, 121);">tìm kiếm 4　</a>
-            <a href="#" class="" style="color: rgb(126, 121, 121);">Xem thêm</a>
-        </nav>
-    </div>
     <div class="container">
         <div class="py-2">
             <div class="row ">
                 <div class="col-md-8 pt-2">
-                    <div class="row">
-                        <div class="py-2">
-                            <span class="text-bg-danger fs-5">Tin nóng</span>
-                            <a href="#" class="fw-semibold link-dark" th:text="${hotArticles.shortTitle}"></a>
-                        </div>
-                        <hr>
-                        <div class="fw-bolder fs-4">Nổi Bật</div>
-                        <div>Đây là những thông tin nổi bật nhất đến từ đất nước Nhật Bản</div>
-                        <hr>
-                    </div>
                     <hr>
+                    <div class="mt-4 mb-4">
+                        <h4 class="text-center">Kết Quả Tìm Kiếm</h4>
+                        <p class="text-danger text-center" th:text="${searchError}" th:if="${searchError}"></p>
+                    </div>
                     <div class="row">
-                        <div class="col-md-6" th:each="allArticle: ${allArticles}">
+                        <div class="col-md-6" th:each="article: ${searchTitle}">
                             <div class="row">
                                 <div class="col-4 d-none d-lg-block">
                                     <div class="card">
-                                        <img th:src="@{'/images/' + ${allArticle.urlImage} + ''}" alt="">
+                                        <img th:src="@{'/images/' + ${article.urlImage} + ''}" alt="">
                                     </div>
                                 </div>
                                 <div class="col-8">
                                     <div class="fw-bolder">
-                                        <a th:href="@{/blog/v1/categorys/articles/posts/{articlesId}(articlesId=${allArticle.id})}"
-                                            method="GET" class="link-dark" th:text="${allArticle.shortTitle}"></a>
+                                        <a th:href="@{/blog/v1/categorys/articles/posts/{articlesId}(articlesId=${article.id})}"
+                                            method="GET" class="link-dark" th:text="${article.shortTitle}"></a>
                                     </div>
-                                    <p th:text="${allArticle.shortConTent}" class="text-truncate"
+                                    <p th:text="${article.shortConTent}" class="text-truncate"
                                         style="font-size: small;"></p>
                                     <div class="text-end" style="font-size: x-small"
-                                        th:text="'cre: ' + ${#temporals.format(allArticle.createDay, 'dd-MM-yy HH:mm')}">
+                                        th:text="'cre: ' + ${#temporals.format(article.createDay, 'dd-MM-yy HH:mm')}">
                                     </div>
                                 </div>
                             </div>
                             <hr>
                         </div>
                     </div>
-                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                        <div class="col-md-6">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="card">
-                                        <img src="../image/1.jpg" class="card-img-top" alt="...">
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="fw-bolder fs-4"><a href="#" class="link-dark">Sập đê sông Hyogo
-                                            Itami</a></div>
-                                    <div class="text-end" style="font-size: small;">sfds</div>
-                                </div>
-                            </div>
-                            <hr>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="card">
-                                        <img src="../image/1.jpg" class="card-img-top" alt="...">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="fw-bolder fs-4"><a href="#" class="link-dark">Sập đê sông Hyogo
-                                            Itami</a></div>
-                                    <div class="text-end" style="font-size: small;">2023年5月8日 12時00分</div>
-                                </div>
-                            </div>
-                            <hr>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="card">
-                                        <img src="../image/1.jpg" class="card-img-top" alt="...">
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="fw-bolder fs-4"><a href="#" class="link-dark">Sập đê sông Hyogo
-                                            Itami</a></div>
-                                    <div class="text-end" style="font-size: small;">2023年5月8日 12時00分</div>
-                                </div>
-                            </div>
-                            <hr>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="card">
-                                        <img src="../image/1.jpg" class="card-img-top" alt="...">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="fw-bolder fs-4"><a href="#" class="link-dark">Sập đê sông Hyogo
-                                            Itami</a></div>
-                                    <div class="text-end" style="font-size: small;">2023年5月8日 12時00分</div>
-                                </div>
-                            </div>
-                            <hr>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="card">
-                                        <img src="../image/1.jpg" class="card-img-top" alt="...">
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="fw-bolder fs-4"><a href="#" class="link-dark">Sập đê sông Hyogo
-                                            Itami</a></div>
-                                    <div class="text-end" style="font-size: small;">2023年5月8日 12時00分</div>
-                                </div>
-                            </div>
-                            <hr>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="card">
-                                        <img src="../image/1.jpg" class="card-img-top" alt="...">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="fw-bolder fs-4"><a href="#" class="link-dark">Sập đê sông Hyogo
-                                            Itami</a></div>
-                                    <div class="text-end" style="font-size: small;">2023年5月8日 12時00分</div>
-                                </div>
-                            </div>
-                            <hr>
-                        </div>
-                    </div>
+                    <hr>
+                
 
                 </div>
                 <div class="col-md-4 pt-2">

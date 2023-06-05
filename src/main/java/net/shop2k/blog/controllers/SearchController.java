@@ -28,9 +28,15 @@ public class SearchController {
          * Search Title
          */
         List <Articles> searchTitle = articlesService.searchArticles(keyword);
-        model.addAttribute("searchTitle", searchTitle);
-        log.info("Lỗi");
-        return "html/test.html";
+        if(!searchTitle.isEmpty()){
+            model.addAttribute("searchTitle", searchTitle);
+            log.info("検索できた");
+            return "html/searchTitle.html";
+        }else{
+            model.addAttribute("searchError", "Từ khóa không hợp lệ");
+            log.info("このキーワードを検索できなかった");
+            return "html/searchtitle.html";
+        }
     }
 
 }
