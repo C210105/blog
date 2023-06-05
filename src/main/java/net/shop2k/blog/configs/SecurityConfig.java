@@ -28,7 +28,12 @@ public class SecurityConfig {
             .defaultSuccessUrl("/admin/blog/index")
             .failureUrl("/admin/blog/login?error=true")
             .permitAll()
-        );
+        )
+        .logout(logout -> logout
+            .logoutUrl("/admin/blog/logout") //logout　ページ
+            .logoutSuccessUrl("/admin/blog/login") //logout。後
+            .invalidateHttpSession(true) //sessionを削除する
+            .deleteCookies("JSESSIONID")); //cookiesを削除する
         return http.build();
     }
 
