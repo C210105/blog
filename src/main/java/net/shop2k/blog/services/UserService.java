@@ -66,8 +66,8 @@ public class UserService implements UserDetailsService{
         String recipientEmail = user.getEmail();
         String subject = "Xác nhận đăng kí";
         String content = "Xin chào " + user.getUsername() + "\n" 
-            + "Vui lòng xác nhận đăng kí bằng cách nhấp vào liên kết sau: \n"
-            + "localhost:8080/blog/confirm?code=" + user.getConfirmationCode();
+            // + "Vui lòng xác nhận đăng kí bằng cách nhấp vào liên kết sau: \n"
+            + "Mã xác nhận: " + user.getConfirmationCode();
         
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(recipientEmail);
