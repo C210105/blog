@@ -32,11 +32,11 @@
                         <p class="text-success text-center" th:text="${susccessMessage}" th:if="${susccessMessage}"></p>
                         <form th:action="@{/blog/register}" method="POST" class="">
                             <div class="form-group mb-3">
-                                <input type="text" id="email" name="email" class="form-control rounded-left" placeholder="Email"
+                                <input type="text" id="nickName" name="nickName" class="form-control rounded-left" placeholder="Nhập nick name"
                                     required>
                             </div>
                             <div class="form-group mb-3">
-                                <input type="text" id="username" name="username" class="form-control rounded-left" placeholder="Tài khoản"
+                                <input type="email" id="username" name="username" class="form-control rounded-left" placeholder="Nhập email"
                                     required>
                             </div>
                             <div class="form-group d-flex mb-3">

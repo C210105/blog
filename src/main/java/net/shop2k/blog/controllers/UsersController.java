@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import lombok.extern.log4j.Log4j2;
 import net.shop2k.blog.entitys.User;
 import net.shop2k.blog.services.UserService;
 
+@Log4j2
 @Controller
 @RequestMapping(path = "/blog")
 public class UsersController {
@@ -29,12 +31,12 @@ public class UsersController {
     }
 
     @PostMapping("/register")
-    public String registerUser(@RequestParam("username") String username, @RequestParam("password") String password, @RequestParam("email") String email, Model model) {
+    public String registerUser(@RequestParam("username") String username, @RequestParam("password") String password, @RequestParam("nickName") String nickName, Model model) {
         // Tạo đối tượng User từ thông tin đăng ký
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
-        user.setEmail(email);
+        user.setNickName(nickName);
         // user.setSetEnabled(true);
         user.setRole("ROLE_ADMIN");
         
@@ -42,14 +44,14 @@ public class UsersController {
         try {
             User registeredUser = userService.registerUser(user);
             userService.sendConfirmationEmail(registeredUser);
-            model.addAttribute("susccessMessage", "Đăng kí thành công. Vui lòng xác nhận email để hoàn tất quá trình đăng kí");
-            // return "redirect:/blog/login"; // Chuyển hướng sau khi đăng ký thành công
-            // return "html/users/register.html";
+            model.addAttribute("susccessMessage", "Nhập mã xác nhận đã được gửi đến trong email");
+            log.info("このEmailは使える");
+            return "html/users/confiramationcode.html";
         } catch (IllegalArgumentException e){
             model.addAttribute("error", e.getMessage());
-            // return "html/users/register.html";
+            log.info("エラー：このemailは存在してる");
+            return "html/users/register.html";
         }
-        return "html/users/confiramationcode.html";
     }
 
     @PostMapping("/register/confirm")
@@ -57,9 +59,11 @@ public class UsersController {
         try{
             userService.confirmRegistration(confirmationCode);
             model.addAttribute("successMessage", "Xác nhận đăng kí thành công");
+            log.info("Emailで承認できた");
             return "html/users/login.html";
         } catch(IllegalArgumentException e){
             model.addAttribute("errorMessage", e.getMessage());
+            log.info("Emailで承認できなかった");
             return "html/users/confiramationcode.html";
         }
     }
