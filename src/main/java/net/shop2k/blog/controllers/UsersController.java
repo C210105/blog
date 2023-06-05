@@ -29,24 +29,38 @@ public class UsersController {
     }
 
     @PostMapping("/register")
-    public String registerUser(@RequestParam("username") String username, @RequestParam("password") String password, Model model) {
+    public String registerUser(@RequestParam("username") String username, @RequestParam("password") String password, @RequestParam("email") String email, Model model) {
         // Tạo đối tượng User từ thông tin đăng ký
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
-        user.setSetEnabled(true);
+        user.setEmail(email);
+        // user.setSetEnabled(true);
         user.setRole("ROLE_ADMIN");
         
         // Lưu thông tin người dùng vào cơ sở dữ liệu
         try {
-            userService.registerUser(user);
-            model.addAttribute("susccessMessage", "Đăng kí thành công");
+            User registeredUser = userService.registerUser(user);
+            userService.sendConfirmationEmail(registeredUser);
+            model.addAttribute("susccessMessage", "Đăng kí thành công. Vui lòng xác nhận email để hoàn tất quá trình đăng kí");
             // return "redirect:/blog/login"; // Chuyển hướng sau khi đăng ký thành công
-            return "html/users/register.html";
+            // return "html/users/register.html";
         } catch (IllegalArgumentException e){
             model.addAttribute("error", e.getMessage());
-            return "html/users/register.html";
+            // return "html/users/register.html";
         }
+        return "html/users/register.html";
+    }
+
+    @GetMapping("/confirm")
+    public String confirmRegistration(@RequestParam("code") String confirmationCode, Model model){
+        try{
+            userService.confirmRegistration(confirmationCode);
+            model.addAttribute("successMessage", "Xác nhận đăng kí thành công");
+        } catch(IllegalArgumentException e){
+            model.addAttribute("errorMessage", e.getMessage());
+        }
+        return "html/users/register.html";
     }
 
 }

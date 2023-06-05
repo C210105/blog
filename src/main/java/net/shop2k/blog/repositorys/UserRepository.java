@@ -9,4 +9,6 @@ import net.shop2k.blog.entitys.User;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     User findByUsername(String username);
+
+    User findByConfirmationCode(String confirmationCode);
 }
