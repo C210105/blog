@@ -19,45 +19,46 @@
 </head>
 
 <body>
-        <header class="p-3 border-bottom">
-            <div class="container">
-              <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+    <header class="p-3 border-bottom">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                 <a href="#" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
-                  <img th:src="@{/images/1.png}" width="32" height="32" alt="">
+                    <img th:src="@{/images/1.png}" width="32" height="32" alt="">
                 </a>
-        
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                  <li><a href="#" class="nav-link px-2 link-secondary">Blog</a></li>
-                  <li><a href="#" class="nav-link px-2 link-dark">Thông Tin</a></li>
-                  <li><a href="#" class="nav-link px-2 link-dark">Hỏi Đáp</a></li>
-                  <li><a href="#" class="nav-link px-2 link-dark">Trợ Giúp</a></li>
+                    <li><a href="#" class="nav-link px-2 link-secondary">Blog</a></li>
+                    <li><a href="#" class="nav-link px-2 link-dark">Thông Tin</a></li>
+                    <li><a href="#" class="nav-link px-2 link-dark">Hỏi Đáp</a></li>
+                    <li><a href="#" class="nav-link px-2 link-dark">Trợ Giúp</a></li>
                 </ul>
-        
                 <form th:action="@{/blog/index/search}" method="GET" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                  <input type="text" name="keyword" class="form-control" placeholder="Tìm kiếm" aria-label="Search">
+                    <input type="text" name="keyword" class="form-control" placeholder="Tìm kiếm" aria-label="Search">
                 </form>
-        
                 <div class="dropdown text-end">
-                  <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img th:src="@{/images/1.png}" alt="mdo" width="32" height="32" class="rounded-circle">
-                  </a>
-                  <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="">
-                    <li><a class="dropdown-item" href="#">Thông tin</a></li>
-                    <li><a class="dropdown-item" href="#">Bảo mật</a></li>
-                    <li><a class="dropdown-item" href="#">Cài đặt</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">Đăng ký</a></li>
-                  </ul>
+                    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <img th:src="@{/images/1.png}" alt="mdo" width="32" height="32" class="rounded-circle">
+                    </a>
+                    <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="">
+                        <li><a class="dropdown-item" href="#">Thông tin</a></li>
+                        <li><a class="dropdown-item" href="#">Bảo mật</a></li>
+                        <li><a class="dropdown-item" href="#">Cài đặt</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Đăng ký</a></li>
+                    </ul>
                 </div>
-              </div>
             </div>
-          </header>
-        <!-- <hr> -->
-        <div class="nav-scroller py-1 bg-primary">
-            <nav class="container nav d-flex justify-content-between" th:object="${categorys}">
-                <a type="buttom" class="btn btn-primary p-2 link-light" method="GET" th:href="@{/blog/v1/categorys/articles/{id}(id=${category.id})}" th:each="category : ${categorys}"
-                    th:text="${category.name}" th:value="${category.id}"></a>
-                <!-- <a class="btn btn-primary p-2 dropdown-toggle text-light" data-bs-toggle="dropdown"
+        </div>
+    </header>
+    <!-- <hr> -->
+    <div class="nav-scroller py-1 bg-primary">
+        <nav class="container nav d-flex justify-content-between" th:object="${categorys}">
+            <a type="buttom" class="btn btn-primary p-2 link-light" method="GET"
+                th:href="@{/blog/v1/categorys/articles/{id}(id=${category.id})}" th:each="category : ${categorys}"
+                th:text="${category.name}" th:value="${category.id}"></a>
+            <!-- <a class="btn btn-primary p-2 dropdown-toggle text-light" data-bs-toggle="dropdown"
                     aria-expanded="false" th:if="${categorys[12].id == 13}" th:href="@{/api/v1/categorys/{id}(id=${categorys[12].id})}" th:text="${categorys[12].name}"
                     th:value="${categorys[12].id}">
                 </a>
@@ -71,18 +72,18 @@
                     <li><a class="btn btn-primary dropdown-item" href="#">Nagoya</a></li>
                     <li><a class="btn btn-primary dropdown-item" href="#">Kyushyu</a></li>
                 </ul> -->
-            </nav>
-        </div>
-        <div class="bg-light">
-            <nav class="container text-truncate">
-                    <a class="link-dark fw-bolder">Ngay bây giờ　</a>
-                    <a href="#" class="" style="color: rgb(126, 121, 121);">tìm kiếm 1　</a>
-                    <a href="#" class="" style="color: rgb(126, 121, 121);">tìm kiếm 2　</a>
-                    <a href="#" class="" style="color: rgb(126, 121, 121);">tìm kiếm 3　</a>
-                    <a href="#" class="" style="color: rgb(126, 121, 121);">tìm kiếm 4　</a>
-                    <a href="#" class="" style="color: rgb(126, 121, 121);">Xem thêm</a>
-            </nav>
-        </div>
+        </nav>
+    </div>
+    <div class="bg-light">
+        <nav class="container text-truncate">
+            <a class="link-dark fw-bolder">Ngay bây giờ　</a>
+            <a href="#" class="" style="color: rgb(126, 121, 121);">tìm kiếm 1　</a>
+            <a href="#" class="" style="color: rgb(126, 121, 121);">tìm kiếm 2　</a>
+            <a href="#" class="" style="color: rgb(126, 121, 121);">tìm kiếm 3　</a>
+            <a href="#" class="" style="color: rgb(126, 121, 121);">tìm kiếm 4　</a>
+            <a href="#" class="" style="color: rgb(126, 121, 121);">Xem thêm</a>
+        </nav>
+    </div>
     <div class="container">
         <div class="py-2">
             <div class="row ">
@@ -97,7 +98,7 @@
                         <div>Đây là những thông tin nổi bật nhất đến từ đất nước Nhật Bản</div>
                         <hr>
                     </div>
-                    <div class="row" >
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="card">
                                 <div class="position-absolute top-0 end-0">
@@ -109,10 +110,11 @@
                         <div class="col-md-6">
                             <div class="fw-bolder fs-4">
                                 <a th:href="@{/blog/v1/categorys/articles/posts/{articlesId}(articlesId=${articles.id})}"
-                                            method="GET" class="link-dark" th:text="${articles.shortTitle}"></a>
+                                    method="GET" class="link-dark" th:text="${articles.shortTitle}"></a>
                             </div>
                             <p th:text="${articles.shortConTent}"></p>
-                            <div class="text-end" style="font-size: small;" th:text="'cre: ' + ${#temporals.format(articles.createDay, 'dd-MM-yy HH:mm')}"></div>
+                            <div class="text-end" style="font-size: small;"
+                                th:text="'cre: ' + ${#temporals.format(articles.createDay, 'dd-MM-yy HH:mm')}"></div>
                         </div>
                     </div>
                     <hr>
@@ -129,8 +131,11 @@
                                         <a th:href="@{/blog/v1/categorys/articles/posts/{articlesId}(articlesId=${allArticle.id})}"
                                             method="GET" class="link-dark" th:text="${allArticle.shortTitle}"></a>
                                     </div>
-                                    <p th:text="${allArticle.shortConTent}" class="text-truncate" style="font-size: small;"></p>
-                                    <div class="text-end" style="font-size: x-small" th:text="'cre: ' + ${#temporals.format(allArticle.createDay, 'dd-MM-yy HH:mm')}"></div>
+                                    <p th:text="${allArticle.shortConTent}" class="text-truncate"
+                                        style="font-size: small;"></p>
+                                    <div class="text-end" style="font-size: x-small"
+                                        th:text="'cre: ' + ${#temporals.format(allArticle.createDay, 'dd-MM-yy HH:mm')}">
+                                    </div>
                                 </div>
                             </div>
                             <hr>
@@ -151,7 +156,7 @@
                                     <div class="text-end" style="font-size: small;">sfds</div>
                                 </div>
                             </div>
-    <hr>
+                            <hr>
                         </div>
                         <div class="col-md-6">
                             <div class="row">
@@ -248,13 +253,14 @@
                     <div class="row">
                         <div class="col-md-6" th:each="product: ${products}">
                             <a href="">
-                                <img th:src="@{'/images/' + ${product.urlImage} + '.png'}" class="card-img-top" alt="...">
+                                <img th:src="@{'/images/' + ${product.urlImage} + '.png'}" class="card-img-top"
+                                    alt="...">
                             </a>
-                                <div class="card-body">
-                                    <div class="fw-bolder text-truncate">
-                                        <a href="#" class="link-dark"></a>
-                                    </div>
-                                </div>    
+                            <div class="card-body">
+                                <div class="fw-bolder text-truncate">
+                                    <a href="#" class="link-dark"></a>
+                                </div>
+                            </div>
                         </div>
 
                     </div>
@@ -280,4 +286,5 @@
         integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
         </script>
 </body>
+
 </html>
