@@ -49,18 +49,19 @@ public class UsersController {
             model.addAttribute("error", e.getMessage());
             // return "html/users/register.html";
         }
-        return "html/users/register.html";
+        return "html/users/confiramationcode.html";
     }
 
-    @GetMapping("/confirm")
+    @PostMapping("/register/confirm")
     public String confirmRegistration(@RequestParam("code") String confirmationCode, Model model){
         try{
             userService.confirmRegistration(confirmationCode);
             model.addAttribute("successMessage", "Xác nhận đăng kí thành công");
+            return "html/users/login.html";
         } catch(IllegalArgumentException e){
             model.addAttribute("errorMessage", e.getMessage());
+            return "html/users/confiramationcode.html";
         }
-        return "html/users/register.html";
     }
 
 }

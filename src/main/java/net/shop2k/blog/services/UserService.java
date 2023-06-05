@@ -54,10 +54,10 @@ public class UserService implements UserDetailsService{
         if(userRepository.findByUsername(user.getUsername()) != null){
             throw new IllegalArgumentException("Tài khoản đã tồn tại");
         }
-        String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
+        String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword()); //パスワードのセキュリティー
         user.setPassword(encodedPassword);
         user.setSetEnabled(false);
-        user.setConfirmationCode(UUID.randomUUID().toString());
+        user.setConfirmationCode(UUID.randomUUID().toString().substring(0, 6)); //randomで6文字
         userRepository.save(user);
         return user;
     }
@@ -68,12 +68,17 @@ public class UserService implements UserDetailsService{
         String content = "Xin chào " + user.getUsername() + "\n" 
             // + "Vui lòng xác nhận đăng kí bằng cách nhấp vào liên kết sau: \n"
             + "Mã xác nhận: " + user.getConfirmationCode();
-        
+        /*
+         * Email承認を設定
+         */
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(recipientEmail);
         mailMessage.setSubject(subject);
         mailMessage.setText(content);
 
+        /*
+         * ユーザーに承認コードを送信する
+         */
         javaMailSender.send(mailMessage);
     }
 
