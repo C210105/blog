@@ -58,8 +58,6 @@ public class UserService implements UserDetailsService{
             throw new IllegalArgumentException("Tài khoản đã tồn tại");
         }else if(!user.getPassword().equals(user.getConfirmedPassword())){
             throw new IllegalArgumentException("Mật khẩu xác nhận không chính xác");
-        }else if(userRepository.findByUsername(user.getUsername()) == null){
-            throw new IllegalArgumentException("Hãy nhập email");
         }
         else{
             String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword()); //パスワードのセキュリティー

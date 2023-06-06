@@ -59,7 +59,7 @@ public class UsersController {
             model.addAttribute("errorMessage", e.getMessage());
             log.info("空白でした");
             return "html/users/register.html";
-        } 
+        }    
     }
 
     @PostMapping("/register/confirm")
