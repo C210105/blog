@@ -38,6 +38,14 @@ public class UsersController {
     }
 
     /*
+     * パスワードを取得画面表示
+     */
+    @GetMapping("/forgot")
+    public String forgotUser(){
+        return "html/users/forgotpassword.html";
+    }
+
+    /*
      * ユーザーを登録機能
      */
     @PostMapping("/register")
