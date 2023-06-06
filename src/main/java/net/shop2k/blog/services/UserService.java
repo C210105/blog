@@ -61,7 +61,9 @@ public class UserService implements UserDetailsService{
         }
         else{
             String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword()); //パスワードのセキュリティー
+            String encodedconfirmedPassword = bCryptPasswordEncoder.encode(user.getConfirmedPassword());
             user.setPassword(encodedPassword);
+            user.setConfirmedPassword(encodedconfirmedPassword);
             user.setSetEnabled(false);
             user.setConfirmationCode(UUID.randomUUID().toString().substring(0, 6)); //randomで6文字
             userRepository.save(user);
