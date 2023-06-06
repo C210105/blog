@@ -34,7 +34,7 @@ public class UserService implements UserDetailsService{
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
         if (user == null) {
-            throw new UsernameNotFoundException("User not found");
+            throw new UsernameNotFoundException("Không được để trống");
         }
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(user.getRole()));
@@ -58,8 +58,10 @@ public class UserService implements UserDetailsService{
             throw new IllegalArgumentException("Tài khoản đã tồn tại");
         }else if(!user.getPassword().equals(user.getConfirmedPassword())){
             throw new IllegalArgumentException("Mật khẩu xác nhận không chính xác");
+        }else if(userRepository.findByUsername(user.getUsername()) == null){
+            throw new IllegalArgumentException("Hãy nhập email");
         }
-         else{
+        else{
             String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword()); //パスワードのセキュリティー
             user.setPassword(encodedPassword);
             user.setSetEnabled(false);

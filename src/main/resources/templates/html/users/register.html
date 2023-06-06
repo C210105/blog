@@ -27,28 +27,41 @@
             <div class="row justify-content-center">
                 <div class="col-md-7 col-lg-5">
                     <div class="bg-light p-4 p-md-5">
-                        <h3 class="text-center mb-3">Đăng Kí</h3>
+                        <h3 class="text-center p-1">Đăng Kí</h3>
                         <p class="text-danger text-center" th:text="${error}" th:if="${error}"></p>
+                        <p class="text-danger text-center" th:text="${errorMessage}" th:if="${errorMessage}"></p>
                         <p class="text-success text-center" th:text="${susccessMessage}" th:if="${susccessMessage}"></p>
                         <form th:action="@{/blog/register}" method="POST" class="">
-                            <div class="form-group mb-3">
-                                <input type="text" id="nickName" name="nickName" class="form-control rounded-left" placeholder="Nhập nick name"
-                                    required>
+                            <div class="input-group has-validation mb-3">
+                                <div class="form-floating is-invalid">
+                                    <input type="text" class="form-control is-invalid" id="nickName" name="nickName"
+                                        aria-label="With textarea" placeholder="1">
+                                    <label for="floatingInputGroup2">Nhập bí danh</label>
+                                </div>
                             </div>
-                            <div class="form-group mb-3">
-                                <input type="email" id="username" name="username" class="form-control rounded-left" placeholder="Nhập email"
-                                    required>
+                            <div class="input-group has-validation mb-3">
+                                <div class="form-floating is-invalid">
+                                    <input type="email" class="form-control is-invalid" id="username" name="username"
+                                        placeholder="1">
+                                    <label for="floatingInputGroup2">Nhập email</label>
+                                </div>
                             </div>
-                            <div class="form-group d-flex mb-3">
-                                <input type="password" id="password" name="password" class="form-control rounded-left" placeholder="Nhập mật khẩu"
-                                    required>
+                            <div class="input-group has-validation mb-3">
+                                <div class="form-floating is-invalid">
+                                    <input type="password" class="form-control is-invalid" id="password" name="password"
+                                        placeholder="1">
+                                    <label for="floatingInputGroup2">Nhập mật khẩu</label>
+                                </div>
                             </div>
-                            <div class="form-group d-flex mb-3">
-                                <input type="password" id="confirmedPassword" name="confirmedPassword" class="form-control rounded-left" placeholder="Nhập lại mật khẩu"
-                                    required>
+                            <div class="input-group has-validation mb-4">
+                                <div class="form-floating is-invalid">
+                                    <input type="password" class="form-control is-invalid" id="confirmedPassword" name="confirmedPassword"
+                                        placeholder="1">
+                                    <label for="floatingInputGroup2">Nhập lại mật khẩu</label>
+                                </div>
                             </div>
-                            <div class="form-group mb-3">
-                                <button type="submit" class="form-control btn btn-primary rounded submit px-3">Đăng Kí</button>
+                            <div class="form-group mb-4">
+                                <button type="submit" class="form-control btn btn-primary rounded submit px-3" style="font-size: 20px;">Đăng Kí</button>
                             </div>
                             <div class="form-group d-flex text-center">
                                 <div class="w-50 text-md-right">

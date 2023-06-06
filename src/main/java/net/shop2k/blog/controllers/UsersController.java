@@ -1,6 +1,7 @@
 package net.shop2k.blog.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -54,7 +55,11 @@ public class UsersController {
             model.addAttribute("error", e.getMessage());
             log.info("エラー：このemailは存在してる");
             return "html/users/register.html";
-        }
+        } catch (UsernameNotFoundException e){
+            model.addAttribute("errorMessage", e.getMessage());
+            log.info("空白でした");
+            return "html/users/register.html";
+        } 
     }
 
     @PostMapping("/register/confirm")
