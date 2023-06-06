@@ -7,10 +7,10 @@ import net.shop2k.blog.entitys.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
+    
+    User findByUsername(String username); //Emailで検索
 
-    User findByUsername(String username);
+    User findByUsernameAndSetEnabled(String username, boolean setEnabled); //EmailとsetEnable(email承認かどうか)で検索
 
-    User findByUsernameAndSetEnabled(String username, boolean setEnabled);
-
-    User findByConfirmationCode(String confirmationCode);
+    User findByConfirmationCode(String confirmationCode); //Email承認のコードで検索
 }

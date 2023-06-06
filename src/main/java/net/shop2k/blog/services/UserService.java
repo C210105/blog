@@ -91,17 +91,21 @@ public class UserService implements UserDetailsService{
         javaMailSender.send(mailMessage);
     }
 
+    /*
+     * 承認コードをチェックする
+     */
     public void confirmRegistration(String code){
         User user = userRepository.findByConfirmationCode(code);
+        /*
+         * エラー：メッセージが表示
+         */
         if(user == null){
             throw new IllegalArgumentException("Mã xác nhận không hợp lệ");
         }
+        /*
+         * 承認できたら、
+         */
         user.setSetEnabled(true);
         userRepository.save(user);
     }
-
-    /*
-     * Email Service
-     */
-
 }
