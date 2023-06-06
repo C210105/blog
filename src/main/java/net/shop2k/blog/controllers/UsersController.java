@@ -31,11 +31,14 @@ public class UsersController {
     }
 
     @PostMapping("/register")
-    public String registerUser(@RequestParam("username") String username, @RequestParam("password") String password, @RequestParam("nickName") String nickName, Model model) {
+    public String registerUser(@RequestParam("username") String username, @RequestParam("password") String password, @RequestParam("confirmedPassword") String confirmedPassword,
+        @RequestParam("nickName") String nickName, Model model) {
+            
         // Tạo đối tượng User từ thông tin đăng ký
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
+        user.setConfirmedPassword(confirmedPassword);
         user.setNickName(nickName);
         // user.setSetEnabled(true);
         user.setRole("ROLE_ADMIN");

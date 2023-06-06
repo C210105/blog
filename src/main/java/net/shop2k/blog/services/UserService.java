@@ -56,7 +56,10 @@ public class UserService implements UserDetailsService{
          */
         if(userRepository.findByUsernameAndSetEnabled(user.getUsername(), true) != null){
             throw new IllegalArgumentException("Tài khoản đã tồn tại");
-        } else{
+        }else if(!user.getPassword().equals(user.getConfirmedPassword())){
+            throw new IllegalArgumentException("Mật khẩu xác nhận không chính xác");
+        }
+         else{
             String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword()); //パスワードのセキュリティー
             user.setPassword(encodedPassword);
             user.setSetEnabled(false);

@@ -26,6 +26,9 @@ public class User{
     @Column (name = "password")
     private String password;
 
+    @Column (name = "confirmedPassword")
+    private String confirmedPassword;
+    
     @Column (name = "role")
     private String role;
 
