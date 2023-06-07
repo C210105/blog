@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.extern.log4j.Log4j2;
 import net.shop2k.blog.entitys.User;
@@ -25,7 +26,7 @@ public class UsersController {
      * ログイン画面表示
      */
     @GetMapping("/login")
-    public String loginUser() {
+    public String showLoginUser() {
         return "html/users/login.html";
     }
 
@@ -33,8 +34,24 @@ public class UsersController {
      * ユーザーを登録画面表示
      */
     @GetMapping("/register")
-    public String registerUser() {
+    public String showRegisterUser() {
         return "html/users/register.html";
+    }
+
+    /*
+     * パスワードを取得画面表示
+     */
+    @GetMapping("/forgot-password")
+    public String showForgotUser() {
+        return "html/users/forgotpassword.html";
+    }
+
+    /*
+     * リセットパスワード
+     */
+    @GetMapping("/forgot-password-reset")
+    public String showForgotPasswordReset() {
+        return "html/users/code-update-password.html";
     }
 
     /*
@@ -43,7 +60,7 @@ public class UsersController {
     @PostMapping("/register")
     public String registerUser(@RequestParam("username") String username, @RequestParam("password") String password,
             @RequestParam("confirmedPassword") String confirmedPassword,
-            @RequestParam("nickName") String nickName, Model model) {
+            @RequestParam("nickName") String nickName, Model model, RedirectAttributes redirectAttributes) {
 
         // 登録情報からUserオブジェクトを作成
         User user = new User();
@@ -64,20 +81,21 @@ public class UsersController {
             model.addAttribute("susccessMessage", "Nhập mã xác nhận đã được gửi đến trong email");
             log.info("このEmailは使える");
             return "html/users/confiramationcode.html";
+            // return "redirect:html/users/confiramationcode.html";
         } catch (IllegalArgumentException e) {
             /*
              * エラー
              */
-            model.addAttribute("error", e.getMessage());
+            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
             log.info("エラー：このemailは存在してる");
-            return "html/users/register.html";
+            return "redirect:/blog/register";
         } catch (UsernameNotFoundException e) {
             /*
              * エラー
              */
-            model.addAttribute("errorMessage", e.getMessage());
+            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
             log.info("空白でした");
-            return "html/users/register.html";
+            return "redirect:/blog/register";
         }
     }
 
@@ -93,7 +111,7 @@ public class UsersController {
             userService.confirmRegistration(confirmationCode);
             model.addAttribute("successMessage", "Xác nhận đăng kí thành công");
             log.info("Emailで承認できた");
-            return "html/users/login.html";
+            return "redirect:/blog/login";
         } catch (IllegalArgumentException e) {
             /*
              * エラー
@@ -101,6 +119,49 @@ public class UsersController {
             model.addAttribute("errorMessage", e.getMessage());
             log.info("Emailで承認できなかった");
             return "html/users/confiramationcode.html";
+        }
+    }
+
+    /*
+     * パスワードを取得機能
+     */
+    // EmailにCodeを送信する
+    @PostMapping("/forgot-password")
+    public String getForgot(@RequestParam("username") String username, RedirectAttributes redirectAttributes,
+            Model model) {
+        try {
+            //Emailが存在してる場合
+            userService.sendConfirmationCode(username);
+            log.info("codeを送信した");
+            redirectAttributes.addFlashAttribute("successMessageForgot", "Mã xác nhận đã được gửi đến Email của bạn");
+            return "redirect:/blog/forgot-password-reset";
+        } catch (IllegalArgumentException e) {
+            //Emailが存在しなかった場合
+            redirectAttributes.addFlashAttribute("errorMessageForgot", e.getMessage());
+            log.info("エラー：このEmailは存在しなかった");
+            return "redirect:/blog/forgot-password";
+        }
+    }
+
+    /*
+     * 新しいパスワードを取得する
+     * codeを入力
+     * 新しいパスワードを入力
+     */
+    @PostMapping("/forgot-password-reset")
+    public String getForgotReset(@RequestParam("confirmationCode") String confirmationCode,@RequestParam("newPassword") String newPassword,
+            @RequestParam("newConfirmedPassword") String newConfirmedPassword, RedirectAttributes redirectAttributes, Model model) {
+        try{
+            //正しく入力した場合
+            userService.confirmForgotPass(confirmationCode, newPassword, newConfirmedPassword);
+            log.info("パスワードを取得できた");
+            redirectAttributes.addFlashAttribute("successMessageReset", "Lấy lại mật khẩu thành công");
+            return "redirect:/blog/login";
+        }catch(IllegalArgumentException e){
+            //間違った場合
+            log.info("エラー：" + e.getMessage());
+            redirectAttributes.addFlashAttribute("errorMessageReset", e.getMessage());
+            return "redirect:/blog/forgot-password-reset";
         }
     }
 

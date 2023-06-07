@@ -27,8 +27,9 @@
             <div class="row justify-content-center">
                 <div class="col-md-7 col-lg-5">
                     <div class="bg-light p-4 p-md-5">
-                        <h3 class="text-center mb-3">Đăng Nhập</h3>
+                        <h4 class="text-center mb-3">Đăng Nhập</h4>
                         <p class="text-success text-center" th:text="${successMessage}" th:if="${successMessage}"></p>
+                        <p class="text-success text-center" th:text="${successMessageReset}" th:if="${successMessageReset}"></p>
                         <form action="/login" method="POST" class="">
                             <div class="form-group mb-3">
                                 <input type="text" id="username" name="username" class="form-control rounded-left" placeholder="Nhập email"
@@ -57,7 +58,7 @@
                                     <a th:href="@{/blog/register}" class="text-decoration-none">Đăng Ký</a>
                                 </div>
                                 <div class="w-50 text-md-right">
-                                    <a href="#" class="text-decoration-none">Quên mật khẩu</a>
+                                    <a th:href="@{/blog/forgot-password}" method="GET" class="text-decoration-none">Quên mật khẩu</a>
                                 </div>
                             </div>
                         </form>

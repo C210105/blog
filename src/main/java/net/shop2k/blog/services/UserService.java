@@ -57,7 +57,7 @@ public class UserService implements UserDetailsService{
         if(userRepository.findByUsernameAndSetEnabled(user.getUsername(), true) != null){
             throw new IllegalArgumentException("Tài khoản đã tồn tại");
         }else if(!user.getPassword().equals(user.getConfirmedPassword())){
-            throw new IllegalArgumentException("Mật khẩu xác nhận không chính xác");
+            throw new IllegalArgumentException("Mật khẩu không giống nhau");
         }
         else{
             String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword()); //パスワードのセキュリティー
@@ -95,6 +95,7 @@ public class UserService implements UserDetailsService{
      * 承認コードをチェックする
      */
     public void confirmRegistration(String code){
+
         User user = userRepository.findByConfirmationCode(code);
         /*
          * エラー：メッセージが表示
@@ -107,5 +108,77 @@ public class UserService implements UserDetailsService{
          */
         user.setSetEnabled(true);
         userRepository.save(user);
+    }
+
+    /*
+     * パスワードを取得
+     */
+    public void sendConfirmationCode(String username){
+
+        User user = userRepository.findByUsername(username);
+        //入力したemailを確認
+        if(user == null){
+            //間違った場合
+            throw new IllegalArgumentException("Email không tồn tại");
+        }
+        /*
+         * 正しい場合は
+         * DBにコードを登録
+         * 入力したemailにコードを送信
+         */
+        String confirmationCode = generateConfirmationCode();
+        user.setConfirmationCode(confirmationCode);
+        userRepository.save(user);
+        sendConfirmationEmail(user.getUsername(), confirmationCode);
+    }
+
+    /*
+     * emailに送信フォーム
+     */
+    public void sendConfirmationEmail(String username, String confirmationCode){
+        String subject = "Tìm lại mật khẩu";
+        String content = "Đây là mã xác nhận để khôi phục mật khẩu của bạn.\n\n" +
+            "Mã xác nhận là: " + confirmationCode;
+        
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setTo(username);
+        mailMessage.setSubject(subject);
+        mailMessage.setText(content);
+
+        //送信
+        javaMailSender.send(mailMessage);
+    }
+
+    /*
+     *  入力した情報を確認
+     */
+    public void confirmForgotPass(String confirmationCode, String newPassword, String newConfirmedPassword) {
+        // コードによって探し
+        User user = userRepository.findByConfirmationCode(confirmationCode);
+        if (user == null) {
+            //コードは正しくなかった
+            throw new IllegalArgumentException("Mã xác nhận không hợp lệ");
+        } else if(!newPassword.equals(newConfirmedPassword)){
+            //パスワードは一致しなかった
+            throw new IllegalArgumentException("Mật khẩu không khớp nhau");
+        }
+        /*
+         * パスワードは高いセキュリティーを指定した
+         * DBに保存する
+         */
+        String encodedPassword = bCryptPasswordEncoder.encode(newPassword);
+        String encodedconfirmedPassword = bCryptPasswordEncoder.encode(newConfirmedPassword);
+        user.setPassword(encodedPassword);
+        user.setConfirmedPassword(encodedconfirmedPassword);
+        // user.setConfirmationCode(null);
+        userRepository.save(user);
+    }
+
+    /*
+     * コードを生成する
+     * 6文字
+     */
+    private String generateConfirmationCode() {
+        return UUID.randomUUID().toString().substring(0, 6);
     }
 }
