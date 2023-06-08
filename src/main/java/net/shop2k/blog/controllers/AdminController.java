@@ -49,6 +49,14 @@ public class AdminController {
     CategorysService categorysService;
 
     /*
+     * ADMINを登録
+     */
+    @GetMapping("/register-admins")
+    public String showRegisterAdmin(){
+        return "html/admin/register-admin.html";
+    }
+
+    /*
      * ログイン
      */
     @GetMapping("/login")
@@ -56,7 +64,6 @@ public class AdminController {
         return "html/admin/login.html";
     }
 
-    
     /*
      * ログアウト
      */
@@ -91,30 +98,6 @@ public class AdminController {
     public String loginError() {
         return "html/error.html";
     }
-
-    // @PostMapping("/registeradmin")
-    // public String registerAdmin(@RequestParam("username") String username,
-    // @RequestParam("password") String passwrod, Model model){
-
-    // /*
-    // * ADMIN を生成する
-    // */
-    // Admin admin = new Admin();
-    // admin.setUsername(username);
-    // admin.setPassword(passwrod);
-    // admin.setSetEnabled(true);
-    // admin.setRole("ROLE_ADMIN");
-
-    // //エラーをチェックする
-    // try{
-    // adminService.registerAdmin(admin);
-    // model.addAttribute("susccessMessage", "Đăng kí thành công");
-    // return "html/admin/register.html";
-    // }catch (IllegalArgumentException e){
-    // model.addAttribute("error", e.getMessage());
-    // return "html/admin/register.html";
-    // }
-    // }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/index")
