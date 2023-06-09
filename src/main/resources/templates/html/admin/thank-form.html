@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Login</title>
+    <title>ADMIN</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -20,26 +20,26 @@
     <main>
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-md-6 text-center mb-3 mt-5">
-                    <h2 class="heading-section">ADMIN</h2>
+                <div class="col-md-6 text-center mb-2 mt-5">
+                    <h2 class="heading-section">CẢM ƠN BẠN</h2>
                 </div>
             </div>
             <div class="row justify-content-center">
-                <div class="col-md-7 col-lg-5">
+                <div class="col-md-8">
                     <div class="bg-light p-4 p-md-5">
-                        <h3 class="text-center mb-3">Xác Nhận Nộp Đơn Đăng Kí</h3>
-                        <p class="text-danger text-center" th:text="${errorConfirmationCode}" th:if="${errorConfirmationCode}"></p>
-                        <p class="text-success text-center" th:text="${successMessageRegisterAdmin}" th:if="${successMessageRegisterAdmin}"></p>
-                        <form th:action="@{/admin/blog/register-admins/confirm}" method="POST" class="">
-                            <div class="form-group mb-4">
-                                <input type="text" id="confirmationCode" name="confirmationCode" class="form-control rounded-left" placeholder="Nhập mã xác nhận"
-                                    required>
-                            </div>
-                            <div class="form-group mb-3">
-                                <button type="submit" class="form-control btn btn-primary rounded submit px-3">Xác nhận</button>
-                            </div>
-                            <div class="text-center mt-4 mb-3">
-                                <a th:href="@{/admin/blog/register-admins}" method="GET" class="fs-6 text-decoration-none">Quay lại</a>
+                        <form class="">
+                            <h4 class="text-center">Cảm ơn bạn đã gửi đơn đăng kí cho chúng tôi</h4>
+                            <p class="text-center mb-4">Sau khi kiểm tra thông tin xong chúng tôi sẽ gửi thông báo kết quả cho bạn</p>
+                            <div class="form-group d-flex text-center">
+                                <div class="w-50">
+                                    <a th:href="@{/blog/index/}" method="GET" class="text-decoration-none">Quay lại</a>
+                                </div>
+                                <div class="w-50">
+                                    <a href="#" class="text-decoration-none">Các câu hỏi thường gặp</a>
+                                </div>
+                                <div class="w-50">
+                                    <a href="#" class="text-decoration-none">Xem thêm</a>
+                                </div>
                             </div>
                         </form>
                     </div>

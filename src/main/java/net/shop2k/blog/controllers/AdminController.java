@@ -403,7 +403,7 @@ public class AdminController {
         @RequestParam("phone") String phone, @RequestParam("address") String address,
         @RequestParam("selfPr") String selfPr, @RequestParam("username") String username,
         @RequestParam("password") String password, @RequestParam("confirmedPassword") String confirmedPassword,
-        RedirectAttributes redirectAttributes){
+        RedirectAttributes redirectAttributes, Model model){
         
         //登録情報からAdminプロジェクトを作成
         Admin admin = new Admin();
@@ -421,6 +421,7 @@ public class AdminController {
         try{
             Admin registerAdmin = adminService.registerAdmin(admin);
             adminService.sendConfirmationEmail(registerAdmin);
+            model.addAttribute("successMessageRegisterAdmin", "Chúng tôi đã gửi mã xác nhận đến email của bạn");
             log.info("このフォームが使えた");
             return "html/admin/confirmation-code.html";
         }catch(IllegalArgumentException e){
@@ -437,11 +438,11 @@ public class AdminController {
         try{
             adminService.confirmationCodeAdmin(confirmationCode);
             log.info("emailで承認できた");
-            return "redirect:/admin/blog/login";
+            return "html/admin/thank-form";
         }catch(IllegalArgumentException e){
             model.addAttribute("errorConfirmationCode", e.getMessage());
             log.info("エラー：承認コードがダメ");
-            return "html/admin/confirmation-code.html";
+            return "html/admin/confirmation-code";
         }
     }
 }
