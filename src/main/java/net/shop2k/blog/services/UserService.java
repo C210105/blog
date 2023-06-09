@@ -78,7 +78,7 @@ public class UserService implements UserDetailsService{
             // + "Vui lòng xác nhận đăng kí bằng cách nhấp vào liên kết sau: \n"
             + "Mã xác nhận: " + user.getConfirmationCode();
         /*
-         * Email承認を設定
+         * Emailに送信を設定
          */
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(recipientEmail);
