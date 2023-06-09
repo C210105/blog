@@ -63,6 +63,17 @@ public class AdminController {
     }
 
     /*
+     * login
+     */
+    @PostMapping("/login")
+    public String getAdmin(RedirectAttributes redirectAttributes){
+        log.info("ログインできた");
+        return "redirect:/admin/blog/index";
+    }
+        
+        
+    // }
+    /*
      * ログアウト
      */
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -385,7 +396,7 @@ public class AdminController {
         return "html/admin/register-admins.html";
     }
 
-    //Post
+    // Post
     @PostMapping("/register-admins")
     public String getRegisterAdmin(@RequestParam("nickName") String nickName,
         @RequestParam("age") int age, @RequestParam("gender") String gender, 
@@ -411,10 +422,26 @@ public class AdminController {
             Admin registerAdmin = adminService.registerAdmin(admin);
             adminService.sendConfirmationEmail(registerAdmin);
             log.info("このフォームが使えた");
-            return "redirect:/admin/blog/login";
+            return "html/admin/confirmation-code.html";
         }catch(IllegalArgumentException e){
             log.info(e.getMessage());
             return "redirect:/admin/blog/login";
+        }
+    }
+
+    /*
+     * confirmation_code
+     */
+    @PostMapping("/register-admins/confirm")
+    public String confirmRegistrationAdmin(@RequestParam("confirmationCode") String confirmationCode, Model model){
+        try{
+            adminService.confirmationCodeAdmin(confirmationCode);
+            log.info("emailで承認できた");
+            return "redirect:/admin/blog/login";
+        }catch(IllegalArgumentException e){
+            model.addAttribute("errorConfirmationCode", e.getMessage());
+            log.info("エラー：承認コードがダメ");
+            return "html/admin/confirmation-code.html";
         }
     }
 }

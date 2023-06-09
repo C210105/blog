@@ -22,7 +22,7 @@ import net.shop2k.blog.repositorys.AdminRepository;
  * ADMIN Service
  */
 @Service
-public class AdminService  implements UserDetailsService{
+public class AdminService{
     
     @Autowired
     private AdminRepository adminRepository;
@@ -33,26 +33,26 @@ public class AdminService  implements UserDetailsService{
     @Autowired
     private JavaMailSender javaMailSender;
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    // @Override
+    // public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         
-        Admin admin = adminRepository.findByUsername(username);
-        if(admin == null){
-            throw new UsernameNotFoundException("Không được để trống");
-        }
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(admin.getRole()));
+    //     Admin admin = adminRepository.findByUsername(username);
+    //     if(admin == null){
+    //         throw new UsernameNotFoundException("Không được để trống");
+    //     }
+    //     List<GrantedAuthority> authorities = new ArrayList<>();
+    //     authorities.add(new SimpleGrantedAuthority(admin.getRole()));
 
-        return new org.springframework.security.core.userdetails.User(
-            admin.getUsername(),
-            admin.getPassword(),
-            admin.isSetEnabled(),
-            true,
-            true,
-            true,
-            authorities
-        );
-    }
+    //     return new org.springframework.security.core.userdetails.User(
+    //         admin.getUsername(),
+    //         admin.getPassword(),
+    //         admin.isSetEnabled(),
+    //         true,
+    //         true,
+    //         true,
+    //         authorities
+    //     );
+    // }
 
     public Admin registerAdmin(Admin admin) {
 
@@ -81,9 +81,9 @@ public class AdminService  implements UserDetailsService{
 
         //email フォーム
         String recipientEmail = admin.getUsername();
-        String subject = "Xác nhận đăng kí";
+        String subject = "Xác nhận nộp đơn đăng kí trở thành ADMIN";
         String content = "Xin chào " + admin.getNickName() + "\n"
-            + "Mã xác nhận: " + admin.getConfirmationCode();
+            + "Mã xác nhận của bạn là: " + admin.getConfirmationCode();
 
         //emailに送信を設定
         SimpleMailMessage mailMessage = new SimpleMailMessage();
@@ -97,9 +97,9 @@ public class AdminService  implements UserDetailsService{
     /*
      * 承認コードをチェック
      */
-    public void confirmationCodeAdmin(String code){
+    public void confirmationCodeAdmin(String confirmationCode){
         
-        Admin admin = adminRepository.findByConfirmationCode(code);
+        Admin admin = adminRepository.findByConfirmationCode(confirmationCode);
         //承認コードが違い場合
         if(admin == null){
             throw new IllegalArgumentException("Mã xác nhận không hợp lệ");

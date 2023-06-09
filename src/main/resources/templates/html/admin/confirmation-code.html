@@ -21,25 +21,24 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-6 text-center mb-3 mt-5">
-                    <h2 class="heading-section">Khách</h2>
+                    <h2 class="heading-section">ADMIN</h2>
                 </div>
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-7 col-lg-5">
                     <div class="bg-light p-4 p-md-5">
-                        <h3 class="text-center mb-4">Xác Nhận Tài Khoản</h3>
-                        <p class="text-danger text-center" th:text="${errorMessage}" th:if="${errorMessage}"></p>
-                        <p class="text-success text-center" th:text="${susccessMessage}" th:if="${susccessMessage}"></p>
-                        <form th:action="@{/blog/register/confirm}" method="POST" class="">
-                            <div class="form-group mb-3">
-                                <input type="text" id="code" name="code" class="form-control rounded-left" placeholder="Nhập mã xác nhận"
+                        <h3 class="text-center mb-4">Xác Nhận Nộp Đơn Đăng Kí</h3>
+                        <p class="text-danger text-center" th:text="${errorConfirmationCode}" th:if="${errorConfirmationCode}"></p>
+                        <form th:action="@{/admin/blog/register-admins/confirm}" method="POST" class="">
+                            <div class="form-group mb-4">
+                                <input type="text" id="confirmationCode" name="confirmationCode" class="form-control rounded-left" placeholder="Nhập mã xác nhận"
                                     required>
                             </div>
                             <div class="form-group mb-3">
                                 <button type="submit" class="form-control btn btn-primary rounded submit px-3">Xác nhận</button>
                             </div>
                             <div class="text-center mt-4 mb-3">
-                                <a th:href="@{/blog/register-users}" method="GET" class="fs-6 text-decoration-none">Quay lại</a>
+                                <a th:href="@{/admin/blog/register-admins}" method="GET" class="fs-6 text-decoration-none">Quay lại</a>
                             </div>
                         </form>
                     </div>
