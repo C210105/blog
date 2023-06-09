@@ -67,6 +67,7 @@ public class AdminService  implements UserDetailsService{
             admin.setPassword(encodedPassword);
             admin.setConfirmedPassword(encodedconfirmedPassword);
             admin.setSetEnabled(false);
+            admin.setEmailCode(false);
             admin.setConfirmationCode(UUID.randomUUID().toString().substring(0, 6));
             adminRepository.save(admin);
             return admin;
@@ -104,6 +105,7 @@ public class AdminService  implements UserDetailsService{
             throw new IllegalArgumentException("Mã xác nhận không hợp lệ");
         }
         //承認コードがOK場合
+        admin.setEmailCode(true);
         adminRepository.save(admin);
     }
 }

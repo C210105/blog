@@ -32,6 +32,9 @@ public class Admin extends User{
     @Column (name = "selfPr") //自己PR
     private String selfPr;
 
+    @Column (name = "emailCode") //コードで承認かどうか
+    private boolean emailCode;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
