@@ -43,9 +43,6 @@ public class Admin extends Manager{
     @Column (name = "emailCode") //コードで承認かどうか
     private boolean emailCode;
 
-    @Column(name = "setEnabled") // 不ー許可
-    private boolean setEnabled;
-
     @Column(name = "confirmation_code") //承認コード
     private String confirmationCode;
 

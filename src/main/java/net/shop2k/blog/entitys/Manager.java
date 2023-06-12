@@ -2,13 +2,6 @@ package net.shop2k.blog.entitys;
 
 import java.util.List;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -31,6 +24,9 @@ public class Manager {
 
     @Column (name = "password") // パスワード
     private String password;
+
+    @Column(name = "setEnabled") // 不ー許可
+    private boolean setEnabled;
 
     @Column (name = "role") //role
     private String role;
