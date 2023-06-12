@@ -53,6 +53,7 @@ public class AdminService{
     //         authorities
     //     );
     // }
+    
 
     public Admin registerAdmin(Admin admin) {
 
@@ -106,6 +107,7 @@ public class AdminService{
         }
         //承認コードがOK場合
         admin.setEmailCode(true);
+        admin.setSetEnabled(true);
         adminRepository.save(admin);
     }
 }
