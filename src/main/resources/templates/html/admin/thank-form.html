@@ -21,36 +21,24 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-6 text-center mb-2 mt-5">
-                    <h2 class="heading-section">ADMIN</h2>
+                    <h2 class="heading-section">CẢM ƠN BẠN</h2>
                 </div>
             </div>
             <div class="row justify-content-center">
-                <div class="col-md-7 col-lg-5">
+                <div class="col-md-8">
                     <div class="bg-light p-4 p-md-5">
-                        <h3 class="text-center mb-3">Đăng Nhập</h3>
-                        <div th:if="${param.error}">
-                            <p class="error-message text-danger text-center">Tên đăng nhập hoặc mật khẩu không đúng. Vui
-                                lòng thử lại.</p>
-                        </div>
-                        <form th:action="@{/admin/blog/login}" method="POST" class="">
-                            <div class="form-group mb-3">
-                                <input type="text" id="username" name="username" class="form-control rounded-left"
-                                    placeholder="Tài khoản" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
-                            </div>
-                            <div class="form-group d-flex mb-4">
-                                <input type="password" id="password" name="password" class="form-control rounded-left"
-                                    placeholder="Mật khẩu">
-                            </div>
-                            <div class="form-group mb-3">
-                                <button type="submit" class="form-control btn btn-primary rounded submit">Đăng
-                                    nhập</button>
-                            </div>
+                        <form class="">
+                            <h4 class="text-center">Cảm ơn bạn đã gửi đơn đăng kí cho chúng tôi</h4>
+                            <p class="text-center mb-4">Sau khi kiểm tra thông tin xong chúng tôi sẽ gửi thông báo kết quả cho bạn</p>
                             <div class="form-group d-flex text-center">
-                                <div class="w-50 text-md-right">
-                                    <a href="#" class="text-decoration-none">Quay lại</a>
+                                <div class="w-50">
+                                    <a th:href="@{/blog/index/}" method="GET" class="text-decoration-none">Quay lại</a>
                                 </div>
-                                <div class="w-50 text-md-right">
-                                    <a href="#" class="text-decoration-none">Quên mật khẩu</a>
+                                <div class="w-50">
+                                    <a href="#" class="text-decoration-none">Các câu hỏi thường gặp</a>
+                                </div>
+                                <div class="w-50">
+                                    <a href="#" class="text-decoration-none">Xem thêm</a>
                                 </div>
                             </div>
                         </form>

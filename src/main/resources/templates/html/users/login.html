@@ -47,17 +47,20 @@
                                     </label>
                                 </div>
                             </div>
-                            <div class="form-group mb-3">
+                            <div class="form-group mb-4">
                                 <button type="submit" class="form-control btn btn-primary rounded submit px-3">Đăng Nhập</button>
                             </div>
-                            <div class="form-group d-flex text-center">
-                                <div class="w-50 text-md-right">
+                            <div class="form-group d-flex justify-content-between">
+                                <div class="">
                                     <a th:href="@{/blog/index/}" method="GET" class="text-decoration-none">Quay lại</a>
                                 </div>
-                                <div class="w-50 text-md-right">
-                                    <a th:href="@{/blog/register}" class="text-decoration-none">Đăng Ký</a>
+                                <div class="">
+                                    <a th:href="@{/blog/register-users}" class="text-decoration-none">Đăng ký USER</a>
                                 </div>
-                                <div class="w-50 text-md-right">
+                                <div class="">
+                                    <a th:href="@{/admin/blog/register-admins}" method="GET" class="text-decoration-none">Đăng ký ADMIN</a>
+                                </div>
+                                <div class="">
                                     <a th:href="@{/blog/forgot-password}" method="GET" class="text-decoration-none">Quên mật khẩu</a>
                                 </div>
                             </div>

@@ -33,9 +33,9 @@ public class UsersController {
     /*
      * ユーザーを登録画面表示
      */
-    @GetMapping("/register")
+    @GetMapping("/register-users")
     public String showRegisterUser() {
-        return "html/users/register.html";
+        return "html/users/register-users.html";
     }
 
     /*
@@ -57,7 +57,7 @@ public class UsersController {
     /*
      * ユーザーを登録機能
      */
-    @PostMapping("/register")
+    @PostMapping("/register-users")
     public String registerUser(@RequestParam("username") String username, @RequestParam("password") String password,
             @RequestParam("confirmedPassword") String confirmedPassword,
             @RequestParam("nickName") String nickName, Model model, RedirectAttributes redirectAttributes) {
@@ -69,7 +69,7 @@ public class UsersController {
         user.setConfirmedPassword(confirmedPassword);
         user.setNickName(nickName);
         // user.setSetEnabled(true);
-        user.setRole("ROLE_ADMIN");
+        user.setRole("ROLE_USER");
 
         // 登録した情報を処理
         try {
@@ -88,14 +88,14 @@ public class UsersController {
              */
             redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
             log.info("エラー：このemailは存在してる");
-            return "redirect:/blog/register";
+            return "redirect:/blog/register-users";
         } catch (UsernameNotFoundException e) {
             /*
              * エラー
              */
             redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
             log.info("空白でした");
-            return "redirect:/blog/register";
+            return "redirect:/blog/register-users";
         }
     }
 

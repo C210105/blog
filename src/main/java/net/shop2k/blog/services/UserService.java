@@ -15,30 +15,39 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import lombok.extern.log4j.Log4j2;
+import net.shop2k.blog.entitys.Admin;
 import net.shop2k.blog.entitys.User;
+import net.shop2k.blog.repositorys.AdminRepository;
 import net.shop2k.blog.repositorys.UserRepository;
 
 @Service
-public class UserService implements UserDetailsService{
-    
+@Log4j2
+public class UserService implements UserDetailsService {
+
     @Autowired
     private UserRepository userRepository;
 
     @Autowired
+    private AdminRepository adminRepository;
+
+    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-    
+
     @Autowired
     private JavaMailSender javaMailSender;
-    
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        /*
+         * User
+         * ログイン情報をチェック
+         */
         User user = userRepository.findByUsername(username);
-        if (user == null) {
-            throw new UsernameNotFoundException("Không được để trống");
-        }
+        if (user != null) {
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(user.getRole()));
-    
+        log.info("Userとしてログインできた");
         return new org.springframework.security.core.userdetails.User(
             user.getUsername(),
             user.getPassword(),
@@ -47,8 +56,30 @@ public class UserService implements UserDetailsService{
             true,
             true,
             authorities
+            );
+        }
+        /*
+         * admin
+         * ログイン情報をチェック
+         */
+        Admin admin = adminRepository.findByUsername(username);
+        if(admin != null){
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority(admin.getRole()));
+        log.info("ADMINとしてログインできた");
+        return new org.springframework.security.core.userdetails.User(
+            admin.getUsername(),
+            admin.getPassword(),
+            admin.isSetEnabled(),
+            true,
+            true,
+            true,
+            authorities
         );
     }
+    throw new UsernameNotFoundException("Không được để trống");
+
+}
 
     public User registerUser(User user){
         /*
@@ -78,7 +109,7 @@ public class UserService implements UserDetailsService{
             // + "Vui lòng xác nhận đăng kí bằng cách nhấp vào liên kết sau: \n"
             + "Mã xác nhận: " + user.getConfirmationCode();
         /*
-         * Email承認を設定
+         * Emailに送信を設定
          */
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(recipientEmail);
@@ -150,7 +181,7 @@ public class UserService implements UserDetailsService{
     }
 
     /*
-     *  入力した情報を確認
+     * 入力した情報を確認
      */
     public void confirmForgotPass(String confirmationCode, String newPassword, String newConfirmedPassword) {
         // コードによって探し

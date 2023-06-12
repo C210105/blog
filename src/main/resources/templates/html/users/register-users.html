@@ -16,17 +16,17 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-6 text-center mb-2 mt-5">
-                    <h2 class="heading-section">Khách</h2>
+                    <h2 class="heading-section">NGƯỜI DÙNG</h2>
                 </div>
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-7 col-lg-5">
                     <div class="bg-light p-4 p-md-5">
-                        <h4 class="text-center p-3">Đăng Kí</h4>
+                        <h4 class="text-center p-3">Đăng Kí USER</h4>
                         <p class="text-danger text-center" th:text="${error}" th:if="${error}"></p>
                         <p class="text-danger text-center" th:text="${errorMessage}" th:if="${errorMessage}"></p>
                         <p class="text-success text-center" th:text="${susccessMessage}" th:if="${susccessMessage}"></p>
-                        <form th:action="@{/blog/register}" method="POST" class="">
+                        <form th:action="@{/blog/register-users}" method="POST" class="">
                             <div class="input-group has-validation mb-3">
                                 <div class="form-floating is-invalid">
                                     <input type="text" class="form-control is-invalid" id="nickName" name="nickName"

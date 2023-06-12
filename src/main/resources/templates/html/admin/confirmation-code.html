@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>ADMIN</title>
+    <title>Login</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -20,38 +20,26 @@
     <main>
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-md-6 text-center mb-2 mt-5">
+                <div class="col-md-6 text-center mb-3 mt-5">
                     <h2 class="heading-section">ADMIN</h2>
                 </div>
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-7 col-lg-5">
                     <div class="bg-light p-4 p-md-5">
-                        <h3 class="text-center mb-3">Đăng Nhập</h3>
-                        <div th:if="${param.error}">
-                            <p class="error-message text-danger text-center">Tên đăng nhập hoặc mật khẩu không đúng. Vui
-                                lòng thử lại.</p>
-                        </div>
-                        <form th:action="@{/admin/blog/login}" method="POST" class="">
-                            <div class="form-group mb-3">
-                                <input type="text" id="username" name="username" class="form-control rounded-left"
-                                    placeholder="Tài khoản" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
-                            </div>
-                            <div class="form-group d-flex mb-4">
-                                <input type="password" id="password" name="password" class="form-control rounded-left"
-                                    placeholder="Mật khẩu">
+                        <h3 class="text-center mb-3">Xác Nhận Nộp Đơn Đăng Kí</h3>
+                        <p class="text-danger text-center" th:text="${errorConfirmationCode}" th:if="${errorConfirmationCode}"></p>
+                        <p class="text-success text-center" th:text="${successMessageRegisterAdmin}" th:if="${successMessageRegisterAdmin}"></p>
+                        <form th:action="@{/admin/blog/register-admins/confirm}" method="POST" class="">
+                            <div class="form-group mb-4">
+                                <input type="text" id="confirmationCode" name="confirmationCode" class="form-control rounded-left" placeholder="Nhập mã xác nhận"
+                                    required>
                             </div>
                             <div class="form-group mb-3">
-                                <button type="submit" class="form-control btn btn-primary rounded submit">Đăng
-                                    nhập</button>
+                                <button type="submit" class="form-control btn btn-primary rounded submit px-3">Xác nhận</button>
                             </div>
-                            <div class="form-group d-flex text-center">
-                                <div class="w-50 text-md-right">
-                                    <a href="#" class="text-decoration-none">Quay lại</a>
-                                </div>
-                                <div class="w-50 text-md-right">
-                                    <a href="#" class="text-decoration-none">Quên mật khẩu</a>
-                                </div>
+                            <div class="text-center mt-4 mb-3">
+                                <a th:href="@{/admin/blog/register-admins}" method="GET" class="fs-6 text-decoration-none">Quay lại</a>
                             </div>
                         </form>
                     </div>

@@ -2,9 +2,9 @@ package net.shop2k.blog.entitys;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -13,22 +13,29 @@ import lombok.Data;
  */
 @Entity
 @Table (name = "admins")
+@PrimaryKeyJoinColumn(name = "id")
 @Data
-public class Admin{
+public class Admin extends User{
 
-    @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column (name = "age") //年齢
+    private int age;
 
-    @Column (name = "username")
-    private String username;
+    @Column (name = "gender") //性別
+    private String gender;
 
-    @Column (name = "password")
-    private String password;
+    @Column (name = "phone") //携帯電話
+    private String phone;
 
-    @Column (name = "role")
-    private String role;
+    @Column (name = "address") //住所
+    private String address;
 
-    @Column(name = "setEnabled")
-    private boolean setEnabled;
+    @Column (name = "selfPr") //自己PR
+    private String selfPr;
+
+    @Column (name = "emailCode") //コードで承認かどうか
+    private boolean emailCode;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

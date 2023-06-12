@@ -26,14 +26,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.log4j.Log4j2;
+import net.shop2k.blog.entitys.Admin;
 import net.shop2k.blog.entitys.Articles;
 import net.shop2k.blog.entitys.Categorys;
+import net.shop2k.blog.services.AdminService;
 import net.shop2k.blog.services.ArticlesService;
 import net.shop2k.blog.services.CategorysService;
 
@@ -46,6 +49,9 @@ public class AdminController {
     ArticlesService articlesService;
 
     @Autowired
+    AdminService adminService;
+
+    @Autowired
     CategorysService categorysService;
 
     /*
@@ -56,7 +62,17 @@ public class AdminController {
         return "html/admin/login.html";
     }
 
-    
+    /*
+     * login
+     */
+    @PostMapping("/login")
+    public String getAdmin(RedirectAttributes redirectAttributes){
+        log.info("ログインできた");
+        return "redirect:/admin/blog/index";
+    }
+        
+        
+    // }
     /*
      * ログアウト
      */
@@ -91,30 +107,6 @@ public class AdminController {
     public String loginError() {
         return "html/error.html";
     }
-
-    // @PostMapping("/registeradmin")
-    // public String registerAdmin(@RequestParam("username") String username,
-    // @RequestParam("password") String passwrod, Model model){
-
-    // /*
-    // * ADMIN を生成する
-    // */
-    // Admin admin = new Admin();
-    // admin.setUsername(username);
-    // admin.setPassword(passwrod);
-    // admin.setSetEnabled(true);
-    // admin.setRole("ROLE_ADMIN");
-
-    // //エラーをチェックする
-    // try{
-    // adminService.registerAdmin(admin);
-    // model.addAttribute("susccessMessage", "Đăng kí thành công");
-    // return "html/admin/register.html";
-    // }catch (IllegalArgumentException e){
-    // model.addAttribute("error", e.getMessage());
-    // return "html/admin/register.html";
-    // }
-    // }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/index")
@@ -391,6 +383,66 @@ public class AdminController {
         // model.addAttribute("return");
         // model.addAttribute("")
         return "html/admin/error.html";
+    }
 
+    /*
+     * ADMINになりたい方は
+     * 申請機能
+     */
+
+     //Get
+    @GetMapping("/register-admins")
+    public String showRegisterAdmin(){
+        return "html/admin/register-admins.html";
+    }
+
+    // Post
+    @PostMapping("/register-admins")
+    public String getRegisterAdmin(@RequestParam("nickName") String nickName,
+        @RequestParam("age") int age, @RequestParam("gender") String gender, 
+        @RequestParam("phone") String phone, @RequestParam("address") String address,
+        @RequestParam("selfPr") String selfPr, @RequestParam("username") String username,
+        @RequestParam("password") String password, @RequestParam("confirmedPassword") String confirmedPassword,
+        RedirectAttributes redirectAttributes, Model model){
+        
+        //登録情報からAdminプロジェクトを作成
+        Admin admin = new Admin();
+        admin.setNickName(nickName);
+        admin.setAge(age);
+        admin.setGender(gender);
+        admin.setPhone(phone);
+        admin.setAddress(address);
+        admin.setSelfPr(selfPr);
+        admin.setUsername(username);
+        admin.setPassword(password);
+        admin.setConfirmedPassword(confirmedPassword);
+        admin.setRole("ROLE_ADMIN");
+
+        try{
+            Admin registerAdmin = adminService.registerAdmin(admin);
+            adminService.sendConfirmationEmail(registerAdmin);
+            model.addAttribute("successMessageRegisterAdmin", "Chúng tôi đã gửi mã xác nhận đến email của bạn");
+            log.info("このフォームが使えた");
+            return "html/admin/confirmation-code.html";
+        }catch(IllegalArgumentException e){
+            log.info(e.getMessage());
+            return "redirect:/admin/blog/login";
+        }
+    }
+
+    /*
+     * confirmation_code
+     */
+    @PostMapping("/register-admins/confirm")
+    public String confirmRegistrationAdmin(@RequestParam("confirmationCode") String confirmationCode, Model model){
+        try{
+            adminService.confirmationCodeAdmin(confirmationCode);
+            log.info("emailで承認できた");
+            return "html/admin/thank-form";
+        }catch(IllegalArgumentException e){
+            model.addAttribute("errorConfirmationCode", e.getMessage());
+            log.info("エラー：承認コードがダメ");
+            return "html/admin/confirmation-code";
+        }
     }
 }
