@@ -1,46 +1,25 @@
 package net.shop2k.blog.entitys;
 
-import java.util.List;
-
-import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Entity
-@Table (name = "users")
+@Table(name = "users")
+@DiscriminatorValue("user")
 @Data
-public class User{
+@EqualsAndHashCode(callSuper = false)
+public class User extends Admin{
 
-    @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Long id;
+    @ManyToOne
+    @JoinColumn(name ="manager_id") //managerに関係ある
+    private Manager manager;
 
-    @Column (name = "nickName")
-    private String nickName;
-    
-    @Column (name = "username")  //email
-    private String username;
-
-    @Column (name = "password")
-    private String password;
-
-    @Column (name = "confirmedPassword")
-    private String confirmedPassword;
-    
-    @Column (name = "role")
-    private String role;
-
-    @Column(name = "setEnabled")
-    private boolean setEnabled;
-
-    @Column(name = "confirmation_code")
-    private String confirmationCode;
-
-    @OneToMany (mappedBy = "user")
-    private List<Admin> admins;
+    @ManyToOne
+    @JoinColumn(name = "admin_id") ////adminに関係ある
+    private Admin admin;
 }

@@ -17,8 +17,10 @@ import org.springframework.stereotype.Service;
 
 import lombok.extern.log4j.Log4j2;
 import net.shop2k.blog.entitys.Admin;
+import net.shop2k.blog.entitys.Manager;
 import net.shop2k.blog.entitys.User;
 import net.shop2k.blog.repositorys.AdminRepository;
+import net.shop2k.blog.repositorys.ManagerRepository;
 import net.shop2k.blog.repositorys.UserRepository;
 
 @Service
@@ -30,6 +32,9 @@ public class UserService implements UserDetailsService {
 
     @Autowired
     private AdminRepository adminRepository;
+
+    @Autowired
+    private ManagerRepository managerRepository;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -45,10 +50,9 @@ public class UserService implements UserDetailsService {
          */
         User user = userRepository.findByUsername(username);
         if (user != null) {
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(user.getRole()));
-        log.info("Userとしてログインできた");
-        return new org.springframework.security.core.userdetails.User(
+            List<GrantedAuthority> authorities = new ArrayList<>();
+            authorities.add(new SimpleGrantedAuthority(user.getRole()));
+            return new org.springframework.security.core.userdetails.User(
             user.getUsername(),
             user.getPassword(),
             user.isSetEnabled(),
@@ -64,19 +68,32 @@ public class UserService implements UserDetailsService {
          */
         Admin admin = adminRepository.findByUsername(username);
         if(admin != null){
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(admin.getRole()));
-        log.info("ADMINとしてログインできた");
-        return new org.springframework.security.core.userdetails.User(
-            admin.getUsername(),
-            admin.getPassword(),
-            admin.isSetEnabled(),
-            true,
-            true,
-            true,
-            authorities
-        );
-    }
+            List<GrantedAuthority> authorities = new ArrayList<>();
+            authorities.add(new SimpleGrantedAuthority(admin.getRole()));
+            return new org.springframework.security.core.userdetails.User(
+                admin.getUsername(),
+                admin.getPassword(),
+                admin.isSetEnabled(),
+                true,
+                true,
+                true,
+                authorities
+            );
+        }
+        Manager manager = managerRepository.findByUsername(username);
+        if(manager != null){
+            List <GrantedAuthority> authorities = new ArrayList<>();
+            authorities.add(new SimpleGrantedAuthority(manager.getRole()));
+            return new org.springframework.security.core.userdetails.User(
+                manager.getUsername(),
+                manager.getPassword(),
+                manager.isSetEnabled(),
+                true,
+                true,
+                true,
+                authorities    
+            );
+        }
     throw new UsernameNotFoundException("Không được để trống");
 
 }
@@ -89,6 +106,13 @@ public class UserService implements UserDetailsService {
             throw new IllegalArgumentException("Tài khoản đã tồn tại");
         }else if(!user.getPassword().equals(user.getConfirmedPassword())){
             throw new IllegalArgumentException("Mật khẩu không giống nhau");
+        }
+        else if(adminRepository.findByUsernameAndSetEnabled(user.getUsername(), true) != null){
+            throw new IllegalArgumentException("Tài khoản đã tồn tại");
+        }
+        Manager manager = managerRepository.findByUsername(user.getUsername());
+        if (manager != null) {
+            throw new IllegalArgumentException("Tài khoản đã tồn tại");
         }
         else{
             String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword()); //パスワードのセキュリティー

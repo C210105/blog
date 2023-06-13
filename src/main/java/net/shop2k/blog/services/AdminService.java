@@ -1,22 +1,19 @@
 package net.shop2k.blog.services;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import net.shop2k.blog.entitys.Admin;
+import net.shop2k.blog.entitys.Manager;
 import net.shop2k.blog.repositorys.AdminRepository;
+import net.shop2k.blog.repositorys.ManagerRepository;
+import net.shop2k.blog.repositorys.UserRepository;
 
 /*
  * ADMIN Service
@@ -26,6 +23,12 @@ public class AdminService{
     
     @Autowired
     private AdminRepository adminRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private ManagerRepository managerRepository;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -53,14 +56,21 @@ public class AdminService{
     //         authorities
     //     );
     // }
+    
 
     public Admin registerAdmin(Admin admin) {
 
         //emailは存在するかどうか
         if(adminRepository.findByUsernameAndSetEnabled(admin.getUsername(), true) != null){
-                throw new IllegalArgumentException("Admin đã tồn tại");
-        } else if(!admin.getPassword().equals(admin.getConfirmedPassword())){
+            throw new IllegalArgumentException("Admin đã tồn tại");
+        }else if(userRepository.findByUsernameAndSetEnabled(admin.getUsername(), true) != null){
+            throw new IllegalArgumentException("Tài khoản đã tồn tại");
+        }else if(!admin.getPassword().equals(admin.getConfirmedPassword())){
             throw new IllegalArgumentException("Mật khẩu không giống nhau");   
+        }
+        Manager manager = managerRepository.findByUsername(admin.getUsername());
+        if (manager != null) {
+            throw new IllegalArgumentException("Tài khoản đã tồn tại");
         }else{
             String encodedPassword = bCryptPasswordEncoder.encode(admin.getPassword());
             String encodedconfirmedPassword = bCryptPasswordEncoder.encode(admin.getConfirmedPassword());
@@ -106,6 +116,11 @@ public class AdminService{
         }
         //承認コードがOK場合
         admin.setEmailCode(true);
+        // admin.setSetEnabled(true);
         adminRepository.save(admin);
+    }
+
+    public List <Admin> getAllAdmin(){
+        return adminRepository.findAll();
     }
 }

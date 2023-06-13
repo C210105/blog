@@ -15,6 +15,7 @@ import net.shop2k.blog.entitys.Categorys;
 
 @Repository
 public interface CategorysRepository extends JpaRepository<Categorys, Long>{
+    
     Category getCategoryById(Long categoryId);
 
     Categorys findByName(String name);
