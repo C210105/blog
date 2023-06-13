@@ -52,7 +52,6 @@ public class UserService implements UserDetailsService {
         if (user != null) {
             List<GrantedAuthority> authorities = new ArrayList<>();
             authorities.add(new SimpleGrantedAuthority(user.getRole()));
-            log.info("Userとしてログインできた");
             return new org.springframework.security.core.userdetails.User(
             user.getUsername(),
             user.getPassword(),
@@ -71,7 +70,6 @@ public class UserService implements UserDetailsService {
         if(admin != null){
             List<GrantedAuthority> authorities = new ArrayList<>();
             authorities.add(new SimpleGrantedAuthority(admin.getRole()));
-            log.info("ADMINとしてログインできた");
             return new org.springframework.security.core.userdetails.User(
                 admin.getUsername(),
                 admin.getPassword(),
@@ -86,7 +84,6 @@ public class UserService implements UserDetailsService {
         if(manager != null){
             List <GrantedAuthority> authorities = new ArrayList<>();
             authorities.add(new SimpleGrantedAuthority(manager.getRole()));
-            log.info("Managerとしてログインできた");
             return new org.springframework.security.core.userdetails.User(
                 manager.getUsername(),
                 manager.getPassword(),
@@ -109,6 +106,13 @@ public class UserService implements UserDetailsService {
             throw new IllegalArgumentException("Tài khoản đã tồn tại");
         }else if(!user.getPassword().equals(user.getConfirmedPassword())){
             throw new IllegalArgumentException("Mật khẩu không giống nhau");
+        }
+        else if(adminRepository.findByUsernameAndSetEnabled(user.getUsername(), true) != null){
+            throw new IllegalArgumentException("Tài khoản đã tồn tại");
+        }
+        Manager manager = managerRepository.findByUsername(user.getUsername());
+        if (manager != null) {
+            throw new IllegalArgumentException("Tài khoản đã tồn tại");
         }
         else{
             String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword()); //パスワードのセキュリティー

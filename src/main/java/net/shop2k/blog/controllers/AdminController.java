@@ -57,17 +57,18 @@ public class AdminController {
     /*
      * ログイン
      */
+    // @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/login")
-    public String loginAdmin(Model model) {
+    public String loginAdmin() {
         return "html/admin/login.html";
     }
 
     /*
      * login
      */
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/login")
-    public String getAdmin(RedirectAttributes redirectAttributes){
-        log.info("ログインできた");
+    public String getAdmin(){
         return "redirect:/admin/blog/index";
     }
         
@@ -426,7 +427,8 @@ public class AdminController {
             return "html/admin/confirmation-code.html";
         }catch(IllegalArgumentException e){
             log.info(e.getMessage());
-            return "redirect:/admin/blog/login";
+            redirectAttributes.addFlashAttribute("errorRegisterAdmin", e.getMessage());
+            return "redirect:/admin/blog/register-admins";
         }
     }
 
