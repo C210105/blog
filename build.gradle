@@ -37,6 +37,7 @@ dependencies {
 	implementation 'org.springframework.security:spring-security-crypto'
 	implementation 'org.springframework.security:spring-security-core'
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
+	implementation 'org.apache.maven:maven-plugin-api:3.6.3'
 	// implementation 'com.sun.mail:javax.mail'
 
 	// // implementation 'org.springframework.security:spring-security-digest'
