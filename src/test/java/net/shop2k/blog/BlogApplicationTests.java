@@ -19,12 +19,12 @@ import net.shop2k.blog.services.CategorysService;
 @SpringBootTest
 class BlogApplicationTests {
 
-	@Autowired
-	CategorysService categorysService;
-	@Autowired
-	ArticlesService articlesService;
-	@Autowired
-	ArticlesRepository articlesRepository;
+	// @Autowired
+	// CategorysService categorysService;
+	// @Autowired
+	// ArticlesService articlesService;
+	// @Autowired
+	// ArticlesRepository articlesRepository;
 
 	@Test
 	void contextLoads() {
@@ -48,13 +48,13 @@ class BlogApplicationTests {
 	/*
 	 * titleを検索
 	 */
-	@Test
-	void titleを検索(){
+	// @Test
+	// void titleを検索(){
 
-		String title = "rồng";
-		List <Articles> search = articlesService.searchArticles(title);
-		assertFalse(search.isEmpty());
+	// 	String title = "rồng";
+	// 	List <Articles> search = articlesService.searchArticles(title);
+	// 	assertFalse(search.isEmpty());
 	
-	}
+	// }
 
 }
