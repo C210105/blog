@@ -17,16 +17,47 @@
 </head>
 
 <body>
-  <header>
-    <!-- place navbar here -->
-    <h1>Erro</h1>
-  </header>
-  <main>
+  <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center mb-2 mt-5">
+            <h2 class="heading-section">Lỗi</h2>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="bg-light p-4 p-md-5">
+                <form class="">
+                    <h5 class="text-center text-danger">Xin Lỗi, Bạn chưa được cấp phép để truy cập tài nguyên này của chúng tôi</h5>
+                    <p class="text-center text-danger mb-4">Bạn hãy đăng kí với tư cách là ADMIN hoặc là USER để có thể truy cập tài nguyên này</p>
+                    <div class="form-group d-flex text-center">
+                        <div class="w-50">
+                            <a th:href="@{/blog/index/}" method="GET" class="text-decoration-none">Quay lại</a>
+                        </div>
+                        <div class="w-50">
+                            <a href="#" class="text-decoration-none">Các câu hỏi thường gặp</a>
+                        </div>
+                        <div class="w-50">
+                            <a href="#" class="text-decoration-none">Xem thêm</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
+    </div>
   </main>
-  <footer>
-    <!-- place footer here -->
-  </footer>
+  <footer class="py-3 my-4">
+    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+        <li class="nav-item"><a href="#" class="nav-link px-3 text-muted">Blog</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-3 text-muted">Thông Tin</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-3 text-muted">Hỏi Đáp</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-3 text-muted">Trợ Giúp</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-3 text-muted">Khác</a></li>
+    </ul>
+    <p class="text-center text-muted">© 2023 By Longwhisky68</p>
+</footer>
   <!-- Bootstrap JavaScript Libraries -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
     integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"

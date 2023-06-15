@@ -31,8 +31,8 @@ public class SecurityConfig {
         )
         .formLogin(login -> login
             //デフォルトのログインフォーム
-            .loginProcessingUrl("/admin/blog/login")
-            .loginPage("/admin/blog/login")
+            .loginProcessingUrl("/blog/login")
+            .loginPage("/blog/login")
             .successHandler((request, response, authentication) -> {
                 // ROLEの情報を受け取り
                 Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
@@ -53,12 +53,12 @@ public class SecurityConfig {
                 log.info("エラー");
                 response.sendRedirect("/admin/blog/error");
             })
-            .failureUrl("/admin/blog/login?error=true")
+            .failureUrl("/blog/login?error=true")
             .permitAll()
         )
         .logout(logout -> logout
-            .logoutUrl("/admin/blog/logout") //logout　ページ
-            .logoutSuccessUrl("/admin/blog/login") //logout。後
+            .logoutUrl("/blog/logout") //logout　ページ
+            .logoutSuccessUrl("/blog/login") //logout。後
             .invalidateHttpSession(true) //sessionを削除する
             .deleteCookies("JSESSIONID")); //cookiesを削除する
         return http.build();
