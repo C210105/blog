@@ -16,7 +16,7 @@ import lombok.EqualsAndHashCode;
  * ADMIN 情報
  */
 @Entity
-@Table(name = "admins")
+// @Table(name = "admins")
 @DiscriminatorValue("admin")
 @Data
 @EqualsAndHashCode(callSuper = false)
