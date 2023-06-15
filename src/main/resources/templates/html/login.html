@@ -31,10 +31,14 @@
                 <div class="col-md-7 col-lg-5">
                     <div class="bg-light p-4 p-md-5">
                         <h4 class="text-center mb-3">Đăng Nhập</h4>
+                        <div th:if="${param.error}">
+                            <p class="error-message text-danger text-center">Tên đăng nhập hoặc mật khẩu không đúng. Vui
+                                lòng thử lại.</p>
+                        </div>
                         <p class="text-success text-center" th:text="${successMessage}" th:if="${successMessage}"></p>
                         <p class="text-success text-center" th:text="${successMessageReset}"
                             th:if="${successMessageReset}"></p>
-                        <form th:action="@{/admin/blog/login}" method="POST" class="">
+                        <form th:action="@{/blog/login}" method="POST" class="">
                             <div class="form-group mb-3">
                                 <input type="text" id="username" name="username" class="form-control rounded-left"
                                     placeholder="Tài khoản" required

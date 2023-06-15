@@ -25,10 +25,10 @@ public class UsersController {
     /*
      * ログイン画面表示
      */
-    @GetMapping("/login")
-    public String showLoginUser() {
-        return "html/users/login.html";
-    }
+    // @GetMapping("/login")
+    // public String showLoginUser() {
+    //     return "html/users/login.html";
+    // }
 
     /*
      * ユーザーを登録画面表示
