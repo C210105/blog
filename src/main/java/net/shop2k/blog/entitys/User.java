@@ -9,7 +9,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Entity
-@Table(name = "users")
+// @Table(name = "users")
 @DiscriminatorValue("user")
 @Data
 @EqualsAndHashCode(callSuper = false)
