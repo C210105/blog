@@ -12,6 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <style>
         a {
             text-decoration: none;
@@ -41,7 +42,7 @@
                         data-bs-toggle="dropdown" aria-expanded="false">
                         <img th:src="@{/images/1.png}" alt="mdo" width="32" height="32" class="rounded-circle">
                     </a>
-                    <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="">
+                    <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
                         <li><a class="dropdown-item" href="#">Thông tin</a></li>
                         <li><a class="dropdown-item" href="#">Bảo mật</a></li>
                         <li><a class="dropdown-item" href="#">Cài đặt</a></li>
@@ -60,20 +61,6 @@
             <a type="buttom" class="btn btn-primary p-2 link-light" method="GET"
                 th:href="@{/blog/v1/categorys/articles/{id}(id=${category.id})}" th:each="category : ${categorys}"
                 th:text="${category.name}" th:value="${category.id}"></a>
-            <!-- <a class="btn btn-primary p-2 dropdown-toggle text-light" data-bs-toggle="dropdown"
-                    aria-expanded="false" th:if="${categorys[12].id == 13}" th:href="@{/api/v1/categorys/{id}(id=${categorys[12].id})}" th:text="${categorys[12].name}"
-                    th:value="${categorys[12].id}">
-                </a>
-                <ul class="dropdown-menu" th:if="${categorys[12].id == 13}">
-                    <li><a class="btn btn-primary dropdown-item" href="#">Hokkaido</a></li>
-                    <li><a class="btn btn-primary dropdown-item" href="#">Tokyo</a></li>
-                    <li><a class="btn btn-primary dropdown-item" href="#">Saitama</a></li>
-                    <li><a class="btn btn-primary dropdown-item" href="#">Chiba</a></li>
-                    <li><a class="btn btn-primary dropdown-item" href="#">Oosaka</a></li>
-                    <li><a class="btn btn-primary dropdown-item" href="#">Kyoto</a></li>
-                    <li><a class="btn btn-primary dropdown-item" href="#">Nagoya</a></li>
-                    <li><a class="btn btn-primary dropdown-item" href="#">Kyushyu</a></li>
-                </ul> -->
         </nav>
     </div>
     <div class="bg-light">
@@ -122,6 +109,103 @@
                         <div class="text-end">Tg: Dang Long</div>
                     </div>
                     <hr>
+                    <div class="card">
+                        <div class="text-center mt-1">
+                            <img width="35" height="35" src="https://img.icons8.com/dotty/80/speech-bubble-with-dots--v1.png" alt="speech-bubble-with-dots--v1"/>
+                        </div>
+                        <form class="card-body">
+                            <div class="form-control">
+                                <div class="d-flex justify-content-end">
+                                    <p style="font-size: 12px;">Đã kiểm định</p>
+                                    <img width="20" height="20" src="https://img.icons8.com/material-outlined/24/checked--v1.png" alt="checked--v1"/>
+                                </div>
+                                <div>
+                                        Service role "arn:aws:iam::535732411067:role/aws-elasticbeanstalk-ec2-role" is
+                                        missing permissions required to check for managed updates. Verify the role's
+                                        policies.
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    <button style="width: 30px; height: 19px; border: 0ch;" type="submit" class="bg-white reply-button">
+                                        <img width="24" height="22" src="https://img.icons8.com/material-outlined/24/response.png" alt="response"/>
+                                    </button>
+                                    <button class="ms-3 bg-white" style="width: 25px; height: 20px; border: 0ch;" type="submit">
+                                        <img width="20" height="20" src="https://img.icons8.com/material-outlined/24/facebook-like--v1.png" alt="facebook-like--v1"/>
+                                    </button>
+                                    <button class="ms-3 bg-white" style="width: 25px; height: 20px; border: 0ch;" type="submit">
+                                        <img class="" width="20" height="20" src="https://img.icons8.com/material-outlined/24/thumbs-down.png" alt="thumbs-down"/>
+                                    </button>
+                                    <img class="mt-1 ms-3" width="20" height="22" src="https://img.icons8.com/ios-glyphs/30/time--v1.png" alt="time--v1"/>
+                                    <p class="mt-2" style="font-size: 10px";>16/6/2023</p>
+                                    <img class="mt-1" width="20" height="22" src="https://img.icons8.com/windows/32/user.png" alt="user"/>
+                                    <p class="mt-2" style="font-size: 10px;">LONGWHISKY68</p>
+                                </div>
+                                <script>
+                                    const replyButtons = document.querySelectorAll(".reply-button");
+                                    replyButtons.forEach((replyButton) => {
+                                        replyButton.addEventListener("click", function (event) {
+                                            event.preventDefault();
+                                            const replySection = this.parentNode.parentNode.querySelector(".reply-form");
+                                            if (replySection.style.display === "none" || replySection.style.display === "") {
+                                                replySection.style.display = "block";
+                                            } else {
+                                                replySection.style.display = "none";
+                                            }
+                                        });
+                                    });
+                                </script> 
+                                <div action="#" class="card-body reply-form" style="display: none;">
+                                    <div class="input-group mb-3 mt-3">
+                                        <label for="" class="input-group-text">
+                                            <img width="20" height="20" src="https://img.icons8.com/ios/50/hand-with-pen.png" alt="hand-with-pen"/>
+                                        </label>
+                                        <div class="form-floating">
+                                            <textarea class="form-control" id="shortTitle" name="shortTitle"
+                                                aria-label="With textarea" placeholder="1"></textarea>
+                                            <label for="floatingInputGroup2">Trả lời @LONGWHISKY68</label>
+                                        </div>
+                                        <label for="" class="input-group-text">
+                                            <button type="submit" class="btn">
+                                                <img width="20" height="20" src="https://img.icons8.com/ios/50/sent--v1.png" alt="sent--v1"/>
+                                            </button>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="text-center mb-1">
+                            <button style="width: 30px; height: 19px; border: 0ch;" type="submit" class="bg-white reply-button text-center">
+                                <img width="30" height="30" src="https://img.icons8.com/ios/50/hand-with-pen.png" alt="hand-with-pen"/>
+                            </button>
+                        </div>
+                        <script>
+                            const replyArticles = document.querySelectorAll(".reply-button");
+                            replyArticles.forEach((replyButton) => {
+                                replyButton.addEventListener("click", function (event) {
+                                    event.preventDefault();
+                                    const replySection = this.parentNode.parentNode.querySelector(".reply-form-articles");
+                                    if (replySection.style.display === "none" || replySection.style.display === "") {
+                                        replySection.style.display = "block";
+                                    } else {
+                                        replySection.style.display = "none";
+                                    }
+                                });
+                            });
+                        </script> 
+                        <form action="#" class="card-body reply-form-articles" style="display: none;">
+                            <div class="input-group mb-3 mt-3">
+                                <div class="form-floating">
+                                    <textarea class="form-control" id="shortTitle" name="shortTitle"
+                                        aria-label="With textarea" placeholder="1"></textarea>
+                                    <label for="floatingInputGroup2">Nhập bình luận của bạn...</label>
+                                </div>
+                                <label for="" class="input-group-text">
+                                    <button type="submit" class="btn">
+                                        <img width="20" height="20" src="https://img.icons8.com/ios/50/sent--v1.png" alt="sent--v1"/>
+                                    </button>
+                                </label>
+                            </div>
+                        </form>
+                    </div>
                 </div>
                 <div class="col-md-4 pt-2">
                     <div class="row">
@@ -166,7 +250,9 @@
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
         integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous">
+    </script>
+    
 </body>
 
 </html>
