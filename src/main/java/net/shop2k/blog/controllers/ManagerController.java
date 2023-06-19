@@ -44,6 +44,7 @@ public class ManagerController {
     /*
      * index ページを表示
      */
+    @PreAuthorize("hasRole('ROLE_MANAGER')")
     @GetMapping("/index")
     // @PreAuthorize("hasRole('ROLE_MANAGER')")
     public String showIndexManager(){

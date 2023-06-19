@@ -236,4 +236,9 @@ public class UserService implements UserDetailsService {
     private String generateConfirmationCode() {
         return UUID.randomUUID().toString().substring(0, 6);
     }
+
+    public User getUsername(String username){
+        return userRepository.findByUsername(username);
+    }
+
 }

@@ -47,6 +47,9 @@ public class SecurityConfig {
                         log.info("MANAGERとしてログイン出来た");
                         response.sendRedirect("/manager/blog/index");
                         return;
+                    }if(authority.getAuthority().equals("ROLE_USER")){
+                        response.sendRedirect("/blog/index/");
+                        return;
                     }
                 }
                 // 以外 ->

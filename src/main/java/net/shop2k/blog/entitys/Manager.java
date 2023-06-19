@@ -32,8 +32,11 @@ public class Manager {
     private String role;
 
     @OneToMany(mappedBy = "manager") //複数adminに関係ある
-    private List<Admin> admins;
+    private List <Admin> admins;
 
     @OneToMany(mappedBy = "manager") //複数userに関係ある
-    private List<User> users;
+    private List <User> users;
+
+    @OneToMany(mappedBy = "manager")
+    private List <Comment> comments;
 }
