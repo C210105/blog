@@ -36,6 +36,7 @@
                                 lòng thử lại.</p>
                         </div>
                         <p class="text-success text-center" th:text="${successMessage}" th:if="${successMessage}"></p>
+                        <p class="text-danger text-center" th:text="${commentErrorMessage}" th:if="${commentErrorMessage}"></p>
                         <p class="text-success text-center" th:text="${successMessageReset}"
                             th:if="${successMessageReset}"></p>
                         <form th:action="@{/blog/login}" method="POST" class="">

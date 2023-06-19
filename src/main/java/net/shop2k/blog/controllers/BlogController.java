@@ -18,7 +18,8 @@ public class BlogController {
     
     @GetMapping("/login")
     public String showLogin(){
-        return "/html/login";
+        log.info("ログインページを表示");
+        return "/html/login.html";
     }
 
     @GetMapping("/logout")

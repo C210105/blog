@@ -49,7 +49,7 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="#">Đăng ký</a></li>
+                        <li><a class="dropdown-item" th:href="@{/blog/login}">Đăng ký</a></li>
                     </ul>
                 </div>
             </div>
@@ -113,16 +113,14 @@
                         <div class="text-center mt-1">
                             <img width="35" height="35" src="https://img.icons8.com/dotty/80/speech-bubble-with-dots--v1.png" alt="speech-bubble-with-dots--v1"/>
                         </div>
-                        <form class="card-body">
+                        <div></div>
+                        <form class="card-body" th:each="comment: ${comments}">
                             <div class="form-control">
                                 <div class="d-flex justify-content-end">
                                     <p style="font-size: 12px;">Đã kiểm định</p>
                                     <img width="20" height="20" src="https://img.icons8.com/material-outlined/24/checked--v1.png" alt="checked--v1"/>
                                 </div>
-                                <div>
-                                        Service role "arn:aws:iam::535732411067:role/aws-elasticbeanstalk-ec2-role" is
-                                        missing permissions required to check for managed updates. Verify the role's
-                                        policies.
+                                <div th:text="${comment.content}">
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <button style="width: 30px; height: 19px; border: 0ch;" type="submit" class="bg-white reply-button">
@@ -137,14 +135,14 @@
                                     <img class="mt-1 ms-3" width="20" height="22" src="https://img.icons8.com/ios-glyphs/30/time--v1.png" alt="time--v1"/>
                                     <p class="mt-2" style="font-size: 10px";>16/6/2023</p>
                                     <img class="mt-1" width="20" height="22" src="https://img.icons8.com/windows/32/user.png" alt="user"/>
-                                    <p class="mt-2" style="font-size: 10px;">LONGWHISKY68</p>
+                                    <p class="mt-2" style="font-size: 10px;" th:text="${comment.user.nickName}"></p>
                                 </div>
-                                <script>
-                                    const replyButtons = document.querySelectorAll(".reply-button");
-                                    replyButtons.forEach((replyButton) => {
-                                        replyButton.addEventListener("click", function (event) {
+                                <!-- <script>
+                                    const replyButtonsComment = document.querySelectorAll(".reply-button");
+                                    replyButtonsComment.forEach((replyButtonsComment) => {
+                                        replyButtonsComment.addEventListener("click", function (event) {
                                             event.preventDefault();
-                                            const replySection = this.parentNode.parentNode.querySelector(".reply-form");
+                                            const replySection = this.parentNode.parentNode.querySelector(".reply-form-comment");
                                             if (replySection.style.display === "none" || replySection.style.display === "") {
                                                 replySection.style.display = "block";
                                             } else {
@@ -153,14 +151,14 @@
                                         });
                                     });
                                 </script> 
-                                <div action="#" class="card-body reply-form" style="display: none;">
+                                <div action="#" class="card-body reply-form-comment" style="display: none;">
                                     <div class="input-group mb-3 mt-3">
                                         <label for="" class="input-group-text">
                                             <img width="20" height="20" src="https://img.icons8.com/ios/50/hand-with-pen.png" alt="hand-with-pen"/>
                                         </label>
                                         <div class="form-floating">
-                                            <textarea class="form-control" id="shortTitle" name="shortTitle"
-                                                aria-label="With textarea" placeholder="1"></textarea>
+                                            <textarea class="form-control" id="" name="shortTitle"
+                                                aria-label="With textarea" placeholder="1" required></textarea>
                                             <label for="floatingInputGroup2">Trả lời @LONGWHISKY68</label>
                                         </div>
                                         <label for="" class="input-group-text">
@@ -169,11 +167,11 @@
                                             </button>
                                         </label>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </form>
                         <div class="text-center mb-1">
-                            <button style="width: 30px; height: 19px; border: 0ch;" type="submit" class="bg-white reply-button text-center">
+                            <button type="button" style="width: 30px; height: 19px; border: 0ch;" class="bg-white reply-button text-center">
                                 <img width="30" height="30" src="https://img.icons8.com/ios/50/hand-with-pen.png" alt="hand-with-pen"/>
                             </button>
                         </div>
@@ -182,7 +180,7 @@
                             replyArticles.forEach((replyButton) => {
                                 replyButton.addEventListener("click", function (event) {
                                     event.preventDefault();
-                                    const replySection = this.parentNode.parentNode.querySelector(".reply-form-articles");
+                                    const replySection = this.parentNode.parentNode.querySelector(".reply-form");
                                     if (replySection.style.display === "none" || replySection.style.display === "") {
                                         replySection.style.display = "block";
                                     } else {
@@ -190,15 +188,15 @@
                                     }
                                 });
                             });
-                        </script> 
-                        <form action="#" class="card-body reply-form-articles" style="display: none;">
+                        </script>
+                        <form th:action="@{/blog/v1/categorys/articles/posts/{articlesId}/comments(articlesId=${articles.id})}" method="POST" class="card-body reply-form" style="display: none;">
                             <div class="input-group mb-3 mt-3">
                                 <label for="" class="input-group-text">
                                     <img width="20" height="20" src="https://img.icons8.com/ios/50/hand-with-pen.png" alt="hand-with-pen"/>
                                 </label>
                                 <div class="form-floating">
-                                    <textarea class="form-control" id="shortTitle" name="shortTitle"
-                                        aria-label="With textarea" placeholder="1"></textarea>
+                                    <textarea class="form-control" id="content" name="content"
+                                        aria-label="With textarea" placeholder="1" required></textarea>
                                     <label for="floatingInputGroup2">Nhập bình luận của bạn...</label>
                                 </div>
                                 <label for="" class="input-group-text">

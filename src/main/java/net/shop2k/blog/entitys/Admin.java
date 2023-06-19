@@ -50,6 +50,9 @@ public class Admin extends Manager{
     @JoinColumn (name = "manager_id") //managerに関係ある
     private Manager manager;
 
-    @OneToMany(mappedBy = "admin") //adminに関係ある
+    @OneToMany (mappedBy = "admin") //adminに関係ある
     private List<User> users;
+
+    @OneToMany (mappedBy = "admin")
+    private List <Comment> comments;
 }
